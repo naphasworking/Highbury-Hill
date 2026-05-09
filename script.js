@@ -233,6 +233,33 @@ document.addEventListener('keydown', e => {
   if (e.key === 'ArrowRight')  openLightbox((lbIdx + 1) % lbImages.length);
 });
 
+/* Touch swipe navigation in lightbox */
+let _lbTouchX = 0;
+lightbox.addEventListener('touchstart', e => { _lbTouchX = e.touches[0].clientX; }, { passive: true });
+lightbox.addEventListener('touchend', e => {
+  const dx = e.changedTouches[0].clientX - _lbTouchX;
+  if (Math.abs(dx) < 40) return;
+  if (dx < 0) openLightbox((lbIdx + 1) % lbImages.length);
+  else         openLightbox((lbIdx - 1 + lbImages.length) % lbImages.length);
+});
+
+/* Gallery Show More (mobile) */
+const galleryShowMoreWrap = document.getElementById('galleryShowMoreWrap');
+const galleryShowMoreBtn  = document.getElementById('galleryShowMore');
+if (galleryShowMoreBtn) {
+  galleryShowMoreBtn.addEventListener('click', () => {
+    document.querySelectorAll('.gallery-hidden-mobile').forEach(el => {
+      el.classList.remove('gallery-hidden-mobile');
+    });
+    galleryShowMoreWrap.style.display = 'none';
+    /* Rebuild lbImages to include newly visible items */
+    lbImages = Array.from(document.querySelectorAll('.gallery-item')).map(gi => {
+      const img = gi.querySelector('img');
+      return { src: img.src, alt: img.alt };
+    });
+  });
+}
+
 /* --- Smooth scroll --- */
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
   anchor.addEventListener('click', e => {
