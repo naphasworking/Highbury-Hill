@@ -589,7 +589,7 @@ button { cursor: pointer; background: none; border: none; font-family: inherit; 
 
 .unit-main-photo {
   width: 100%;
-  height: 420px;
+  aspect-ratio: 16 / 9;
   overflow: hidden;
   background: var(--greige);
 }
@@ -597,7 +597,7 @@ button { cursor: pointer; background: none; border: none; font-family: inherit; 
   width: 100%;
   height: 100%;
   object-fit: cover;
-  object-position: center 82%; /* shifts view down — crops baked-in stats bar at top of factsheet JPGs */
+  object-position: center 100%;
   transition: opacity 0.4s ease;
 }
 
@@ -611,7 +611,7 @@ button { cursor: pointer; background: none; border: none; font-family: inherit; 
 .unit-thumb {
   height: 72px;
   object-fit: cover;
-  object-position: center 82%; /* same crop as main image — hides stats bar in thumbnails */
+  object-position: center 100%;
   cursor: pointer;
   opacity: 0.5;
   transition: opacity 0.3s ease, outline 0.2s ease;
@@ -1408,7 +1408,6 @@ button { cursor: pointer; background: none; border: none; font-family: inherit; 
   .unit-tab { padding: 12px 20px; }
 
   /* House types mobile */
-  .unit-main-photo { height: 280px; }
   .unit-thumbs { grid-template-columns: repeat(4, 1fr); gap: 4px; }
   .unit-thumb { height: 60px; }
   .unit-stats { flex-wrap: wrap; row-gap: 0; }
@@ -1434,7 +1433,6 @@ button { cursor: pointer; background: none; border: none; font-family: inherit; 
 @media (max-width: 480px) {
   .hero-actions { flex-direction: column; align-items: center; }
   .unit-actions { flex-direction: column; gap: 12px; }
-  .unit-main-photo { height: 240px; }
   .stat-item { flex: 0 0 50%; }
   .amenities-grid { grid-template-columns: repeat(2, 1fr); gap: 24px; }
   .gallery-grid { grid-template-columns: 1fr; }
