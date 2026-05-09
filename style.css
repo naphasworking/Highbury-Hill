@@ -1373,9 +1373,9 @@ button { cursor: pointer; background: none; border: none; font-family: inherit; 
   .fact-item:nth-child(5) { border-top: 1px solid rgba(255,255,255,0.1); }
 
   .concept-grid,
-  .unit-grid,
+  .unit-lower,
   .location-grid,
-  .register-grid { grid-template-columns: 1fr; gap: 48px; }
+  .register-grid { grid-template-columns: 1fr; gap: 40px; }
 
   .concept-image { order: -1; }
 
@@ -1407,6 +1407,18 @@ button { cursor: pointer; background: none; border: none; font-family: inherit; 
   .unit-tabs { flex-wrap: wrap; }
   .unit-tab { padding: 12px 20px; }
 
+  /* House types mobile */
+  .unit-main-photo { height: 280px; }
+  .unit-thumbs { grid-template-columns: repeat(4, 1fr); gap: 4px; }
+  .unit-thumb { height: 60px; }
+  .unit-stats { flex-wrap: wrap; row-gap: 0; }
+  .stat-item { flex: 0 0 33.333%; padding: 14px 0; border-bottom: 1px solid var(--border); }
+  .stat-item:nth-child(n+6) { border-bottom: none; }
+  .stat-divider { display: none; }
+  .unit-name { font-size: 2rem; }
+  .unit-actions { flex-direction: column; gap: 12px; }
+  .unit-actions .btn { width: 100%; text-align: center; }
+
   .gallery-grid { grid-template-columns: repeat(2, 1fr); }
   .gallery-item, .gallery-item.g-col-2, .gallery-item.g-col-3,
   .gallery-item.g-col-4 { grid-column: span 1; height: 220px; }
@@ -1421,7 +1433,9 @@ button { cursor: pointer; background: none; border: none; font-family: inherit; 
 
 @media (max-width: 480px) {
   .hero-actions { flex-direction: column; align-items: center; }
-  .unit-actions { flex-direction: column; }
+  .unit-actions { flex-direction: column; gap: 12px; }
+  .unit-main-photo { height: 240px; }
+  .stat-item { flex: 0 0 50%; }
   .amenities-grid { grid-template-columns: repeat(2, 1fr); gap: 24px; }
   .gallery-grid { grid-template-columns: 1fr; }
   .gallery-item, .gallery-item.g-col-2, .gallery-item.g-col-3,
