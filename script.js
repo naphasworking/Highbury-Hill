@@ -90,11 +90,18 @@ unitTabs.forEach(tab => {
     unitTabs.forEach(t => t.classList.remove('active'));
     unitPanels.forEach(p => p.classList.remove('active'));
     tab.classList.add('active');
-    /* Reset animation so it replays on every tab switch */
+    /* Reset panel fade animation so it replays on every tab switch */
     next.style.animation = 'none';
     next.offsetHeight; // reflow flush
     next.style.animation = '';
     next.classList.add('active');
+    /* Re-trigger main photo slide reveal for the incoming panel */
+    const mainPhoto = next.querySelector('.unit-main-photo');
+    if (mainPhoto && mainPhoto.classList.contains('img-clip-reveal')) {
+      mainPhoto.classList.remove('revealed');
+      void mainPhoto.offsetHeight; // reflow
+      setTimeout(() => mainPhoto.classList.add('revealed'), 60);
+    }
   });
 });
 
@@ -203,11 +210,11 @@ document.addEventListener('DOMContentLoaded', () => {
   [
     ['.fact-item',   80],
     ['.amenity-item', 70],
-    ['.gallery-item', 60],
     ['.distance-item:not(.distance-hidden)', 45],
   ].forEach(([sel, step]) => {
     document.querySelectorAll(sel).forEach((el, i) => addReveal(el, i * step));
   });
+  /* gallery-item and unit-main-photo use img-clip-reveal — handled separately */
 
   /* Register & location blocks */
   document.querySelectorAll('.register-text, .register-form-wrap').forEach((el, i) => addReveal(el, i * 130));
@@ -262,6 +269,57 @@ document.addEventListener('DOMContentLoaded', () => {
         if (!el.classList.contains('revealed')) el.classList.add('revealed');
       });
     }, 2500);
+  }
+
+  /* --- Gallery image slide reveal --- */
+  const galleryEls = Array.from(document.querySelectorAll('.gallery-item'));
+  galleryEls.forEach((el, i) => {
+    el.classList.add('img-clip-reveal');
+    const inner = el.querySelector('img');
+    if (inner) inner.style.transitionDelay = `${i * 0.07}s`;
+  });
+
+  if (prefersReduced) {
+    galleryEls.forEach(el => el.classList.add('revealed'));
+  } else {
+    const galleryObs = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('revealed');
+          galleryObs.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0, rootMargin: '0px 0px 80px 0px' });
+    /* Observe only currently visible items (hidden-mobile excluded via display:none) */
+    galleryEls.filter(el => !el.classList.contains('gallery-hidden-mobile'))
+              .forEach(el => galleryObs.observe(el));
+    setTimeout(() => {
+      galleryEls.forEach(el => { if (!el.classList.contains('revealed')) el.classList.add('revealed'); });
+    }, 3000);
+  }
+
+  /* --- Unit main photo slide reveal --- */
+  const unitPhotos = Array.from(document.querySelectorAll('.unit-main-photo'));
+  unitPhotos.forEach(el => el.classList.add('img-clip-reveal'));
+
+  if (prefersReduced) {
+    unitPhotos.forEach(el => el.classList.add('revealed'));
+  } else {
+    const unitObs = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('revealed');
+          unitObs.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0, rootMargin: '0px 0px 80px 0px' });
+    /* Only the active panel's photo is visible on load */
+    const activePhoto = document.querySelector('.unit-panel.active .unit-main-photo');
+    if (activePhoto) unitObs.observe(activePhoto);
+    /* Pre-reveal inactive panels after 1.5s so they're ready when tabs are clicked */
+    setTimeout(() => {
+      unitPhotos.forEach(el => { if (!el.classList.contains('revealed')) el.classList.add('revealed'); });
+    }, 1500);
   }
 })();
 
@@ -350,8 +408,12 @@ const galleryShowMoreWrap = document.getElementById('galleryShowMoreWrap');
 const galleryShowMoreBtn  = document.getElementById('galleryShowMore');
 if (galleryShowMoreBtn) {
   galleryShowMoreBtn.addEventListener('click', () => {
-    document.querySelectorAll('.gallery-hidden-mobile').forEach(el => {
+    document.querySelectorAll('.gallery-hidden-mobile').forEach((el, i) => {
       el.classList.remove('gallery-hidden-mobile');
+      /* Slide in newly visible items that haven't been revealed yet */
+      if (el.classList.contains('img-clip-reveal') && !el.classList.contains('revealed')) {
+        setTimeout(() => el.classList.add('revealed'), 60 + i * 80);
+      }
     });
     galleryShowMoreWrap.style.display = 'none';
     /* Rebuild lbImages to include newly visible items */

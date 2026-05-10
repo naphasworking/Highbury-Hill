@@ -1481,6 +1481,22 @@ button { cursor: pointer; background: none; border: none; font-family: inherit; 
   transition-duration: 0.7s;
 }
 
+/* Unit main photo: mask via overflow+translateX only (no opacity fade)
+   so the thumbnail switcher's inline opacity changes still work fast */
+.unit-main-photo.img-clip-reveal img {
+  opacity: 1;
+  transition: transform 1.0s cubic-bezier(0.16,1,0.3,1), opacity 0.18s ease;
+}
+
+/* Gallery items: restore fast hover transition after reveal */
+.gallery-item.img-clip-reveal.revealed img {
+  transition: transform 0.7s cubic-bezier(0.25,0.46,0.45,0.94), filter 0.4s;
+}
+.gallery-item.img-clip-reveal.revealed:hover img {
+  transform: scale(1.06);
+  filter: brightness(1.06);
+}
+
 /* --- Reduce-motion override --- */
 @media (prefers-reduced-motion: reduce) {
   .hero-eyebrow, .hero-title, .hero-tagline, .hero-actions, .hero-scroll-hint {
