@@ -1458,26 +1458,24 @@ button { cursor: pointer; background: none; border: none; font-family: inherit; 
   animation: lbZoomIn 0.35s cubic-bezier(0.22,1,0.36,1) forwards;
 }
 
-/* --- Architectural image: clip-path mask reveal + depth scale --- */
+/* --- Architectural image: overflow-mask slide reveal + depth scale --- */
 .concept-img-wrap { overflow: hidden; }
 
-.img-clip-reveal {
-  clip-path: inset(0 100% 0 0);          /* fully hidden — right mask at 100% */
-  transform: translateX(-30px);
-  transition:
-    clip-path  1.2s cubic-bezier(0.16,1,0.3,1),
-    transform  1.2s cubic-bezier(0.16,1,0.3,1);
-}
+/* Image starts translated fully left (clipped by parent overflow:hidden) */
 .img-clip-reveal img {
-  transform: scale(1.1);                 /* zoom-out as image reveals */
-  transition: transform 1.4s cubic-bezier(0.16,1,0.3,1);
+  transform: translateX(-100%) scale(1.06);
+  opacity: 0;
+  transition:
+    transform 1.2s cubic-bezier(0.16,1,0.3,1),
+    opacity   0.8s ease;
   will-change: transform;
 }
-.img-clip-reveal.revealed {
-  clip-path: inset(0 0% 0 0);            /* fully visible */
-  transform: translateX(0);
+/* Revealed: slide into place + zoom-out depth */
+.img-clip-reveal.revealed img {
+  transform: translateX(0) scale(1);
+  opacity: 1;
 }
-.img-clip-reveal.revealed img { transform: scale(1); }
+/* Hover interaction after reveal */
 .img-clip-reveal.revealed:hover img {
   transform: scale(1.04);
   transition-duration: 0.7s;
@@ -1490,8 +1488,7 @@ button { cursor: pointer; background: none; border: none; font-family: inherit; 
   }
   .reveal { opacity: 1 !important; }
   .reveal.in-view { animation: none !important; }
-  .img-clip-reveal { clip-path: none !important; transform: none !important; transition: none !important; }
-  .img-clip-reveal img { transform: scale(1) !important; transition: none !important; }
+  .img-clip-reveal img { transform: none !important; opacity: 1 !important; transition: none !important; }
   .gallery-item img { transition: none !important; }
   .unit-panel.active { animation: none !important; }
   .lightbox.open .lb-img { animation: none !important; }

@@ -234,14 +234,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
   document.querySelectorAll('.reveal').forEach(el => revealObs.observe(el));
 
-  /* --- Clip-path mask reveal for architectural images --- */
+  /* --- Architectural image mask reveal --- */
   const clipImgs = Array.from(document.querySelectorAll('.concept-img-wrap'));
   clipImgs.forEach((el, i) => {
     el.classList.add('img-clip-reveal');
-    const delay = `${i * 0.18}s`;
-    el.style.transitionDelay = delay;
+    /* Stagger the transition on the img, not the wrapper */
     const inner = el.querySelector('img');
-    if (inner) inner.style.transitionDelay = delay;
+    if (inner) inner.style.transitionDelay = `${i * 0.18}s`;
   });
 
   if (prefersReduced) {
@@ -254,8 +253,15 @@ document.addEventListener('DOMContentLoaded', () => {
           clipObs.unobserve(entry.target);
         }
       });
-    }, { threshold: 0.12 });
+    }, { threshold: 0, rootMargin: '0px 0px 80px 0px' });
     clipImgs.forEach(el => clipObs.observe(el));
+
+    /* Safety fallback: reveal any still-hidden images after 2.5s */
+    setTimeout(() => {
+      clipImgs.forEach(el => {
+        if (!el.classList.contains('revealed')) el.classList.add('revealed');
+      });
+    }, 2500);
   }
 })();
 
