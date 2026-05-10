@@ -9,7 +9,7 @@ window.addEventListener('load', function () {
   if (!wrap) return;
 
   var iframe = document.createElement('iframe');
-  iframe.src = 'https://www.youtube.com/embed/HFY1G9Web8A?autoplay=1&mute=1&loop=1&playlist=HFY1G9Web8A&controls=0&showinfo=0&rel=0&modestbranding=1&iv_load_policy=3&disablekb=1&start=24&end=145';
+  iframe.src = 'https://www.youtube.com/embed/SEbjs0Vo6uQ?autoplay=1&mute=1&loop=1&playlist=SEbjs0Vo6uQ&controls=0&showinfo=0&rel=0&modestbranding=1&iv_load_policy=3&disablekb=1';
   iframe.setAttribute('frameborder', '0');
   iframe.setAttribute('allow', 'autoplay; encrypted-media');
   iframe.setAttribute('allowfullscreen', '');

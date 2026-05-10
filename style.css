@@ -6,40 +6,40 @@
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
 :root {
-  /* === HIGHBURY HILL Brand CI — extracted from Sulvia floor plan & surrounding map === */
+  /* === HIGHBBURY HILL — Quiet Luxury Dark Edition === */
 
-  /* Core Brand */
-  --brand-green:      #1e3828;   /* Deep forest green — project logo BG */
-  --brand-green-mid:  #2d5040;   /* Mid forest green — hover/accent */
-  --brand-green-light:#3d6b54;   /* Light forest green — subtle accent */
+  /* Core Dark — Midnight Cocoa */
+  --brand-green:      #1A120B;
+  --brand-green-mid:  #251810;
+  --brand-green-light:#3A2415;
 
-  /* Warm Neutrals — from floor plan background */
-  --greige:           #d0c9bf;   /* Warm greige — floor plan page BG */
-  --cream:            #f0ece5;   /* Light cream — section backgrounds */
-  --off-white:        #f8f5f1;   /* Near white — card/form backgrounds */
-  --white:            #ffffff;
+  /* Dark Backgrounds */
+  --greige:           #231810;
+  --cream:            #1A120B;
+  --off-white:        #201610;
+  --white:            #FFFFFF;
 
-  /* Accent Blue-Navy — from numbered circle badges */
-  --navy:             #4a6880;   /* Muted steel blue — badges, highlights */
-  --navy-light:       #6a8aa0;   /* Lighter navy — hover */
+  /* Bronze */
+  --navy:             #8E6D45;
+  --navy-light:       #A88050;
 
-  /* Accent Gold/Tan — from road lines on map */
-  --gold:             #c8b48a;   /* Warm gold/tan — decorative lines, dividers */
-  --gold-dark:        #a8906a;   /* Deeper gold — emphasis */
+  /* Metallic Royal Gold */
+  --gold:             #D4AF37;
+  --gold-dark:        #B09020;
 
-  /* Text */
-  --charcoal:         #1a1a1a;   /* Near black — headings */
-  --dark:             #0f1f18;   /* Darkest — footer BG (deep green-black) */
-  --text:             #2c2c2c;   /* Body text */
-  --text-muted:       #5a5a5a;   /* Secondary text */
-  --text-faint:       #9a9080;   /* Faint/label text */
+  /* Champagne Text */
+  --charcoal:         #F5F5DC;
+  --dark:             #0D0905;
+  --text:             #D8D0A0;
+  --text-muted:       #A09060;
+  --text-faint:       #706040;
 
-  /* Borders & Dividers */
-  --stone:            #c8b48a;   /* = gold, reused for consistency */
-  --stone-light:      #e4dfd6;   /* Light warm border */
-  --border:           #ddd8d0;   /* Standard border — warm, not cold gray */
+  /* Borders — gold tinted */
+  --stone:            #8E6D45;
+  --stone-light:      rgba(212,175,55,0.12);
+  --border:           rgba(212,175,55,0.18);
 
-  --font-serif: 'Cormorant Garamond', Georgia, serif;
+  --font-serif: 'Playfair Display', Georgia, serif;
   --font-sans:  'Inter', system-ui, sans-serif;
 
   --max-w: 1240px;
@@ -75,7 +75,7 @@ button { cursor: pointer; background: none; border: none; font-family: inherit; 
   font-weight: 500;
   letter-spacing: 0.2em;
   text-transform: uppercase;
-  color: var(--brand-green);
+  color: var(--gold);
   margin-bottom: 16px;
 }
 .section-label.center { text-align: center; }
@@ -89,7 +89,7 @@ button { cursor: pointer; background: none; border: none; font-family: inherit; 
   margin-bottom: 32px;
 }
 .section-title.center { text-align: center; }
-.section-title em { font-style: italic; color: var(--brand-green); }
+.section-title em { font-style: italic; color: var(--gold); }
 
 /* --- Buttons --- */
 .btn {
@@ -105,11 +105,11 @@ button { cursor: pointer; background: none; border: none; font-family: inherit; 
 }
 
 .btn-primary {
-  background: var(--brand-green);
-  color: var(--white);
-  border: 1.5px solid var(--brand-green);
+  background: var(--gold);
+  color: var(--dark);
+  border: 1.5px solid var(--gold);
 }
-.btn-primary:hover { background: var(--brand-green-mid); border-color: var(--brand-green-mid); }
+.btn-primary:hover { background: var(--gold-dark); border-color: var(--gold-dark); }
 
 .btn-ghost {
   background: transparent;
@@ -120,10 +120,10 @@ button { cursor: pointer; background: none; border: none; font-family: inherit; 
 
 .btn-outline {
   background: transparent;
-  color: var(--brand-green);
-  border: 1.5px solid var(--brand-green);
+  color: var(--gold);
+  border: 1.5px solid var(--gold);
 }
-.btn-outline:hover { background: var(--brand-green); color: var(--white); }
+.btn-outline:hover { background: var(--gold); color: var(--dark); }
 
 .btn.full-width { width: 100%; justify-content: center; }
 
@@ -157,7 +157,7 @@ button { cursor: pointer; background: none; border: none; font-family: inherit; 
 }
 
 .site-header.scrolled {
-  background: rgba(247, 244, 239, 0.97);
+  background: rgba(26, 18, 11, 0.97);
   backdrop-filter: blur(12px);
   border-bottom: 1px solid var(--border);
   box-shadow: 0 2px 20px rgba(0,0,0,0.06);
@@ -189,11 +189,11 @@ button { cursor: pointer; background: none; border: none; font-family: inherit; 
   transition: filter var(--transition);
 }
 
-/* Nav logo — scrolled header (cream bg):
-   multiply blend removes white bg, gold logo shows naturally on cream */
+/* Nav logo — scrolled header (dark bg):
+   invert to white so logo shows on dark background */
 .site-header.scrolled .nav-logo {
-  filter: none;
-  mix-blend-mode: multiply;
+  filter: brightness(0) invert(1);
+  mix-blend-mode: normal;
 }
 
 .main-nav {
@@ -222,12 +222,12 @@ button { cursor: pointer; background: none; border: none; font-family: inherit; 
 }
 .main-nav .nav-cta:hover { background: var(--white); color: var(--charcoal); }
 .site-header.scrolled .main-nav .nav-cta {
-  border-color: var(--brand-green);
-  color: var(--brand-green);
+  border-color: var(--gold);
+  color: var(--gold);
 }
 .site-header.scrolled .main-nav .nav-cta:hover {
-  background: var(--brand-green);
-  color: var(--white);
+  background: var(--gold);
+  color: var(--dark);
 }
 
 .lang-toggle {
@@ -331,16 +331,16 @@ button { cursor: pointer; background: none; border: none; font-family: inherit; 
   position: absolute;
   inset: 0;
   background:
-    radial-gradient(ellipse 75% 65% at 0%   0%,   rgba(10,22,16,0.85) 0%, transparent 65%),
-    radial-gradient(ellipse 75% 65% at 100% 0%,   rgba(10,22,16,0.85) 0%, transparent 65%),
-    radial-gradient(ellipse 75% 70% at 0%   100%, rgba(10,22,16,0.92) 0%, transparent 65%),
-    radial-gradient(ellipse 75% 70% at 100% 100%, rgba(10,22,16,0.92) 0%, transparent 65%),
-    radial-gradient(ellipse 70% 55% at 50%  50%,  rgba(10,22,16,0.42) 0%, transparent 72%),
+    radial-gradient(ellipse 75% 65% at 0%   0%,   rgba(26,18,11,0.85) 0%, transparent 65%),
+    radial-gradient(ellipse 75% 65% at 100% 0%,   rgba(26,18,11,0.85) 0%, transparent 65%),
+    radial-gradient(ellipse 75% 70% at 0%   100%, rgba(26,18,11,0.92) 0%, transparent 65%),
+    radial-gradient(ellipse 75% 70% at 100% 100%, rgba(26,18,11,0.92) 0%, transparent 65%),
+    radial-gradient(ellipse 70% 55% at 50%  50%,  rgba(26,18,11,0.42) 0%, transparent 72%),
     linear-gradient(to bottom,
-      rgba(10,22,16,0.58) 0%,
-      rgba(10,22,16,0.22) 28%,
-      rgba(10,22,16,0.22) 68%,
-      rgba(10,22,16,0.80) 100%
+      rgba(26,18,11,0.58) 0%,
+      rgba(26,18,11,0.22) 28%,
+      rgba(26,18,11,0.22) 68%,
+      rgba(26,18,11,0.80) 100%
     );
   z-index: 1;
 }
@@ -519,7 +519,7 @@ button { cursor: pointer; background: none; border: none; font-family: inherit; 
 
 .amenities-grid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(3, 1fr);
   gap: 40px 32px;
 }
 
@@ -534,7 +534,7 @@ button { cursor: pointer; background: none; border: none; font-family: inherit; 
 .amenity-icon {
   width: 56px;
   height: 56px;
-  color: var(--brand-green);
+  color: var(--text-muted);
 }
 .amenity-icon svg { width: 100%; height: 100%; }
 
@@ -577,8 +577,8 @@ button { cursor: pointer; background: none; border: none; font-family: inherit; 
 }
 .unit-tab:hover { color: var(--charcoal); }
 .unit-tab.active {
-  color: var(--brand-green);
-  border-bottom-color: var(--brand-green);
+  color: var(--gold);
+  border-bottom-color: var(--gold);
 }
 
 .unit-panel { display: none; }
@@ -619,7 +619,7 @@ button { cursor: pointer; background: none; border: none; font-family: inherit; 
   width: 100%;
 }
 .unit-thumb:hover { opacity: 0.8; }
-.unit-thumb.active { opacity: 1; outline: 2px solid var(--brand-green); outline-offset: -2px; }
+.unit-thumb.active { opacity: 1; outline: 2px solid var(--gold); outline-offset: -2px; }
 
 /* --- Lower row: info + floor plans --- */
 .unit-lower {
@@ -709,7 +709,7 @@ button { cursor: pointer; background: none; border: none; font-family: inherit; 
 }
 .fp-btn:first-child { border-radius: 2px 0 0 2px; }
 .fp-btn:last-child  { border-radius: 0 2px 2px 0; border-left: none; }
-.fp-btn.active { background: var(--brand-green); color: var(--white); border-color: var(--brand-green); }
+.fp-btn.active { background: var(--gold); color: var(--dark); border-color: var(--gold); }
 .fp-btn:not(.active):hover { background: var(--cream); }
 
 .floorplan-img-wrap {
@@ -804,7 +804,7 @@ button { cursor: pointer; background: none; border: none; font-family: inherit; 
 }
 .map-toggle:first-child { border-radius: 2px 0 0 2px; }
 .map-toggle:last-child { border-radius: 0 2px 2px 0; border-left: none; }
-.map-toggle.active { background: var(--brand-green); color: var(--white); border-color: var(--brand-green); }
+.map-toggle.active { background: var(--gold); color: var(--dark); border-color: var(--gold); }
 
 .map-view { display: none; }
 .map-view.active { display: block; }
@@ -845,7 +845,7 @@ button { cursor: pointer; background: none; border: none; font-family: inherit; 
   border-radius: 50%;
   flex-shrink: 0;
 }
-.legend-venue  { background: var(--brand-green); }
+.legend-venue  { background: var(--gold); }
 .legend-nearby { background: var(--navy); }
 
 /* =============================================
@@ -941,7 +941,7 @@ button { cursor: pointer; background: none; border: none; font-family: inherit; 
 .lightbox {
   position: fixed;
   inset: 0;
-  background: rgba(10, 22, 16, 0.96);
+  background: rgba(13, 9, 5, 0.97);
   z-index: 1000;
   display: flex;
   align-items: center;
@@ -1030,14 +1030,14 @@ button { cursor: pointer; background: none; border: none; font-family: inherit; 
   color: var(--charcoal);
   transition: var(--transition);
 }
-.contact-link:hover { color: var(--brand-green); }
+.contact-link:hover { color: var(--gold); }
 .contact-link svg { width: 18px; height: 18px; flex-shrink: 0; }
 
 /* --- Form --- */
 .register-form-wrap {
   background: var(--off-white);
   padding: 48px;
-  box-shadow: 0 4px 40px rgba(30,56,40,0.08);
+  box-shadow: 0 8px 64px rgba(0,0,0,0.5), 0 0 0 1px rgba(212,175,55,0.08);
 }
 
 .form-row {
@@ -1066,18 +1066,18 @@ button { cursor: pointer; background: none; border: none; font-family: inherit; 
 .form-group select {
   padding: 12px 16px;
   border: 1px solid var(--border);
-  background: var(--cream);
+  background: rgba(255,255,255,0.04);
   font-family: var(--font-sans);
   font-size: 14px;
-  color: var(--text);
+  color: var(--charcoal);
   transition: var(--transition);
   outline: none;
   appearance: none;
 }
 .form-group input:focus,
 .form-group select:focus {
-  border-color: var(--brand-green);
-  background: var(--white);
+  border-color: var(--gold);
+  background: rgba(255,255,255,0.04);
 }
 .form-group input::placeholder { color: var(--stone); }
 
@@ -1092,7 +1092,7 @@ button { cursor: pointer; background: none; border: none; font-family: inherit; 
   height: 16px;
   margin-top: 2px;
   flex-shrink: 0;
-  accent-color: var(--brand-green);
+  accent-color: var(--gold);
   cursor: pointer;
 }
 .form-checkbox label {
@@ -1101,7 +1101,7 @@ button { cursor: pointer; background: none; border: none; font-family: inherit; 
   line-height: 1.6;
 }
 .form-checkbox label a {
-  color: var(--brand-green);
+  color: var(--gold);
   text-decoration: underline;
 }
 
@@ -1115,8 +1115,8 @@ button { cursor: pointer; background: none; border: none; font-family: inherit; 
   width: 64px;
   height: 64px;
   border-radius: 50%;
-  background: var(--brand-green);
-  color: var(--white);
+  background: var(--gold);
+  color: var(--dark);
   font-size: 28px;
   display: flex;
   align-items: center;
@@ -1285,7 +1285,7 @@ button { cursor: pointer; background: none; border: none; font-family: inherit; 
 }
 .fact-label { letter-spacing: 0.18em; }
 .fact-item {
-  border-right-color: rgba(200, 180, 138, 0.2); /* gold-tinted divider */
+  border-right-color: rgba(212,175,55,0.15); /* gold-tinted divider */
 }
 
 /* Amenities — refined hover + icon sizing */
@@ -1295,7 +1295,7 @@ button { cursor: pointer; background: none; border: none; font-family: inherit; 
   transition: color 0.3s ease, transform 0.3s ease;
 }
 .amenity-item:hover .amenity-icon {
-  color: var(--navy);
+  color: var(--gold);
   transform: translateY(-5px);
 }
 .amenity-item p {
@@ -1323,7 +1323,7 @@ button { cursor: pointer; background: none; border: none; font-family: inherit; 
 
 /* Register section form card */
 .register-form-wrap {
-  border-top: 3px solid var(--brand-green);
+  border-top: 3px solid var(--gold);
 }
 
 /* Form labels */
@@ -1341,7 +1341,7 @@ button { cursor: pointer; background: none; border: none; font-family: inherit; 
 
 /* Active navigation link styling */
 .main-nav a.active { color: var(--charcoal); font-weight: 500; }
-.site-header.scrolled .main-nav a.active { color: var(--brand-green); }
+.site-header.scrolled .main-nav a.active { color: var(--gold); }
 
 /* =============================================
    SCROLL ANIMATIONS
@@ -1383,7 +1383,7 @@ button { cursor: pointer; background: none; border: none; font-family: inherit; 
 
   .concept-image { order: -1; }
 
-  .amenities-grid { grid-template-columns: repeat(4, 1fr); }
+  .amenities-grid { grid-template-columns: repeat(3, 1fr); }
 }
 
 @media (max-width: 768px) {
@@ -1448,15 +1448,15 @@ button { cursor: pointer; background: none; border: none; font-family: inherit; 
     font-weight: 500;
     letter-spacing: 0.14em;
     text-transform: uppercase;
-    color: var(--brand-green);
-    border: 1px solid var(--brand-green);
+    color: var(--gold);
+    border: 1px solid var(--gold);
     background: transparent;
     cursor: pointer;
     transition: var(--transition);
   }
   .gallery-show-more:active {
-    background: var(--brand-green);
-    color: var(--white);
+    background: var(--gold);
+    color: var(--dark);
   }
 
   /* Mobile lightbox touch targets */
@@ -1493,8 +1493,8 @@ button { cursor: pointer; background: none; border: none; font-family: inherit; 
   position: absolute;
   top: -100%;
   left: 16px;
-  background: var(--brand-green);
-  color: var(--white);
+  background: var(--gold);
+  color: var(--dark);
   padding: 10px 20px;
   font-size: 12px;
   letter-spacing: 0.1em;
