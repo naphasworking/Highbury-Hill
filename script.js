@@ -161,10 +161,20 @@ mapToggles.forEach(btn => {
   });
 });
 
-/* --- Hero animated entry --- */
+/* --- Hero animated entry: left-to-right mask reveal --- */
 document.addEventListener('DOMContentLoaded', () => {
   const heroContent = document.querySelector('.hero-content');
-  if (heroContent) requestAnimationFrame(() => heroContent.classList.add('hero-animated'));
+  if (!heroContent) return;
+
+  /* Wrap each hero text line in overflow:hidden so the slide is masked */
+  heroContent.querySelectorAll('.hero-eyebrow, .hero-title, .hero-tagline, .hero-actions').forEach(el => {
+    const wrap = document.createElement('div');
+    wrap.className = 'hero-line-wrap';
+    el.parentNode.insertBefore(wrap, el);
+    wrap.appendChild(el);
+  });
+
+  requestAnimationFrame(() => heroContent.classList.add('hero-animated'));
 });
 
 /* --- Scroll reveal system (staggered, viewport-triggered) --- */
@@ -187,7 +197,7 @@ document.addEventListener('DOMContentLoaded', () => {
   /* Concept text */
   document.querySelectorAll('.concept-desc').forEach((el, i) => addReveal(el, 120 + i * 90));
   document.querySelectorAll('.concept-text .btn').forEach(el => addReveal(el, 310));
-  document.querySelectorAll('.concept-img-wrap').forEach((el, i) => addReveal(el, i * 160));
+  /* concept-img-wrap uses clip-path reveal — handled separately below */
 
   /* Staggered grids */
   [
@@ -223,6 +233,30 @@ document.addEventListener('DOMContentLoaded', () => {
   }, { threshold: 0.08, rootMargin: '0px 0px -30px 0px' });
 
   document.querySelectorAll('.reveal').forEach(el => revealObs.observe(el));
+
+  /* --- Clip-path mask reveal for architectural images --- */
+  const clipImgs = Array.from(document.querySelectorAll('.concept-img-wrap'));
+  clipImgs.forEach((el, i) => {
+    el.classList.add('img-clip-reveal');
+    const delay = `${i * 0.18}s`;
+    el.style.transitionDelay = delay;
+    const inner = el.querySelector('img');
+    if (inner) inner.style.transitionDelay = delay;
+  });
+
+  if (prefersReduced) {
+    clipImgs.forEach(el => el.classList.add('revealed'));
+  } else {
+    const clipObs = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('revealed');
+          clipObs.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12 });
+    clipImgs.forEach(el => clipObs.observe(el));
+  }
 })();
 
 /* --- Registration form --- */
