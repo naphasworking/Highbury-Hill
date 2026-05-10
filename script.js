@@ -243,6 +243,18 @@ lightbox.addEventListener('touchend', e => {
   else         openLightbox((lbIdx - 1 + lbImages.length) % lbImages.length);
 });
 
+/* Location Show More */
+const locationShowMoreBtn = document.getElementById('locationShowMore');
+if (locationShowMoreBtn) {
+  locationShowMoreBtn.addEventListener('click', () => {
+    const hidden = document.querySelectorAll('.distance-hidden');
+    const isExpanded = locationShowMoreBtn.classList.contains('expanded');
+    hidden.forEach(el => { el.style.display = isExpanded ? '' : 'flex'; });
+    locationShowMoreBtn.classList.toggle('expanded', !isExpanded);
+    locationShowMoreBtn.querySelector('span').textContent = isExpanded ? 'Show More' : 'Show Less';
+  });
+}
+
 /* Gallery Show More (mobile) */
 const galleryShowMoreWrap = document.getElementById('galleryShowMoreWrap');
 const galleryShowMoreBtn  = document.getElementById('galleryShowMore');
