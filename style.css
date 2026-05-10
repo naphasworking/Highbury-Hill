@@ -210,10 +210,26 @@ button { cursor: pointer; background: none; border: none; font-family: inherit; 
   text-transform: uppercase;
   color: rgba(255,255,255,0.85);
   transition: var(--transition);
+  position: relative;
 }
 .main-nav a:hover { color: var(--white); }
 .site-header.scrolled .main-nav a { color: var(--text-muted); }
 .site-header.scrolled .main-nav a:hover { color: var(--charcoal); }
+
+/* Center-out underline grow */
+.main-nav a:not(.nav-cta)::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 0;
+  height: 1px;
+  background: var(--gold);
+  transition: width 0.3s cubic-bezier(0.25,0.46,0.45,0.94);
+}
+.main-nav a:not(.nav-cta):hover::after,
+.main-nav a:not(.nav-cta).active::after { width: 100%; }
 
 .main-nav .nav-cta {
   padding: 8px 20px;
@@ -909,9 +925,10 @@ button { cursor: pointer; background: none; border: none; font-family: inherit; 
   height: 100%;
   object-fit: cover;
   display: block;
-  transition: transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  transition: transform 0.7s cubic-bezier(0.25,0.46,0.45,0.94), filter 0.4s;
+  will-change: transform;
 }
-.gallery-item:hover img { transform: scale(1.06); }
+.gallery-item:hover img { transform: scale(1.06); filter: brightness(1.06); }
 
 /* Dark hover overlay */
 .gallery-item::after {
@@ -926,18 +943,30 @@ button { cursor: pointer; background: none; border: none; font-family: inherit; 
 }
 .gallery-item:hover::after { background: rgba(10, 22, 16, 0.20); }
 
-/* Gold border reveal on hover */
+/* '+' zoom affordance on hover */
 .gallery-item::before {
-  content: '';
+  content: '+';
   position: absolute;
-  inset: 0;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0.6);
+  font-size: 54px;
+  font-weight: 100;
+  line-height: 1;
+  color: rgba(255,255,255,0);
+  z-index: 3;
+  transition: color 0.35s, transform 0.35s cubic-bezier(0.22,1,0.36,1);
+  pointer-events: none;
   border: 0px solid var(--gold);
   z-index: 2;
   transition: border-width 0.4s ease, opacity 0.4s ease;
   opacity: 0;
   pointer-events: none;
 }
-.gallery-item:hover::before { border-width: 2px; opacity: 0.55; }
+.gallery-item:hover::before {
+  color: rgba(255,255,255,0.9);
+  transform: translate(-50%, -50%) scale(1);
+}
 
 /* Caption label */
 .gallery-label {
@@ -1367,16 +1396,78 @@ button { cursor: pointer; background: none; border: none; font-family: inherit; 
 .site-header.scrolled .main-nav a.active { color: var(--gold); }
 
 /* =============================================
-   SCROLL ANIMATIONS
+   ANIMATION SYSTEM — Luxury Motion Profile
    ============================================= */
-.fade-up {
-  opacity: 0;
-  transform: translateY(32px);
-  transition: opacity 0.7s ease, transform 0.7s ease;
+
+/* --- Hero entry --- */
+@keyframes heroSlideUp {
+  from { opacity: 0; transform: translateY(28px); }
+  to   { opacity: 1; transform: translateY(0); }
 }
-.fade-up.visible {
-  opacity: 1;
-  transform: translateY(0);
+@keyframes heroFadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+.hero-eyebrow,
+.hero-title,
+.hero-tagline,
+.hero-actions { opacity: 0; }
+.hero-scroll-hint { opacity: 0; }
+
+.hero-animated .hero-eyebrow   { animation: heroSlideUp 1s   cubic-bezier(0.22,1,0.36,1) forwards 0.35s; }
+.hero-animated .hero-title     { animation: heroSlideUp 1.1s cubic-bezier(0.22,1,0.36,1) forwards 0.55s; }
+.hero-animated .hero-tagline   { animation: heroSlideUp 1s   cubic-bezier(0.22,1,0.36,1) forwards 0.80s; }
+.hero-animated .hero-actions   { animation: heroSlideUp 0.9s cubic-bezier(0.22,1,0.36,1) forwards 1.05s; }
+.hero-animated .hero-scroll-hint { animation: heroFadeIn 0.8s ease forwards 1.3s; }
+
+/* --- Scroll reveal --- */
+@keyframes revealUp {
+  from { opacity: 0; transform: translateY(22px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.reveal { opacity: 0; }
+.reveal.in-view {
+  animation: revealUp 0.8s cubic-bezier(0.22,1,0.36,1) both;
+  animation-delay: calc(var(--reveal-delay, 0) * 1ms);
+}
+
+/* --- Tab cross-fade --- */
+@keyframes fadePanel {
+  from { opacity: 0; transform: translateY(10px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.unit-panel.active {
+  animation: fadePanel 0.45s cubic-bezier(0.22,1,0.36,1) both;
+}
+
+/* --- Lightbox image zoom-in on open --- */
+@keyframes lbZoomIn {
+  from { opacity: 0; transform: scale(0.9); }
+  to   { opacity: 1; transform: scale(1); }
+}
+.lightbox.open .lb-img {
+  animation: lbZoomIn 0.35s cubic-bezier(0.22,1,0.36,1) forwards;
+}
+
+/* --- Concept image depth on hover --- */
+.concept-img-wrap { overflow: hidden; }
+.concept-img-wrap img {
+  transition: transform 0.75s cubic-bezier(0.25,0.46,0.45,0.94);
+  will-change: transform;
+}
+.concept-img-wrap:hover img { transform: scale(1.04); }
+
+/* --- Reduce-motion override --- */
+@media (prefers-reduced-motion: reduce) {
+  .hero-eyebrow, .hero-title, .hero-tagline, .hero-actions, .hero-scroll-hint {
+    opacity: 1 !important; animation: none !important;
+  }
+  .reveal { opacity: 1 !important; }
+  .reveal.in-view { animation: none !important; }
+  .gallery-item img, .concept-img-wrap img { transition: none !important; }
+  .unit-panel.active { animation: none !important; }
+  .lightbox.open .lb-img { animation: none !important; }
 }
 
 /* =============================================

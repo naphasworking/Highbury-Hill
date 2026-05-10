@@ -79,17 +79,22 @@ mobileNav.querySelectorAll('a').forEach(link => {
   link.addEventListener('click', () => mobileNav.classList.remove('open'));
 });
 
-/* --- Unit type tabs --- */
+/* --- Unit type tabs (cross-fade) --- */
 const unitTabs = document.querySelectorAll('.unit-tab');
 const unitPanels = document.querySelectorAll('.unit-panel');
 
 unitTabs.forEach(tab => {
   tab.addEventListener('click', () => {
+    const next = document.getElementById('tab-' + tab.dataset.tab);
+    if (!next || next.classList.contains('active')) return;
     unitTabs.forEach(t => t.classList.remove('active'));
     unitPanels.forEach(p => p.classList.remove('active'));
     tab.classList.add('active');
-    const target = document.getElementById('tab-' + tab.dataset.tab);
-    if (target) target.classList.add('active');
+    /* Reset animation so it replays on every tab switch */
+    next.style.animation = 'none';
+    next.offsetHeight; // reflow flush
+    next.style.animation = '';
+    next.classList.add('active');
   });
 });
 
@@ -156,24 +161,69 @@ mapToggles.forEach(btn => {
   });
 });
 
-/* --- Scroll fade-in animation --- */
-const fadeEls = document.querySelectorAll(
-  '.concept-grid, .fact-item, .amenity-item, .unit-grid, .location-grid, .gallery-item, .register-grid'
-);
-fadeEls.forEach(el => el.classList.add('fade-up'));
+/* --- Hero animated entry --- */
+document.addEventListener('DOMContentLoaded', () => {
+  const heroContent = document.querySelector('.hero-content');
+  if (heroContent) requestAnimationFrame(() => heroContent.classList.add('hero-animated'));
+});
 
-const observer = new IntersectionObserver(
-  entries => {
-    entries.forEach((entry, i) => {
+/* --- Scroll reveal system (staggered, viewport-triggered) --- */
+(function () {
+  const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  function addReveal(el, delayMs) {
+    el.classList.add('reveal');
+    if (delayMs) el.style.setProperty('--reveal-delay', delayMs);
+  }
+
+  /* Section headings — label then title stagger */
+  document.querySelectorAll('section').forEach(sec => {
+    const label = sec.querySelector('.section-label');
+    const title = sec.querySelector('.section-title');
+    if (label) addReveal(label, 0);
+    if (title) addReveal(title, 110);
+  });
+
+  /* Concept text */
+  document.querySelectorAll('.concept-desc').forEach((el, i) => addReveal(el, 120 + i * 90));
+  document.querySelectorAll('.concept-text .btn').forEach(el => addReveal(el, 310));
+  document.querySelectorAll('.concept-img-wrap').forEach((el, i) => addReveal(el, i * 160));
+
+  /* Staggered grids */
+  [
+    ['.fact-item',   80],
+    ['.amenity-item', 70],
+    ['.gallery-item', 60],
+    ['.distance-item:not(.distance-hidden)', 45],
+  ].forEach(([sel, step]) => {
+    document.querySelectorAll(sel).forEach((el, i) => addReveal(el, i * step));
+  });
+
+  /* Register & location blocks */
+  document.querySelectorAll('.register-text, .register-form-wrap').forEach((el, i) => addReveal(el, i * 130));
+  document.querySelectorAll('.location-text, .location-map').forEach((el, i) => addReveal(el, i * 120));
+
+  /* House type panels */
+  document.querySelectorAll('.unit-gallery').forEach(el => addReveal(el, 0));
+  document.querySelectorAll('.unit-lower').forEach(el => addReveal(el, 120));
+
+  /* Observer */
+  if (prefersReduced) {
+    document.querySelectorAll('.reveal').forEach(el => el.classList.add('in-view'));
+    return;
+  }
+
+  const revealObs = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
       if (entry.isIntersecting) {
-        setTimeout(() => entry.target.classList.add('visible'), i * 60);
-        observer.unobserve(entry.target);
+        entry.target.classList.add('in-view');
+        revealObs.unobserve(entry.target);
       }
     });
-  },
-  { threshold: 0.12 }
-);
-fadeEls.forEach(el => observer.observe(el));
+  }, { threshold: 0.08, rootMargin: '0px 0px -30px 0px' });
+
+  document.querySelectorAll('.reveal').forEach(el => revealObs.observe(el));
+})();
 
 /* --- Registration form --- */
 const form = document.getElementById('registerForm');
