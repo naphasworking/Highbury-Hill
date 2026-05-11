@@ -124,10 +124,10 @@ button { cursor: pointer; background: none; border: none; font-family: inherit; 
 
 .btn-outline {
   background: transparent;
-  color: var(--gold);
-  border: 1.5px solid var(--gold);
+  color: #1A120B;
+  border: 1.5px solid #1A120B;
 }
-.btn-outline:hover { background: var(--gold); color: var(--dark); }
+.btn-outline:hover { background: #1A120B; color: var(--gold); }
 
 .btn.full-width { width: 100%; justify-content: center; }
 
@@ -1057,8 +1057,15 @@ button { cursor: pointer; background: none; border: none; font-family: inherit; 
    ============================================= */
 .register {
   padding: var(--section-pad);
-  background: var(--greige);  /* deepest warm greige — from floor plan BG */
+  background: #1A120B;
 }
+
+/* Text overrides for dark register section */
+.register .section-label  { color: var(--gold); }
+.register .section-title  { color: #FFFFFF; }
+.register .register-desc  { color: rgba(255,255,255,0.62); }
+.register .contact-link   { color: rgba(255,255,255,0.80); }
+.register .contact-link:hover { color: var(--gold); }
 
 .register-grid {
   display: grid;
@@ -1095,7 +1102,7 @@ button { cursor: pointer; background: none; border: none; font-family: inherit; 
 .register-form-wrap {
   background: var(--off-white);
   padding: 48px;
-  box-shadow: 0 4px 40px rgba(0,0,0,0.07), 0 0 0 1px rgba(139,94,60,0.1);
+  box-shadow: 0 12px 64px rgba(0,0,0,0.45), 0 0 0 1px rgba(212,175,55,0.15);
 }
 
 .form-row {
@@ -1194,7 +1201,7 @@ button { cursor: pointer; background: none; border: none; font-family: inherit; 
    FOOTER
    ============================================= */
 .site-footer {
-  background: var(--dark);   /* #0f1f18 — deep green-black, ties back to brand green */
+  background: #1A120B;
   color: var(--white);
   padding: 60px 0 32px;
 }
