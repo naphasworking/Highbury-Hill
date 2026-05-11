@@ -97,10 +97,10 @@ unitTabs.forEach(tab => {
     next.classList.add('active');
     /* Re-trigger main photo slide reveal for the incoming panel */
     const mainPhoto = next.querySelector('.unit-main-photo');
-    if (mainPhoto && mainPhoto.classList.contains('img-clip-reveal')) {
-      mainPhoto.classList.remove('revealed');
+    if (mainPhoto && mainPhoto.classList.contains('reveal-left')) {
+      mainPhoto.classList.remove('in-view');
       void mainPhoto.offsetHeight; // reflow
-      setTimeout(() => mainPhoto.classList.add('revealed'), 60);
+      mainPhoto.classList.add('in-view');
     }
   });
 });
@@ -192,6 +192,10 @@ document.addEventListener('DOMContentLoaded', () => {
     el.classList.add('reveal');
     if (delayMs) el.style.setProperty('--reveal-delay', delayMs);
   }
+  function addRevealLeft(el, delayMs) {
+    el.classList.add('reveal-left');
+    if (delayMs) el.style.setProperty('--reveal-delay', delayMs);
+  }
 
   /* Section headings — label then title stagger */
   document.querySelectorAll('section').forEach(sec => {
@@ -204,7 +208,6 @@ document.addEventListener('DOMContentLoaded', () => {
   /* Concept text */
   document.querySelectorAll('.concept-desc').forEach((el, i) => addReveal(el, 120 + i * 90));
   document.querySelectorAll('.concept-text .btn').forEach(el => addReveal(el, 310));
-  /* concept-img-wrap uses clip-path reveal — handled separately below */
 
   /* Staggered grids */
   [
@@ -214,22 +217,25 @@ document.addEventListener('DOMContentLoaded', () => {
   ].forEach(([sel, step]) => {
     document.querySelectorAll(sel).forEach((el, i) => addReveal(el, i * step));
   });
-  /* gallery-item and unit-main-photo use img-clip-reveal — handled separately */
+
+  /* Gallery items: slide from left with 70 ms stagger */
+  document.querySelectorAll('.gallery-item').forEach((el, i) => addRevealLeft(el, i * 70));
 
   /* Register & location blocks */
   document.querySelectorAll('.register-text, .register-form-wrap').forEach((el, i) => addReveal(el, i * 130));
   document.querySelectorAll('.location-text, .location-map').forEach((el, i) => addReveal(el, i * 120));
 
-  /* House type panels */
-  document.querySelectorAll('.unit-gallery').forEach(el => addReveal(el, 0));
+  /* House type panels — lower info/floorplan slides up; main photo slides left */
   document.querySelectorAll('.unit-lower').forEach(el => addReveal(el, 120));
+  document.querySelectorAll('.unit-main-photo').forEach(el => addRevealLeft(el, 0));
 
-  /* Observer */
+  /* Reduced-motion: show everything immediately */
   if (prefersReduced) {
-    document.querySelectorAll('.reveal').forEach(el => el.classList.add('in-view'));
+    document.querySelectorAll('.reveal, .reveal-left').forEach(el => el.classList.add('in-view'));
     return;
   }
 
+  /* Single observer for both reveal variants */
   const revealObs = new IntersectionObserver(entries => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
@@ -237,90 +243,38 @@ document.addEventListener('DOMContentLoaded', () => {
         revealObs.unobserve(entry.target);
       }
     });
-  }, { threshold: 0.08, rootMargin: '0px 0px -30px 0px' });
+  }, { threshold: 0.1, rootMargin: '0px 0px -60px 0px' });
 
-  document.querySelectorAll('.reveal').forEach(el => revealObs.observe(el));
+  /* Only observe elements below the initial viewport — prevents animations firing on page load.
+     Elements already in view get in-view immediately so they're visible without blocking. */
+  document.querySelectorAll('.reveal, .reveal-left').forEach(el => {
+    if (el.getBoundingClientRect().top > window.innerHeight) {
+      revealObs.observe(el);
+    } else {
+      el.classList.add('in-view');
+    }
+  });
 
-  /* --- Architectural image mask reveal --- */
+  /* --- Concept images: overflow-mask slide reveal (img inside wrapper) --- */
   const clipImgs = Array.from(document.querySelectorAll('.concept-img-wrap'));
   clipImgs.forEach((el, i) => {
     el.classList.add('img-clip-reveal');
-    /* Stagger the transition on the img, not the wrapper */
     const inner = el.querySelector('img');
     if (inner) inner.style.transitionDelay = `${i * 0.18}s`;
   });
 
-  if (prefersReduced) {
-    clipImgs.forEach(el => el.classList.add('revealed'));
-  } else {
-    const clipObs = new IntersectionObserver(entries => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('revealed');
-          clipObs.unobserve(entry.target);
-        }
-      });
-    }, { threshold: 0, rootMargin: '0px 0px 80px 0px' });
-    clipImgs.forEach(el => clipObs.observe(el));
-
-    /* Safety fallback: reveal any still-hidden images after 2.5s */
-    setTimeout(() => {
-      clipImgs.forEach(el => {
-        if (!el.classList.contains('revealed')) el.classList.add('revealed');
-      });
-    }, 2500);
-  }
-
-  /* --- Gallery image slide reveal --- */
-  const galleryEls = Array.from(document.querySelectorAll('.gallery-item'));
-  galleryEls.forEach((el, i) => {
-    el.classList.add('img-clip-reveal');
-    const inner = el.querySelector('img');
-    if (inner) inner.style.transitionDelay = `${i * 0.07}s`;
-  });
-
-  if (prefersReduced) {
-    galleryEls.forEach(el => el.classList.add('revealed'));
-  } else {
-    const galleryObs = new IntersectionObserver(entries => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('revealed');
-          galleryObs.unobserve(entry.target);
-        }
-      });
-    }, { threshold: 0, rootMargin: '0px 0px 80px 0px' });
-    /* Observe only currently visible items (hidden-mobile excluded via display:none) */
-    galleryEls.filter(el => !el.classList.contains('gallery-hidden-mobile'))
-              .forEach(el => galleryObs.observe(el));
-    setTimeout(() => {
-      galleryEls.forEach(el => { if (!el.classList.contains('revealed')) el.classList.add('revealed'); });
-    }, 3000);
-  }
-
-  /* --- Unit main photo slide reveal --- */
-  const unitPhotos = Array.from(document.querySelectorAll('.unit-main-photo'));
-  unitPhotos.forEach(el => el.classList.add('img-clip-reveal'));
-
-  if (prefersReduced) {
-    unitPhotos.forEach(el => el.classList.add('revealed'));
-  } else {
-    const unitObs = new IntersectionObserver(entries => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('revealed');
-          unitObs.unobserve(entry.target);
-        }
-      });
-    }, { threshold: 0, rootMargin: '0px 0px 80px 0px' });
-    /* Only the active panel's photo is visible on load */
-    const activePhoto = document.querySelector('.unit-panel.active .unit-main-photo');
-    if (activePhoto) unitObs.observe(activePhoto);
-    /* Pre-reveal inactive panels after 1.5s so they're ready when tabs are clicked */
-    setTimeout(() => {
-      unitPhotos.forEach(el => { if (!el.classList.contains('revealed')) el.classList.add('revealed'); });
-    }, 1500);
-  }
+  const clipObs = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('revealed');
+        clipObs.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0, rootMargin: '0px 0px 80px 0px' });
+  clipImgs.forEach(el => clipObs.observe(el));
+  setTimeout(() => {
+    clipImgs.forEach(el => { if (!el.classList.contains('revealed')) el.classList.add('revealed'); });
+  }, 2500);
 })();
 
 /* --- Registration form --- */
@@ -411,8 +365,8 @@ if (galleryShowMoreBtn) {
     document.querySelectorAll('.gallery-hidden-mobile').forEach((el, i) => {
       el.classList.remove('gallery-hidden-mobile');
       /* Slide in newly visible items that haven't been revealed yet */
-      if (el.classList.contains('img-clip-reveal') && !el.classList.contains('revealed')) {
-        setTimeout(() => el.classList.add('revealed'), 60 + i * 80);
+      if (el.classList.contains('reveal-left') && !el.classList.contains('in-view')) {
+        setTimeout(() => el.classList.add('in-view'), 60 + i * 80);
       }
     });
     galleryShowMoreWrap.style.display = 'none';

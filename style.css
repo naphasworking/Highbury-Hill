@@ -6,44 +6,44 @@
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
 :root {
-  /* === HIGHBBURY HILL — Quiet Luxury Dark Edition === */
+  /* === HIGHBURY HILL — Clean Minimalist Luxury Edition === */
 
-  /* Core Dark — Midnight Cocoa */
-  --brand-green:      #1A120B;
-  --brand-green-mid:  #251810;
-  --brand-green-light:#3A2415;
+  /* Base Backgrounds — 80% White/Snow */
+  --brand-green:      #FFFFFF;     /* primary white base */
+  --brand-green-mid:  #FAFAFA;     /* snow off-white */
+  --brand-green-light:#F5F1EC;     /* warm light */
 
-  /* Dark Backgrounds */
-  --greige:           #231810;
-  --cream:            #1A120B;
-  --off-white:        #201610;
+  /* Section Backgrounds */
+  --greige:           #F7F4F0;     /* warm off-white (alt sections) */
+  --cream:            #FFFFFF;     /* pure white */
+  --off-white:        #FAFAFA;     /* snow white */
   --white:            #FFFFFF;
 
-  /* Bronze */
-  --navy:             #8E6D45;
-  --navy-light:       #A88050;
+  /* Warm Walnut Brown — used sparingly for accents */
+  --navy:             #8B5E3C;
+  --navy-light:       #A67C5B;
 
-  /* Metallic Royal Gold */
+  /* Champagne Gold — CTAs, logo, thin borders */
   --gold:             #D4AF37;
-  --gold-dark:        #B09020;
+  --gold-dark:        #C5A059;
 
-  /* Champagne Text */
-  --charcoal:         #F5F5DC;
-  --dark:             #0D0905;
-  --text:             #D8D0A0;
-  --text-muted:       #A09060;
-  --text-faint:       #706040;
+  /* Typography — Dark on Light */
+  --charcoal:         #1A1209;     /* near-black headings */
+  --dark:             #0D0905;     /* deepest dark (footer/hero) */
+  --text:             rgba(26,18,9,0.78);  /* body text — soft charcoal */
+  --text-muted:       #6B5B45;    /* warm brown-grey */
+  --text-faint:       #9E8C76;    /* very muted */
 
-  /* Borders — gold tinted */
-  --stone:            #8E6D45;
-  --stone-light:      rgba(212,175,55,0.12);
-  --border:           rgba(212,175,55,0.18);
+  /* Borders — Brown tinted */
+  --stone:            #8B5E3C;
+  --stone-light:      rgba(139,94,60,0.08);
+  --border:           rgba(139,94,60,0.18);
 
-  --font-serif: 'Playfair Display', Georgia, serif;
+  --font-serif: 'Cormorant Garamond', 'Playfair Display', Georgia, serif;
   --font-sans:  'Inter', system-ui, sans-serif;
 
   --max-w: 1240px;
-  --section-pad: 100px 0;
+  --section-pad: 110px 0;
   --transition: 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 
@@ -53,7 +53,7 @@ body {
   font-family: var(--font-sans);
   background: var(--cream);
   color: var(--text);
-  line-height: 1.7;
+  line-height: 1.75;
   overflow-x: hidden;
 }
 
@@ -73,20 +73,21 @@ button { cursor: pointer; background: none; border: none; font-family: inherit; 
   font-family: var(--font-sans);
   font-size: 11px;
   font-weight: 500;
-  letter-spacing: 0.2em;
+  letter-spacing: 0.22em;
   text-transform: uppercase;
-  color: var(--gold);
-  margin-bottom: 16px;
+  color: var(--navy);
+  margin-bottom: 20px;
 }
 .section-label.center { text-align: center; }
 
 .section-title {
   font-family: var(--font-serif);
-  font-size: clamp(2.2rem, 4vw, 3.5rem);
+  font-size: clamp(2.4rem, 4vw, 3.8rem);
   font-weight: 300;
-  line-height: 1.15;
+  line-height: 1.12;
   color: var(--charcoal);
   margin-bottom: 32px;
+  letter-spacing: 0.01em;
 }
 .section-title.center { text-align: center; }
 .section-title em { font-style: italic; color: var(--gold); }
@@ -105,11 +106,14 @@ button { cursor: pointer; background: none; border: none; font-family: inherit; 
 }
 
 .btn-primary {
-  background: var(--gold);
+  background: linear-gradient(to right, var(--gold), var(--gold-dark));
   color: var(--dark);
   border: 1.5px solid var(--gold);
 }
-.btn-primary:hover { background: var(--gold-dark); border-color: var(--gold-dark); }
+.btn-primary:hover {
+  background: linear-gradient(to right, var(--gold-dark), #B8922A);
+  border-color: var(--gold-dark);
+}
 
 .btn-ghost {
   background: transparent;
@@ -157,10 +161,10 @@ button { cursor: pointer; background: none; border: none; font-family: inherit; 
 }
 
 .site-header.scrolled {
-  background: rgba(26, 18, 11, 0.97);
+  background: rgba(255, 255, 255, 0.97);
   backdrop-filter: blur(12px);
-  border-bottom: 1px solid var(--border);
-  box-shadow: 0 2px 20px rgba(0,0,0,0.06);
+  border-bottom: 1px solid rgba(139,94,60,0.12);
+  box-shadow: 0 2px 24px rgba(0,0,0,0.07);
 }
 
 .header-inner {
@@ -189,10 +193,9 @@ button { cursor: pointer; background: none; border: none; font-family: inherit; 
   transition: filter var(--transition);
 }
 
-/* Nav logo — scrolled header (dark bg):
-   invert to white so logo shows on dark background */
+/* Nav logo — scrolled header (white bg): darken logo to show on light background */
 .site-header.scrolled .nav-logo {
-  filter: brightness(0) invert(1);
+  filter: brightness(0);
   mix-blend-mode: normal;
 }
 
@@ -213,7 +216,7 @@ button { cursor: pointer; background: none; border: none; font-family: inherit; 
   position: relative;
 }
 .main-nav a:hover { color: var(--white); }
-.site-header.scrolled .main-nav a { color: var(--text-muted); }
+.site-header.scrolled .main-nav a { color: #6B5B45; }
 .site-header.scrolled .main-nav a:hover { color: var(--charcoal); }
 
 /* Center-out underline grow */
@@ -253,7 +256,7 @@ button { cursor: pointer; background: none; border: none; font-family: inherit; 
   font-size: 11px;
   color: rgba(255,255,255,0.6);
 }
-.site-header.scrolled .lang-toggle { color: var(--text-muted); }
+.site-header.scrolled .lang-toggle { color: #6B5B45; }
 
 .lang-btn {
   font-size: 11px;
@@ -281,7 +284,7 @@ button { cursor: pointer; background: none; border: none; font-family: inherit; 
   background: var(--white);
   transition: var(--transition);
 }
-.site-header.scrolled .mobile-menu-btn span { background: var(--charcoal); }
+.site-header.scrolled .mobile-menu-btn span { background: var(--dark); }
 
 .mobile-nav {
   display: none;
@@ -342,21 +345,21 @@ button { cursor: pointer; background: none; border: none; font-family: inherit; 
   pointer-events: none;
 }
 
-/* Cinematic vignette — smooth radial corner fades + center text zone darkening */
+/* Cinematic vignette — lighter overlay for "airy" feel, text still legible */
 .hero-overlay {
   position: absolute;
   inset: 0;
   background:
-    radial-gradient(ellipse 75% 65% at 0%   0%,   rgba(26,18,11,0.85) 0%, transparent 65%),
-    radial-gradient(ellipse 75% 65% at 100% 0%,   rgba(26,18,11,0.85) 0%, transparent 65%),
-    radial-gradient(ellipse 75% 70% at 0%   100%, rgba(26,18,11,0.92) 0%, transparent 65%),
-    radial-gradient(ellipse 75% 70% at 100% 100%, rgba(26,18,11,0.92) 0%, transparent 65%),
-    radial-gradient(ellipse 70% 55% at 50%  50%,  rgba(26,18,11,0.42) 0%, transparent 72%),
+    radial-gradient(ellipse 75% 65% at 0%   0%,   rgba(26,18,11,0.72) 0%, transparent 65%),
+    radial-gradient(ellipse 75% 65% at 100% 0%,   rgba(26,18,11,0.72) 0%, transparent 65%),
+    radial-gradient(ellipse 75% 70% at 0%   100%, rgba(26,18,11,0.80) 0%, transparent 65%),
+    radial-gradient(ellipse 75% 70% at 100% 100%, rgba(26,18,11,0.80) 0%, transparent 65%),
+    radial-gradient(ellipse 70% 55% at 50%  50%,  rgba(26,18,11,0.28) 0%, transparent 72%),
     linear-gradient(to bottom,
-      rgba(26,18,11,0.58) 0%,
-      rgba(26,18,11,0.22) 28%,
-      rgba(26,18,11,0.22) 68%,
-      rgba(26,18,11,0.80) 100%
+      rgba(26,18,11,0.45) 0%,
+      rgba(26,18,11,0.12) 28%,
+      rgba(26,18,11,0.12) 68%,
+      rgba(26,18,11,0.68) 100%
     );
   z-index: 1;
 }
@@ -443,7 +446,7 @@ button { cursor: pointer; background: none; border: none; font-family: inherit; 
 .concept-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 80px;
+  gap: 100px;
   align-items: center;
 }
 
@@ -451,8 +454,8 @@ button { cursor: pointer; background: none; border: none; font-family: inherit; 
 .concept-desc {
   color: var(--text-muted);
   font-size: 15.5px;
-  line-height: 1.85;
-  margin-bottom: 20px;
+  line-height: 2;
+  margin-bottom: 24px;
 }
 .concept-text .btn { margin-top: 16px; }
 
@@ -490,8 +493,10 @@ button { cursor: pointer; background: none; border: none; font-family: inherit; 
    FACT SHEET
    ============================================= */
 .factsheet {
-  padding: 80px 0;
-  background: var(--brand-green);
+  padding: 100px 0;
+  background: #F5EDE0;  /* warm champagne — accent break between white sections */
+  border-top: 1px solid rgba(139,94,60,0.12);
+  border-bottom: 1px solid rgba(139,94,60,0.12);
 }
 
 .facts-grid {
@@ -503,7 +508,7 @@ button { cursor: pointer; background: none; border: none; font-family: inherit; 
 .fact-item {
   padding: 40px 24px;
   text-align: center;
-  border-right: 1px solid rgba(255,255,255,0.1);
+  border-right: 1px solid rgba(139,94,60,0.15);
 }
 .fact-item:last-child { border-right: none; }
 
@@ -520,7 +525,7 @@ button { cursor: pointer; background: none; border: none; font-family: inherit; 
   font-size: 11px;
   letter-spacing: 0.1em;
   text-transform: uppercase;
-  color: rgba(255,255,255,0.5);
+  color: rgba(26,18,9,0.50);
 }
 
 /* =============================================
@@ -536,7 +541,7 @@ button { cursor: pointer; background: none; border: none; font-family: inherit; 
 .amenities-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 40px 32px;
+  gap: 56px 48px;
 }
 
 .amenity-item {
@@ -550,7 +555,7 @@ button { cursor: pointer; background: none; border: none; font-family: inherit; 
 .amenity-icon {
   width: 56px;
   height: 56px;
-  color: var(--text-muted);
+  color: var(--navy);
 }
 .amenity-icon svg { width: 100%; height: 100%; }
 
@@ -565,7 +570,7 @@ button { cursor: pointer; background: none; border: none; font-family: inherit; 
    HOUSE TYPES
    ============================================= */
 .units {
-  padding: 72px 0;
+  padding: var(--section-pad);
   background: var(--off-white);
 }
 
@@ -726,7 +731,7 @@ button { cursor: pointer; background: none; border: none; font-family: inherit; 
 .fp-btn:first-child { border-radius: 2px 0 0 2px; }
 .fp-btn:last-child  { border-radius: 0 2px 2px 0; border-left: none; }
 .fp-btn.active { background: var(--gold); color: var(--dark); border-color: var(--gold); }
-.fp-btn:not(.active):hover { background: var(--cream); }
+.fp-btn:not(.active):hover { background: var(--greige); }
 
 .floorplan-img-wrap {
   border: 1px solid var(--border);
@@ -746,7 +751,7 @@ button { cursor: pointer; background: none; border: none; font-family: inherit; 
    LOCATION
    ============================================= */
 .location {
-  padding: 72px 0;
+  padding: var(--section-pad);
   background: var(--cream);
 }
 
@@ -891,7 +896,8 @@ button { cursor: pointer; background: none; border: none; font-family: inherit; 
    GALLERY
    ============================================= */
 .gallery {
-  padding: 72px 0 0;
+  padding: var(--section-pad);
+  padding-bottom: 0;
   background: var(--off-white);
 }
 
@@ -900,7 +906,7 @@ button { cursor: pointer; background: none; border: none; font-family: inherit; 
 .gallery-grid {
   display: grid;
   grid-template-columns: repeat(6, 1fr);
-  gap: 4px;
+  gap: 6px;
   padding: 0;
 }
 
@@ -936,12 +942,12 @@ button { cursor: pointer; background: none; border: none; font-family: inherit; 
   position: absolute;
   pointer-events: none;
   inset: 0;
-  background: rgba(10, 22, 16, 0);
+  background: rgba(26, 18, 9, 0);
   transition: background 0.5s ease;
   pointer-events: none;
   z-index: 1;
 }
-.gallery-item:hover::after { background: rgba(10, 22, 16, 0.20); }
+.gallery-item:hover::after { background: rgba(26, 18, 9, 0.22); }
 
 /* '+' zoom affordance on hover */
 .gallery-item::before {
@@ -1057,7 +1063,7 @@ button { cursor: pointer; background: none; border: none; font-family: inherit; 
 .register-grid {
   display: grid;
   grid-template-columns: 1fr 1.4fr;
-  gap: 80px;
+  gap: 96px;
   align-items: start;
 }
 
@@ -1089,7 +1095,7 @@ button { cursor: pointer; background: none; border: none; font-family: inherit; 
 .register-form-wrap {
   background: var(--off-white);
   padding: 48px;
-  box-shadow: 0 8px 64px rgba(0,0,0,0.5), 0 0 0 1px rgba(212,175,55,0.08);
+  box-shadow: 0 4px 40px rgba(0,0,0,0.07), 0 0 0 1px rgba(139,94,60,0.1);
 }
 
 .form-row {
@@ -1117,8 +1123,8 @@ button { cursor: pointer; background: none; border: none; font-family: inherit; 
 .form-group input,
 .form-group select {
   padding: 12px 16px;
-  border: 1px solid var(--border);
-  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(139,94,60,0.22);
+  background: #FFFFFF;
   font-family: var(--font-sans);
   font-size: 14px;
   color: var(--charcoal);
@@ -1129,9 +1135,10 @@ button { cursor: pointer; background: none; border: none; font-family: inherit; 
 .form-group input:focus,
 .form-group select:focus {
   border-color: var(--gold);
-  background: rgba(255,255,255,0.04);
+  background: #FFFFFF;
 }
-.form-group input::placeholder { color: var(--stone); }
+.form-group input::placeholder { color: rgba(139,94,60,0.45); }
+.form-group select { color: var(--charcoal); }
 
 .form-checkbox {
   display: flex;
@@ -1259,18 +1266,18 @@ button { cursor: pointer; background: none; border: none; font-family: inherit; 
    LUXURY BOUTIQUE REFINEMENTS
    ============================================= */
 
-/* Gold accent line under every section label */
+/* Thin gold accent rule under every section label */
 .section-label {
   position: relative;
   display: inline-block;
-  padding-bottom: 14px;
+  padding-bottom: 16px;
 }
 .section-label::after {
   content: '';
   position: absolute;
   bottom: 0;
   left: 0;
-  width: 28px;
+  width: 32px;
   height: 1px;
   background: var(--gold);
 }
@@ -1287,8 +1294,8 @@ button { cursor: pointer; background: none; border: none; font-family: inherit; 
 
 /* Section title sizing bump */
 .section-title {
-  font-size: clamp(2.4rem, 4.5vw, 4rem);
-  letter-spacing: -0.01em;
+  font-size: clamp(2.6rem, 4.5vw, 4.2rem);
+  letter-spacing: 0.01em;
 }
 
 /* Hero — strong text shadows for clarity over any video frame */
@@ -1337,7 +1344,7 @@ button { cursor: pointer; background: none; border: none; font-family: inherit; 
 }
 .fact-label { letter-spacing: 0.18em; }
 .fact-item {
-  border-right-color: rgba(212,175,55,0.15); /* gold-tinted divider */
+  border-right-color: rgba(139,94,60,0.15); /* brown divider on champagne */
 }
 
 /* Amenities — refined hover + icon sizing */
@@ -1392,7 +1399,7 @@ button { cursor: pointer; background: none; border: none; font-family: inherit; 
 }
 
 /* Active navigation link styling */
-.main-nav a.active { color: var(--charcoal); font-weight: 500; }
+.main-nav a.active { color: var(--white); font-weight: 500; }
 .site-header.scrolled .main-nav a.active { color: var(--gold); }
 
 /* =============================================
@@ -1429,7 +1436,7 @@ button { cursor: pointer; background: none; border: none; font-family: inherit; 
 .hero-animated .hero-actions  { animation: heroSlideLeft 0.85s cubic-bezier(0.16,1,0.3,1) forwards 0.75s; }
 .hero-animated .hero-scroll-hint { animation: heroFadeIn 0.8s ease forwards 1.0s; }
 
-/* --- Scroll reveal --- */
+/* --- Scroll reveal: slide up --- */
 @keyframes revealUp {
   from { opacity: 0; transform: translateY(22px); }
   to   { opacity: 1; transform: translateY(0); }
@@ -1437,6 +1444,17 @@ button { cursor: pointer; background: none; border: none; font-family: inherit; 
 .reveal { opacity: 0; }
 .reveal.in-view {
   animation: revealUp 0.8s cubic-bezier(0.22,1,0.36,1) both;
+  animation-delay: calc(var(--reveal-delay, 0) * 1ms);
+}
+
+/* --- Scroll reveal: slide from left (gallery, unit photos) --- */
+@keyframes revealLeft {
+  from { opacity: 0; transform: translateX(-55px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+.reveal-left { opacity: 0; }
+.reveal-left.in-view {
+  animation: revealLeft 0.95s cubic-bezier(0.16,1,0.3,1) both;
   animation-delay: calc(var(--reveal-delay, 0) * 1ms);
 }
 
@@ -1481,20 +1499,12 @@ button { cursor: pointer; background: none; border: none; font-family: inherit; 
   transition-duration: 0.7s;
 }
 
-/* Unit main photo: mask via overflow+translateX only (no opacity fade)
-   so the thumbnail switcher's inline opacity changes still work fast */
-.unit-main-photo.img-clip-reveal img {
-  opacity: 1;
-  transition: transform 1.0s cubic-bezier(0.16,1,0.3,1), opacity 0.18s ease;
-}
 
-/* Gallery items: restore fast hover transition after reveal */
-.gallery-item.img-clip-reveal.revealed img {
-  transition: transform 0.7s cubic-bezier(0.25,0.46,0.45,0.94), filter 0.4s;
-}
-.gallery-item.img-clip-reveal.revealed:hover img {
-  transform: scale(1.06);
-  filter: brightness(1.06);
+/* --- Mobile: swap reveal-left → reveal-up (overflow:hidden on sections clips horizontal translate) --- */
+@media (max-width: 768px) {
+  .reveal-left.in-view {
+    animation-name: revealUp;
+  }
 }
 
 /* --- Reduce-motion override --- */
@@ -1502,8 +1512,8 @@ button { cursor: pointer; background: none; border: none; font-family: inherit; 
   .hero-eyebrow, .hero-title, .hero-tagline, .hero-actions, .hero-scroll-hint {
     opacity: 1 !important; animation: none !important;
   }
-  .reveal { opacity: 1 !important; }
-  .reveal.in-view { animation: none !important; }
+  .reveal, .reveal-left { opacity: 1 !important; }
+  .reveal.in-view, .reveal-left.in-view { animation: none !important; }
   .img-clip-reveal img { transform: none !important; opacity: 1 !important; transition: none !important; }
   .gallery-item img { transition: none !important; }
   .unit-panel.active { animation: none !important; }
@@ -1528,7 +1538,7 @@ button { cursor: pointer; background: none; border: none; font-family: inherit; 
   .facts-grid { grid-template-columns: repeat(3, 1fr); }
   .fact-item:nth-child(3) { border-right: none; }
   .fact-item:nth-child(4),
-  .fact-item:nth-child(5) { border-top: 1px solid rgba(255,255,255,0.1); }
+  .fact-item:nth-child(5) { border-top: 1px solid rgba(139,94,60,0.15); }
 
   .concept-grid,
   .unit-lower,
@@ -1556,7 +1566,7 @@ button { cursor: pointer; background: none; border: none; font-family: inherit; 
 
   .facts-grid { grid-template-columns: repeat(2, 1fr); }
   .fact-item:nth-child(2n) { border-right: none; }
-  .fact-item { border-top: 1px solid rgba(255,255,255,0.1); }
+  .fact-item { border-top: 1px solid rgba(139,94,60,0.15); }
   .fact-item:nth-child(1),
   .fact-item:nth-child(2) { border-top: none; }
 
