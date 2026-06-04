@@ -25,15 +25,15 @@
     var tl = gsap.timeline({ onComplete: finish });
 
     tl
-      /* 1 — logo rises in from depth */
+      /* 1 — logo rises + scales in */
       .fromTo('.intro-logo',
-        { y: 70, z: -260, opacity: 0, rotateX: 10 },
-        { y: 0, z: 0, opacity: 1, rotateX: 0, duration: 1.5, ease: 'power3.out' })
-      /* 2 — lifestyle images cascade in from depth, staggered */
+        { y: 50, scale: 0.9, opacity: 0 },
+        { y: 0, scale: 1, opacity: 1, duration: 1.4, ease: 'power3.out' })
+      /* 2 — lifestyle tiles cascade in, staggered */
       .fromTo('.intro-img',
-        { z: -340, y: 60, opacity: 0 },
-        { z: 0, y: 0, opacity: 1, duration: 1.9, stagger: 0.16, ease: 'power3.out' },
-        '-=1.0')
+        { y: 50, scale: 0.85, opacity: 0 },
+        { y: 0, scale: 1, opacity: 1, duration: 1.5, stagger: 0.12, ease: 'power3.out' },
+        '-=0.9')
       /* 3 — brief settle on the logo */
       .to('.intro-logo',
         { y: -14, duration: 0.7, ease: 'power2.inOut' }, '-=0.5')
