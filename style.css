@@ -483,14 +483,24 @@ button { cursor: pointer; background: none; border: none; font-family: inherit; 
   display: block;
 }
 
-/* ---- Three big alternating concept sections ---- */
+/* ---- Three big alternating concept sections — sticky card stack ---- */
 .concept-section {
   display: grid;
   grid-template-columns: 55fr 45fr;
   min-height: 580px;
   align-items: stretch;
   border-top: 1px solid var(--border);
+
+  /* Sticky stack: each section pins to top and the next one slides over it */
+  position: sticky;
+  top: 100px;   /* = header height */
+  box-shadow: 0 -8px 40px rgba(0,0,0,0.07);
 }
+
+/* Increasing z-index so each card lands on top of the previous */
+.concept > .concept-section:nth-child(2) { z-index: 10; }
+.concept > .concept-section:nth-child(3) { z-index: 20; }
+.concept > .concept-section:nth-child(4) { z-index: 30; }
 
 /* Reverse: text left (45%), image right (55%) */
 .concept-section--reverse {
