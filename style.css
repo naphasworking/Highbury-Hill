@@ -1640,8 +1640,15 @@ button { cursor: pointer; background: none; border: none; font-family: inherit; 
   .concept-header { max-width: 100%; }
 
   .main-nav { display: none; }
-  .lang-toggle { display: none; }            /* hide the header one */
-  .mobile-menu-btn { display: flex; }
+  .mobile-menu-btn { display: flex; margin-left: 16px; }
+
+  /* Show the language toggle directly in the mobile header (next to ☰) */
+  .header-inner > .lang-toggle {
+    display: flex;
+    margin-left: auto;
+    gap: 6px;
+  }
+  .header-inner > .lang-toggle .lang-btn { font-size: 12.5px; }
 
   /* Language toggle inside the mobile menu (cream bg → dark text) */
   .mobile-nav .lang-toggle.mobile-lang {
