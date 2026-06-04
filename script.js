@@ -9,10 +9,11 @@ window.addEventListener('load', function () {
   if (!wrap) return;
 
   var iframe = document.createElement('iframe');
-  iframe.src = 'https://www.youtube.com/embed/SEbjs0Vo6uQ?autoplay=1&mute=1&loop=1&playlist=SEbjs0Vo6uQ&controls=0&showinfo=0&rel=0&modestbranding=1&iv_load_policy=3&disablekb=1';
+  iframe.src = 'https://www.youtube.com/embed/SEbjs0Vo6uQ?autoplay=1&mute=1&loop=1&playlist=SEbjs0Vo6uQ&controls=0&showinfo=0&rel=0&modestbranding=1&iv_load_policy=3&disablekb=1&playsinline=1&enablejsapi=1';
   iframe.setAttribute('frameborder', '0');
-  iframe.setAttribute('allow', 'autoplay; encrypted-media');
+  iframe.setAttribute('allow', 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share');
   iframe.setAttribute('allowfullscreen', '');
+  iframe.setAttribute('referrerpolicy', 'strict-origin-when-cross-origin');
   iframe.setAttribute('aria-hidden', 'true');
   iframe.setAttribute('tabindex', '-1');
   iframe.setAttribute('title', '');
@@ -168,21 +169,7 @@ mapToggles.forEach(btn => {
   });
 });
 
-/* --- Hero animated entry: left-to-right mask reveal --- */
-document.addEventListener('DOMContentLoaded', () => {
-  const heroContent = document.querySelector('.hero-content');
-  if (!heroContent) return;
-
-  /* Wrap each hero text line in overflow:hidden so the slide is masked */
-  heroContent.querySelectorAll('.hero-eyebrow, .hero-title, .hero-tagline, .hero-actions').forEach(el => {
-    const wrap = document.createElement('div');
-    wrap.className = 'hero-line-wrap';
-    el.parentNode.insertBefore(wrap, el);
-    wrap.appendChild(el);
-  });
-
-  requestAnimationFrame(() => heroContent.classList.add('hero-animated'));
-});
+/* Hero text removed — no entry animation needed */
 
 /* --- Scroll reveal system (staggered, viewport-triggered) --- */
 (function () {
