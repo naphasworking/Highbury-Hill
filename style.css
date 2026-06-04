@@ -65,18 +65,18 @@ button { cursor: pointer; background: none; border: none; font-family: inherit; 
 .container {
   max-width: var(--max-w);
   margin: 0 auto;
-  padding: 0 40px;
+  padding: 0 64px;
 }
 
 /* --- Typography --- */
 .section-label {
   font-family: var(--font-sans);
-  font-size: 11px;
-  font-weight: 500;
-  letter-spacing: 0.22em;
+  font-size: 10.5px;
+  font-weight: 400;
+  letter-spacing: 0.28em;
   text-transform: uppercase;
   color: var(--navy);
-  margin-bottom: 20px;
+  margin-bottom: 14px;
 }
 .section-label.center { text-align: center; }
 
@@ -86,7 +86,7 @@ button { cursor: pointer; background: none; border: none; font-family: inherit; 
   font-weight: 300;
   line-height: 1.12;
   color: var(--charcoal);
-  margin-bottom: 32px;
+  margin-bottom: 48px;
   letter-spacing: 0.01em;
 }
 .section-title.center { text-align: center; }
@@ -170,8 +170,8 @@ button { cursor: pointer; background: none; border: none; font-family: inherit; 
 .header-inner {
   max-width: var(--max-w);
   margin: 0 auto;
-  padding: 0 40px;
-  height: 160px;
+  padding: 0 64px;
+  height: 100px;
   display: flex;
   align-items: center;
   gap: 40px;
@@ -186,7 +186,7 @@ button { cursor: pointer; background: none; border: none; font-family: inherit; 
 /* Nav logo — transparent header (over dark hero video):
    PNG has white bg → brightness(0) invert(1) = pure white logo on dark  */
 .nav-logo {
-  height: 144px;
+  height: 80px;
   width: auto;
   display: block;
   filter: brightness(0) invert(1);
@@ -618,7 +618,7 @@ button { cursor: pointer; background: none; border: none; font-family: inherit; 
   width: 100%;
   height: 100%;
   object-fit: cover;
-  object-position: center 100%;
+  object-position: center 55%;
   transition: opacity 0.4s ease;
 }
 
@@ -1273,23 +1273,10 @@ button { cursor: pointer; background: none; border: none; font-family: inherit; 
    LUXURY BOUTIQUE REFINEMENTS
    ============================================= */
 
-/* Thin gold accent rule under every section label */
+/* Section label — no decorative rule, spacing carries the hierarchy */
 .section-label {
-  position: relative;
-  display: inline-block;
-  padding-bottom: 16px;
+  display: block;
 }
-.section-label::after {
-  content: '';
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 32px;
-  height: 1px;
-  background: var(--gold);
-}
-.section-label.center { display: block; }
-.section-label.center::after { left: 50%; transform: translateX(-50%); }
 
 /* Thin gold rule — reusable boutique divider */
 .gold-rule {
@@ -1305,24 +1292,21 @@ button { cursor: pointer; background: none; border: none; font-family: inherit; 
   letter-spacing: 0.01em;
 }
 
-/* Hero — strong text shadows for clarity over any video frame */
+/* Hero — single clean shadow for legibility */
 .hero-title {
   letter-spacing: 0.06em;
-  text-shadow:
-    0 2px 60px rgba(0,0,0,0.80),
-    0 0  120px rgba(0,0,0,0.45),
-    0 4px 20px  rgba(0,0,0,0.55);
+  text-shadow: 0 2px 40px rgba(0,0,0,0.55);
 }
 .hero-tagline {
   letter-spacing: 0.25em;
   font-size: 13px;
-  text-shadow: 0 1px 24px rgba(0,0,0,0.75), 0 0 48px rgba(0,0,0,0.4);
+  text-shadow: 0 1px 20px rgba(0,0,0,0.50);
 }
 .hero-eyebrow {
   letter-spacing: 0.35em;
   font-size: 10.5px;
   color: var(--gold);
-  text-shadow: 0 1px 20px rgba(0,0,0,0.75), 0 0 40px rgba(0,0,0,0.4);
+  text-shadow: none;
 }
 
 /* Buttons — sharper, more boutique */
@@ -1389,7 +1373,7 @@ button { cursor: pointer; background: none; border: none; font-family: inherit; 
 
 /* Register section form card */
 .register-form-wrap {
-  border-top: 3px solid var(--gold);
+  border-top: 1px solid rgba(212,175,55,0.5);
 }
 
 /* Form labels */
@@ -1560,14 +1544,14 @@ button { cursor: pointer; background: none; border: none; font-family: inherit; 
 @media (max-width: 768px) {
   :root { --section-pad: 70px 0; }
 
-  .container { padding: 0 24px; }
+  .container { padding: 0 28px; }
 
   .main-nav { display: none; }
   .lang-toggle { display: none; }
   .mobile-menu-btn { display: flex; }
 
-  .header-inner { height: 100px; }
-  .nav-logo { height: 80px; }
+  .header-inner { height: 72px; }
+  .nav-logo { height: 56px; }
 
   .hero-title { font-size: clamp(3rem, 14vw, 5rem); }
 
