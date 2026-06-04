@@ -39,8 +39,10 @@
   --stone-light:      rgba(139,94,60,0.08);
   --border:           rgba(139,94,60,0.18);
 
-  --font-serif: 'Cormorant Garamond', 'Playfair Display', Georgia, serif;
-  --font-sans:  'Inter', system-ui, sans-serif;
+  /* Latin glyphs use Cormorant/Inter; Thai glyphs fall back to the matching
+     Thai webfonts (Trirong serif, Noto Sans Thai) so Thai meets the CI look */
+  --font-serif: 'Cormorant Garamond', 'Playfair Display', 'Trirong', Georgia, serif;
+  --font-sans:  'Inter', 'Noto Sans Thai', system-ui, sans-serif;
 
   --max-w: 1240px;
   --section-pad: 110px 0;
