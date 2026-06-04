@@ -2,31 +2,7 @@
    HIGHBURY HILL — Interactions + Google Maps
    ============================================= */
 
-/* --- YouTube hero video: inject iframe after page load (performance facade) --- */
-window.addEventListener('load', function () {
-  var wrap = document.getElementById('heroVideoWrap');
-  var poster = document.getElementById('heroVideoPoster');
-  if (!wrap) return;
-
-  var iframe = document.createElement('iframe');
-  iframe.src = 'https://www.youtube.com/embed/SEbjs0Vo6uQ?autoplay=1&mute=1&loop=1&playlist=SEbjs0Vo6uQ&controls=0&showinfo=0&rel=0&modestbranding=1&iv_load_policy=3&disablekb=1&playsinline=1&enablejsapi=1';
-  iframe.setAttribute('frameborder', '0');
-  iframe.setAttribute('allow', 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share');
-  iframe.setAttribute('allowfullscreen', '');
-  iframe.setAttribute('referrerpolicy', 'strict-origin-when-cross-origin');
-  iframe.setAttribute('aria-hidden', 'true');
-  iframe.setAttribute('tabindex', '-1');
-  iframe.setAttribute('title', '');
-  wrap.appendChild(iframe);
-
-  // Fade the poster out once the video has had time to buffer and start
-  setTimeout(function () {
-    if (poster) {
-      poster.style.opacity = '0';
-      setTimeout(function () { if (poster.parentNode) poster.parentNode.removeChild(poster); }, 1200);
-    }
-  }, 3000);
-});
+/* --- Hero video: self-hosted MP4, no embedding restrictions --- */
 
 /* --- Google Maps: lazy-load API only when location section is near viewport --- */
 (function () {

@@ -150,12 +150,16 @@
   <main id="main-content">
   <section class="hero" id="hero" aria-label="Hero">
     <div class="hero-bg">
-      <!-- Hero video — iframe injected after page load for performance -->
-      <div class="hero-video-wrap" id="heroVideoWrap" aria-hidden="true">
-        <div class="hero-video-poster" id="heroVideoPoster">
-          <img src="https://img.youtube.com/vi/SEbjs0Vo6uQ/maxresdefault.jpg" alt="" fetchpriority="high" decoding="async" width="1280" height="720" />
-        </div>
-      </div>
+      <!-- Self-hosted hero video — no embedding restrictions -->
+      <video
+        class="hero-video"
+        autoplay muted loop playsinline
+        poster="Asset/hero-poster.webp"
+        aria-hidden="true"
+        preload="auto"
+      >
+        <source src="Asset/Video/hero.mp4" type="video/mp4" />
+      </video>
       <!-- Cinematic vignette overlay -->
       <div class="hero-overlay"></div>
     </div>
