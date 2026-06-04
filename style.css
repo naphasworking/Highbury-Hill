@@ -615,22 +615,38 @@ button { cursor: pointer; background: none; border: none; font-family: inherit; 
 .unit-panel { display: none; }
 .unit-panel.active { display: block; }
 
-/* --- Main photo — full width, no thumbnails --- */
+/* --- Side-by-side: image left, info+floorplan right --- */
+.unit-split {
+  display: grid;
+  grid-template-columns: 1.05fr 0.95fr;
+  min-height: 680px;
+  align-items: stretch;
+}
+
 .unit-main-photo {
-  width: 100%;
-  aspect-ratio: 16 / 9;
   overflow: hidden;
   background: var(--greige);
-  margin-bottom: 56px;
 }
 .unit-main-photo img {
   width: 100%;
   height: 100%;
   object-fit: cover;
   object-position: center 55%;
+  display: block;
 }
 
-/* --- Info + floor plan --- */
+/* Right panel — info stacked above floor plan */
+.unit-detail {
+  padding: 64px 56px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 48px;
+  background: var(--off-white);
+  border-left: 1px solid var(--border);
+}
+
+/* --- Legacy: keep .unit-lower in case referenced elsewhere --- */
 .unit-lower {
   display: grid;
   grid-template-columns: 1fr 1.2fr;
@@ -1498,8 +1514,10 @@ button { cursor: pointer; background: none; border: none; font-family: inherit; 
   .unit-tabs { flex-wrap: wrap; }
   .unit-tab { padding: 12px 20px; }
 
-  /* House types mobile */
-  .unit-lower { grid-template-columns: 1fr; gap: 40px; }
+  /* House types mobile — stack photo above detail */
+  .unit-split { grid-template-columns: 1fr; min-height: auto; }
+  .unit-main-photo { aspect-ratio: 4 / 3; }
+  .unit-detail { padding: 36px 0; border-left: none; border-top: 1px solid var(--border); gap: 32px; }
   .unit-name { font-size: 2rem; }
   .unit-specs { font-size: 12px; }
   .unit-actions .btn { width: 100%; text-align: center; }

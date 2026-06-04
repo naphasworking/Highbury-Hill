@@ -198,8 +198,8 @@ mapToggles.forEach(btn => {
   document.querySelectorAll('.register-text, .register-form-wrap').forEach((el, i) => addReveal(el, i * 130));
   document.querySelectorAll('.location-text, .location-map').forEach((el, i) => addReveal(el, i * 120));
 
-  /* House type panels — lower info/floorplan slides up; main photo slides left */
-  document.querySelectorAll('.unit-lower').forEach(el => addReveal(el, 120));
+  /* House type panels — detail panel fades up; photo slides in from left */
+  document.querySelectorAll('.unit-detail').forEach(el => addReveal(el, 120));
   document.querySelectorAll('.unit-main-photo').forEach(el => addRevealLeft(el, 0));
 
   /* Reduced-motion: show everything immediately */
