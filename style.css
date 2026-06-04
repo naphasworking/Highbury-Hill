@@ -950,7 +950,7 @@ button { cursor: pointer; background: none; border: none; font-family: inherit; 
 
 .gallery .section-title { margin-bottom: 48px; }
 
-/* ---- Swiper slideshow (Rekha-style: 1 slide, horizontal, loop, arrows) ---- */
+/* ---- Swiper slideshow (Rekha-style: 2 rows, auto-slide, arrows) ---- */
 .gallery-swiper {
   width: 100%;
   max-width: 1240px;
@@ -960,8 +960,9 @@ button { cursor: pointer; background: none; border: none; font-family: inherit; 
   position: relative;
 }
 
+/* Grid mode (rows: 2) — each slide is one cell; two stack per column */
 .gallery-swiper .swiper-slide {
-  height: 600px;
+  height: 300px;
   overflow: hidden;
   position: relative;
   cursor: pointer;
@@ -1581,7 +1582,7 @@ button { cursor: pointer; background: none; border: none; font-family: inherit; 
 
   /* Gallery swiper mobile */
   .gallery-swiper { padding: 0 0 48px; }
-  .gallery-swiper .swiper-slide { height: 320px; }
+  .gallery-swiper .swiper-slide { height: 200px; }
   .gallery-swiper .swiper-button-prev { left: 12px; }
   .gallery-swiper .swiper-button-next { right: 12px; }
   .gallery-swiper .gallery-nav { width: 42px; height: 42px; }
@@ -1604,7 +1605,7 @@ button { cursor: pointer; background: none; border: none; font-family: inherit; 
   .hero-actions { flex-direction: column; align-items: center; }
   .unit-actions { flex-direction: column; gap: 12px; }
   .amenities-grid { grid-template-columns: repeat(2, 1fr); gap: 24px; }
-  .gallery-swiper .swiper-slide { height: 260px; }
+  .gallery-swiper .swiper-slide { height: 180px; }
   .footer-links { flex-direction: column; gap: 32px; }
 }
 

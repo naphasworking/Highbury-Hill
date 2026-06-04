@@ -270,15 +270,18 @@ let lbImages = [];
 let lbIdx = 0;
 
 if (gallerySwiperEl) {
-  lbImages = Array.from(gallerySwiperEl.querySelectorAll('.swiper-slide:not(.swiper-slide-duplicate) img'))
-    .map(img => ({ src: img.src, alt: img.alt }));
+  const origSlides = Array.from(gallerySwiperEl.querySelectorAll('.swiper-slide'));
+  lbImages = origSlides.map(s => {
+    const img = s.querySelector('img');
+    return { src: img.src, alt: img.alt };
+  });
 
-  /* Click a slide → open lightbox at that real index (ignore drag-clicks) */
+  /* Click a slide → open lightbox at its DOM index (ignore drag-clicks) */
   gallerySwiperEl.addEventListener('click', e => {
     const slide = e.target.closest('.swiper-slide');
     if (!slide || gallerySwiperEl.classList.contains('swiper-was-dragging')) return;
-    const realIdx = parseInt(slide.getAttribute('data-swiper-slide-index'), 10);
-    if (!Number.isNaN(realIdx)) openLightbox(realIdx);
+    const idx = origSlides.indexOf(slide);
+    if (idx >= 0) openLightbox(idx);
   });
 }
 
@@ -336,12 +339,19 @@ window.addEventListener('load', function () {
   if (typeof Swiper === 'undefined' || !document.getElementById('gallerySwiper')) return;
 
   const gallerySwiper = new Swiper('#gallerySwiper', {
-    loop: true,
-    slidesPerView: 1,
-    spaceBetween: 30,
-    speed: 300,              /* matches Rekha's default transition */
+    /* 2 rows that auto-slide horizontally (grid mode can't loop, so use rewind) */
+    slidesPerView: 2,
+    grid: { rows: 2, fill: 'row' },
+    spaceBetween: 12,
+    speed: 600,
+    rewind: true,
     grabCursor: true,
     keyboard: { enabled: true },
+    autoplay: {
+      delay: 3000,
+      disableOnInteraction: false,
+      pauseOnMouseEnter: true,
+    },
     navigation: {
       nextEl: '#gallerySwiper .swiper-button-next',
       prevEl: '#gallerySwiper .swiper-button-prev',
@@ -349,6 +359,10 @@ window.addEventListener('load', function () {
     pagination: {
       el: '#gallerySwiper .swiper-pagination',
       clickable: true,
+    },
+    breakpoints: {
+      768:  { slidesPerView: 2, spaceBetween: 12 },
+      1024: { slidesPerView: 3, spaceBetween: 14 },
     },
   });
 
