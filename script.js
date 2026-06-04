@@ -347,7 +347,7 @@ window.addEventListener('load', function () {
 
     const sw = new Swiper(selector, {
       slidesPerView: 'auto',
-      spaceBetween: 14,
+      spaceBetween: 20,
       loop: true,
       speed: 6000,                 /* slow, continuous glide */
       allowTouchMove: true,
