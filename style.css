@@ -78,7 +78,7 @@ button { cursor: pointer; background: none; border: none; font-family: inherit; 
   height: 100%;
 }
 
-/* Centre logo wrap — soft cream halo keeps the logo readable over any image */
+/* Centre logo wrap */
 .intro-logo-wrap {
   position: absolute;
   top: 50%;
@@ -88,16 +88,29 @@ button { cursor: pointer; background: none; border: none; font-family: inherit; 
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 11vh 9vw;
   opacity: 0;                                /* GSAP fades this in/out */
-  background: radial-gradient(ellipse at center,
-    rgba(250,247,242,0.96) 0%,
-    rgba(250,247,242,0.70) 38%,
-    rgba(250,247,242,0) 70%);
   will-change: transform, opacity;
 }
 
-/* Logo image (dark) sits on the halo */
+/* Soft, blurred cream glow behind the logo — feathers naturally */
+.intro-logo-wrap::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 165%;
+  height: 280%;
+  z-index: -1;
+  pointer-events: none;
+  background: radial-gradient(ellipse at center,
+    rgba(250,247,242,0.78) 0%,
+    rgba(250,247,242,0.40) 40%,
+    rgba(250,247,242,0) 72%);
+  filter: blur(45px);                        /* organic, edgeless glow */
+}
+
+/* Logo image (dark) sits on the glow */
 .intro-logo {
   position: relative;
   width: 340px;
