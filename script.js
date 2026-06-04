@@ -189,8 +189,7 @@ mapToggles.forEach(btn => {
     document.querySelectorAll(sel).forEach((el, i) => addReveal(el, i * step));
   });
 
-  /* Gallery items: slide from left with 70 ms stagger */
-  document.querySelectorAll('.gallery-item').forEach((el, i) => addRevealLeft(el, i * 70));
+  /* Gallery is a Swiper slideshow — no per-item reveal (would clash with slide transforms) */
 
   /* Register & location blocks */
   document.querySelectorAll('.register-text, .register-form-wrap').forEach((el, i) => addReveal(el, i * 130));
@@ -265,19 +264,23 @@ const lbPrev     = document.getElementById('lbPrev');
 const lbNext     = document.getElementById('lbNext');
 const lbCounter  = document.getElementById('lbCounter');
 
-const galleryItems = Array.from(document.querySelectorAll('.gallery-item'));
+/* Build lightbox image list from the original (non-cloned) slides */
+const gallerySwiperEl = document.getElementById('gallerySwiper');
 let lbImages = [];
 let lbIdx = 0;
 
-galleryItems.forEach((item, idx) => {
-  item.addEventListener('click', () => {
-    lbImages = galleryItems.map(gi => {
-      const img = gi.querySelector('img');
-      return { src: img.src, alt: img.alt };
-    });
-    openLightbox(idx);
+if (gallerySwiperEl) {
+  lbImages = Array.from(gallerySwiperEl.querySelectorAll('.swiper-slide:not(.swiper-slide-duplicate) img'))
+    .map(img => ({ src: img.src, alt: img.alt }));
+
+  /* Click a slide → open lightbox at that real index (ignore drag-clicks) */
+  gallerySwiperEl.addEventListener('click', e => {
+    const slide = e.target.closest('.swiper-slide');
+    if (!slide || gallerySwiperEl.classList.contains('swiper-was-dragging')) return;
+    const realIdx = parseInt(slide.getAttribute('data-swiper-slide-index'), 10);
+    if (!Number.isNaN(realIdx)) openLightbox(realIdx);
   });
-});
+}
 
 function openLightbox(i) {
   lbIdx = i;
@@ -328,26 +331,34 @@ if (locationShowMoreBtn) {
   });
 }
 
-/* Gallery Show More (mobile) */
-const galleryShowMoreWrap = document.getElementById('galleryShowMoreWrap');
-const galleryShowMoreBtn  = document.getElementById('galleryShowMore');
-if (galleryShowMoreBtn) {
-  galleryShowMoreBtn.addEventListener('click', () => {
-    document.querySelectorAll('.gallery-hidden-mobile').forEach((el, i) => {
-      el.classList.remove('gallery-hidden-mobile');
-      /* Slide in newly visible items that haven't been revealed yet */
-      if (el.classList.contains('reveal-left') && !el.classList.contains('in-view')) {
-        setTimeout(() => el.classList.add('in-view'), 60 + i * 80);
-      }
-    });
-    galleryShowMoreWrap.style.display = 'none';
-    /* Rebuild lbImages to include newly visible items */
-    lbImages = Array.from(document.querySelectorAll('.gallery-item')).map(gi => {
-      const img = gi.querySelector('img');
-      return { src: img.src, alt: img.alt };
-    });
+/* --- Gallery Swiper (Rekha-style: 1 slide, horizontal, loop, 300ms) --- */
+window.addEventListener('load', function () {
+  if (typeof Swiper === 'undefined' || !document.getElementById('gallerySwiper')) return;
+
+  const gallerySwiper = new Swiper('#gallerySwiper', {
+    loop: true,
+    slidesPerView: 1,
+    spaceBetween: 30,
+    speed: 300,              /* matches Rekha's default transition */
+    grabCursor: true,
+    keyboard: { enabled: true },
+    navigation: {
+      nextEl: '#gallerySwiper .swiper-button-next',
+      prevEl: '#gallerySwiper .swiper-button-prev',
+    },
+    pagination: {
+      el: '#gallerySwiper .swiper-pagination',
+      clickable: true,
+    },
   });
-}
+
+  /* Flag drag so a drag-release doesn't trigger the lightbox click */
+  const galEl = document.getElementById('gallerySwiper');
+  gallerySwiper.on('sliderFirstMove', () => galEl.classList.add('swiper-was-dragging'));
+  gallerySwiper.on('touchEnd', () => {
+    setTimeout(() => galEl.classList.remove('swiper-was-dragging'), 50);
+  });
+});
 
 /* --- Smooth scroll --- */
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
