@@ -370,6 +370,7 @@ lightbox.addEventListener('touchend', e => {
 });
 
 /* Location Show More */
+const MORE_LABEL = { en: ['Show More', 'Show Less'], th: ['ดูเพิ่มเติม', 'ดูน้อยลง'] };
 const locationShowMoreBtn = document.getElementById('locationShowMore');
 if (locationShowMoreBtn) {
   locationShowMoreBtn.addEventListener('click', () => {
@@ -377,9 +378,194 @@ if (locationShowMoreBtn) {
     const isExpanded = locationShowMoreBtn.classList.contains('expanded');
     hidden.forEach(el => { el.style.display = isExpanded ? '' : 'flex'; });
     locationShowMoreBtn.classList.toggle('expanded', !isExpanded);
-    locationShowMoreBtn.querySelector('span').textContent = isExpanded ? 'Show More' : 'Show Less';
+    const lbl = MORE_LABEL[window.HH_LANG || 'en'];
+    locationShowMoreBtn.querySelector('span').textContent = isExpanded ? lbl[0] : lbl[1];
   });
 }
+
+/* =============================================
+   LANGUAGE  —  EN / TH  live toggle
+   ============================================= */
+(function () {
+  const rules = [
+    /* Nav */
+    { sel: '.main-nav a', all: true,
+      en: ['Concept','House Types','Location','Atmosphere','Register'],
+      th: ['แนวคิด','แบบบ้าน','ทำเล','บรรยากาศ','ลงทะเบียน'] },
+    { sel: '.mobile-nav a', all: true,
+      en: ['Concept','House Types','Location','Atmosphere','Register'],
+      th: ['แนวคิด','แบบบ้าน','ทำเล','บรรยากาศ','ลงทะเบียน'] },
+
+    /* Hero */
+    { sel: '.hero-title', html: true,
+      en: 'Where Luxury<br><em>Meets Life</em>',
+      th: 'ที่ซึ่งความหรูหรา<br><em>มาบรรจบกับชีวิต</em>' },
+    { sel: '.hero-cta', en: 'View Our Offer', th: 'ดูข้อเสนอพิเศษ' },
+
+    /* Register */
+    { sel: '.register-text .section-label', en: 'Register', th: 'ลงทะเบียน' },
+    { sel: '.register-text .section-title', html: true,
+      en: 'Begin Your<br><em>Journey</em>', th: 'เริ่มต้น<br><em>การเดินทางของคุณ</em>' },
+    { sel: '.register-desc',
+      en: 'Take the first step towards your dream home. Register your interest and our team will be in touch to guide you through the process.',
+      th: 'ก้าวแรกสู่บ้านในฝันของคุณ ลงทะเบียนความสนใจ แล้วทีมงานของเราจะติดต่อกลับเพื่อดูแลคุณในทุกขั้นตอน' },
+    { sel: 'label[for="firstName"]', html: true, en: 'First Name <span>*</span>', th: 'ชื่อ <span>*</span>' },
+    { sel: 'label[for="lastName"]',  html: true, en: 'Last Name <span>*</span>',  th: 'นามสกุล <span>*</span>' },
+    { sel: 'label[for="mobile"]',    html: true, en: 'Mobile Number <span>*</span>', th: 'เบอร์โทรศัพท์ <span>*</span>' },
+    { sel: 'label[for="email"]',     html: true, en: 'Email Address <span>*</span>', th: 'อีเมล <span>*</span>' },
+    { sel: 'label[for="unitType"]',  en: 'Interested Unit Type', th: 'แบบบ้านที่สนใจ' },
+    { sel: 'label[for="budget"]',    en: 'Budget Range', th: 'งบประมาณ' },
+    { sel: 'label[for="consent"]',   html: true,
+      en: 'I consent to HIGHBURY HILL contacting me with project information and agree to the <a href="#">Privacy Policy</a>.',
+      th: 'ฉันยินยอมให้ HIGHBURY HILL ติดต่อเพื่อให้ข้อมูลโครงการ และยอมรับ<a href="#">นโยบายความเป็นส่วนตัว</a>' },
+    { sel: '#firstName', attr: 'placeholder', en: 'Your first name', th: 'ชื่อของคุณ' },
+    { sel: '#lastName',  attr: 'placeholder', en: 'Your last name',  th: 'นามสกุลของคุณ' },
+    { sel: '#unitType option[value=""]', en: '— Select —', th: '— เลือก —' },
+    { sel: '#budget option[value=""]',   en: '— Select —', th: '— เลือก —' },
+    { sel: '#budget option[value="10-15"]', en: '฿10.9 – 15 Million THB', th: '฿10.9 – 15 ล้านบาท' },
+    { sel: '#budget option[value="15-20"]', en: '฿15 – 20 Million THB',   th: '฿15 – 20 ล้านบาท' },
+    { sel: '#budget option[value="20-27"]', en: '฿20 – 27 Million THB',   th: '฿20 – 27 ล้านบาท' },
+    { sel: '#budget option[value="27+"]',   en: '฿27.2 Million THB+',     th: '฿27.2 ล้านบาทขึ้นไป' },
+    { sel: '.register-form button[type="submit"]', en: 'Register Now', th: 'ลงทะเบียนเลย' },
+    { sel: '.form-success h3', en: 'Thank You!', th: 'ขอบคุณค่ะ' },
+    { sel: '.form-success p',
+      en: "We've received your registration. Our team will contact you shortly.",
+      th: 'เราได้รับการลงทะเบียนของคุณแล้ว ทีมงานจะติดต่อกลับโดยเร็วที่สุด' },
+
+    /* Concept */
+    { sel: '.concept-header .section-label', en: 'Our Concept', th: 'แนวคิดของเรา' },
+    { sel: '.concept-header .section-title', html: true,
+      en: 'A Private World<br><em>Above the Ordinary</em>', th: 'โลกส่วนตัว<br><em>เหนือระดับ</em>' },
+    { sel: '.concept-philosophy', html: true,
+      en: 'Where the boundary between home and nature dissolves —<br>and every moment becomes an invitation to live deliberately.',
+      th: 'ที่ซึ่งเส้นแบ่งระหว่างบ้านกับธรรมชาติเลือนหาย —<br>และทุกช่วงเวลาคือคำเชิญให้ใช้ชีวิตอย่างตั้งใจ' },
+    { sel: '.concept-section-title', all: true,
+      en: ["Nature's Sanctuary", 'Refined Craft', 'Deliberate Living'],
+      th: ['สุนทรียะแห่งธรรมชาติ', 'งานออกแบบอันประณีต', 'การใช้ชีวิตอย่างตั้งใจ'] },
+    { sel: '.concept-section-desc', all: true,
+      en: [
+        "Nestled within Pattaya's rolling hills, where lush landscapes and mountain silhouettes define the horizon. Here, home and nature are one.",
+        'Every detail considered, every material chosen with purpose. A home designed so that nothing is arbitrary — and everything reflects who you are.',
+        'Two distinct pool villa typologies. One extraordinary way of life — not simply lived, but chosen with intention at every step.'
+      ],
+      th: [
+        'ตั้งอยู่บนเนินเขาของพัทยา ท่ามกลางภูมิทัศน์เขียวขจีและแนวภูเขาเป็นฉากหลัง ที่ซึ่งบ้านและธรรมชาติเป็นหนึ่งเดียว',
+        'ใส่ใจทุกรายละเอียด คัดสรรทุกวัสดุอย่างมีจุดมุ่งหมาย บ้านที่ออกแบบให้ทุกสิ่งมีความหมายและสะท้อนตัวตนของคุณ',
+        'พูลวิลล่าสองรูปแบบที่แตกต่าง หนึ่งวิถีชีวิตอันพิเศษ ที่ไม่เพียงใช้ชีวิต แต่เลือกอย่างตั้งใจในทุกย่างก้าว'
+      ] },
+
+    /* Atmosphere */
+    { sel: '#atmosphere .section-label', en: 'Atmosphere', th: 'บรรยากาศ' },
+    { sel: '#atmosphere .section-title', html: true,
+      en: 'A Glimpse of <em>Your Future Home</em>', th: 'ภาพบรรยากาศ<em>บ้านในอนาคตของคุณ</em>' },
+
+    /* Fact sheet */
+    { sel: '.fact-label', all: true,
+      en: ['House Typologies','Total Residences','Sqm. per Unit','Starting Price','63 Units · Q3/2026'],
+      th: ['แบบบ้าน','ยูนิตทั้งหมด','ตร.ม. ต่อยูนิต','ราคาเริ่มต้น','63 ยูนิต · ไตรมาส 3/2026'] },
+    { sel: '.fact-item:nth-child(5) .fact-number', en: 'Phase 1', th: 'เฟส 1' },
+
+    /* House types */
+    { sel: '.units .section-label', en: 'House Types', th: 'แบบบ้าน' },
+    { sel: '.units .section-title', html: true,
+      en: 'Find Your <em>Perfect Home</em>', th: 'ค้นหา<em>บ้านที่ใช่</em>ของคุณ' },
+    { sel: '.unit-subtitle', all: true,
+      en: ['Private Pool Villa','Private Pool Villa','Grand Pool Villa'],
+      th: ['พูลวิลล่าส่วนตัว','พูลวิลล่าส่วนตัว','แกรนด์พูลวิลล่า'] },
+    { sel: '.unit-specs', all: true, html: true,
+      en: [
+        '285 Sq.M &nbsp;·&nbsp; 4 Bedrooms &nbsp;·&nbsp; 5 Bathrooms &nbsp;·&nbsp; 2 Car Parking &nbsp;·&nbsp; 1 Private Pool',
+        '375 Sq.M &nbsp;·&nbsp; 4 Bedrooms &nbsp;·&nbsp; 5 Bathrooms &nbsp;·&nbsp; 3 Car Parking &nbsp;·&nbsp; 1 Private Pool',
+        '484 Sq.M &nbsp;·&nbsp; 4 Bedrooms &nbsp;·&nbsp; 5 Bathrooms &nbsp;·&nbsp; 4 Car Parking &nbsp;·&nbsp; 1 Private Pool'
+      ],
+      th: [
+        '285 ตร.ม. &nbsp;·&nbsp; 4 ห้องนอน &nbsp;·&nbsp; 5 ห้องน้ำ &nbsp;·&nbsp; จอดรถ 2 คัน &nbsp;·&nbsp; สระส่วนตัว 1 สระ',
+        '375 ตร.ม. &nbsp;·&nbsp; 4 ห้องนอน &nbsp;·&nbsp; 5 ห้องน้ำ &nbsp;·&nbsp; จอดรถ 3 คัน &nbsp;·&nbsp; สระส่วนตัว 1 สระ',
+        '484 ตร.ม. &nbsp;·&nbsp; 4 ห้องนอน &nbsp;·&nbsp; 5 ห้องน้ำ &nbsp;·&nbsp; จอดรถ 4 คัน &nbsp;·&nbsp; สระส่วนตัว 1 สระ'
+      ] },
+    { sel: '.unit-detail .btn', all: true, en: 'Register Interest', th: 'ลงทะเบียนสนใจ' },
+    { sel: '.fp-btn', all: true,
+      en: ['1st Floor','2nd Floor','1st Floor','2nd Floor','1st Floor','2nd Floor'],
+      th: ['ชั้น 1','ชั้น 2','ชั้น 1','ชั้น 2','ชั้น 1','ชั้น 2'] },
+
+    /* Amenities */
+    { sel: '.amenities .section-label', en: 'Amenities', th: 'สิ่งอำนวยความสะดวก' },
+    { sel: '.amenities .section-title', html: true,
+      en: 'A Life Well <em>Lived</em>', th: 'ชีวิตที่<em>สมบูรณ์แบบ</em>' },
+    { sel: '.amenity-item p', all: true, html: true,
+      en: ['Swimming Pool<br>&amp; Kids Pool','Fitness &amp; Kids<br>Club House','Kids Playground','Garden &amp;<br>Jogging Track','24/7 Security<br>&amp; CCTV','Underground<br>Cable System'],
+      th: ['สระว่ายน้ำ<br>และสระเด็ก','ฟิตเนสและ<br>คลับเฮาส์เด็ก','สนามเด็กเล่น','สวน<br>และลู่วิ่ง','รักษาความปลอดภัย 24 ชม.<br>และกล้องวงจรปิด','ระบบสายไฟ<br>ใต้ดิน'] },
+
+    /* Location */
+    { sel: '.location-text .section-label', en: 'Location', th: 'ทำเลที่ตั้ง' },
+    { sel: '.location-text .section-title', html: true,
+      en: 'Perfectly<br><em>Connected</em>', th: 'เชื่อมต่อ<br><em>ทุกการเดินทาง</em>' },
+    { sel: '.location-address', html: true,
+      en: 'Chaiyapruke 2 Road, Banglamung<br>Pattaya · Chonburi 20150',
+      th: 'ถนนชัยพฤกษ์ 2 บางละมุง<br>พัทยา · ชลบุรี 20150' },
+    { sel: '.distance-item span:first-child', all: true,
+      en: ['Tara Pattana International School','Sukhumvit Road','Siam Country Club','Highgate International School','Jomtien Beach','Ocean Marina Yacht Club','Jomtien Hospital',"Columbia Pictures' Aquaverse",'Rugby International School','Nongnooch Pattaya Garden','U-Tapao International Airport'],
+      th: ['โรงเรียนนานาชาติธารปัญญา','ถนนสุขุมวิท','สยามคันทรีคลับ','โรงเรียนนานาชาติไฮเกท','หาดจอมเทียน','โอเชียน มารีน่า ยอชต์คลับ','โรงพยาบาลจอมเทียน','โคลัมเบีย พิคเจอร์ส อควาเวิร์ส','โรงเรียนนานาชาติรักบี้','สวนนงนุชพัทยา','สนามบินนานาชาติอู่ตะเภา'] },
+    { sel: '.distance-item span:last-child', all: true,
+      en: ['6.9 km','7.1 km','8.1 km','8.6 km','9.3 km','11.2 km','11 km','15 km','14.7 km','17 km','30 km'],
+      th: ['6.9 กม.','7.1 กม.','8.1 กม.','8.6 กม.','9.3 กม.','11.2 กม.','11 กม.','15 กม.','14.7 กม.','17 กม.','30 กม.'] },
+    { sel: '.map-toggle', all: true, en: ['Google Maps','Graphic Map'], th: ['Google Maps','แผนที่ภาพ'] },
+    { sel: '.legend-item span:last-child', all: true,
+      en: ['HIGHBURY HILL','Nearby Landmarks'], th: ['HIGHBURY HILL','สถานที่ใกล้เคียง'] },
+
+    /* Footer */
+    { sel: '.footer-tagline', en: 'Where Nature Meets Contemporary Luxury', th: 'ที่ซึ่งธรรมชาติบรรจบกับความหรูหราร่วมสมัย' },
+    { sel: '.footer-col-title', all: true, en: ['Project','Contact'], th: ['โครงการ','ติดต่อ'] },
+    { sel: '.footer-col:first-child a', all: true,
+      en: ['Concept','House Types','Location','Atmosphere'],
+      th: ['แนวคิด','แบบบ้าน','ทำเล','บรรยากาศ'] },
+    { sel: '.footer-bottom p', html: true,
+      en: '&copy; 2026 HIGHBURY HILL. All rights reserved.',
+      th: '© 2026 HIGHBURY HILL สงวนลิขสิทธิ์' },
+    { sel: '.footer-legal a', all: true,
+      en: ['Privacy Policy','Terms & Conditions'], th: ['นโยบายความเป็นส่วนตัว','ข้อกำหนดและเงื่อนไข'] },
+  ];
+
+  function applyLang(lang) {
+    rules.forEach(function (r) {
+      const nodes = r.all ? Array.from(document.querySelectorAll(r.sel)) : [document.querySelector(r.sel)];
+      nodes.forEach(function (el, i) {
+        if (!el) return;
+        let v = r[lang];
+        if (Array.isArray(v)) v = v[i];
+        if (v == null) return;
+        if (r.attr) el.setAttribute(r.attr, v);
+        else if (r.html) el.innerHTML = v;
+        else el.textContent = v;
+      });
+    });
+
+    /* Location show-more label reflects current expanded state */
+    const moreBtn = document.getElementById('locationShowMore');
+    if (moreBtn) {
+      const lbl = (lang === 'th') ? ['ดูเพิ่มเติม','ดูน้อยลง'] : ['Show More','Show Less'];
+      const span = moreBtn.querySelector('span');
+      if (span) span.textContent = moreBtn.classList.contains('expanded') ? lbl[1] : lbl[0];
+    }
+
+    document.documentElement.lang = lang;
+    document.querySelectorAll('.lang-btn').forEach(function (b) {
+      b.classList.toggle('active', b.dataset.lang === lang);
+    });
+    window.HH_LANG = lang;
+    try { localStorage.setItem('hh_lang', lang); } catch (e) {}
+  }
+
+  /* Wire the TH / EN buttons */
+  document.querySelectorAll('.lang-btn').forEach(function (btn) {
+    btn.addEventListener('click', function () { applyLang(btn.dataset.lang); });
+  });
+
+  /* Initial language: saved choice, else English */
+  let initial = 'en';
+  try { initial = localStorage.getItem('hh_lang') || 'en'; } catch (e) {}
+  applyLang(initial);
+})();
 
 /* --- Gallery: two opposing marquee rows (Rekha-style continuous scroll) --- */
 window.addEventListener('load', function () {
