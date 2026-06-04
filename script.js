@@ -2,6 +2,48 @@
    HIGHBURY HILL — Interactions + Google Maps
    ============================================= */
 
+/* --- Intro animation: logo rises, lifestyle images cascade from depth,
+       then the overlay lifts to reveal the hero (Rekha-style preloader) --- */
+(function () {
+  var overlay = document.getElementById('introOverlay');
+  if (!overlay) return;
+
+  function finish() {
+    if (overlay && overlay.parentNode) overlay.parentNode.removeChild(overlay);
+    document.body.style.overflow = '';
+  }
+
+  var prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (prefersReduced || typeof gsap === 'undefined') { finish(); return; }
+
+  /* Lock scroll while the intro plays */
+  document.body.style.overflow = 'hidden';
+
+  window.addEventListener('load', function () {
+    var tl = gsap.timeline({ onComplete: finish });
+
+    tl
+      /* 1 — logo rises in from depth */
+      .fromTo('.intro-logo',
+        { y: 70, z: -260, opacity: 0, rotateX: 10 },
+        { y: 0, z: 0, opacity: 1, rotateX: 0, duration: 1.5, ease: 'power3.out' })
+      /* 2 — lifestyle images cascade in from depth, staggered */
+      .fromTo('.intro-img',
+        { z: -340, y: 60, opacity: 0 },
+        { z: 0, y: 0, opacity: 1, duration: 1.9, stagger: 0.16, ease: 'power3.out' },
+        '-=1.0')
+      /* 3 — brief settle on the logo */
+      .to('.intro-logo',
+        { y: -14, duration: 0.7, ease: 'power2.inOut' }, '-=0.5')
+      /* 4 — curtain lifts to reveal the hero */
+      .to('.intro-overlay',
+        { yPercent: -100, duration: 1.15, ease: 'power4.inOut' }, '+=0.45');
+  });
+
+  /* Safety net — never leave the user trapped behind the overlay */
+  setTimeout(finish, 12000);
+})();
+
 /* --- YouTube hero video — injected on load, muted autoplay loop --- */
 window.addEventListener('load', function () {
   var wrap   = document.getElementById('heroVideoWrap');
