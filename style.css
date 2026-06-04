@@ -1530,9 +1530,11 @@ button { cursor: pointer; background: none; border: none; font-family: inherit; 
   will-change: transform;
 }
 /* Clip parallax drift inside sections so nothing bleeds */
-.concept, .factsheet, .amenities, .units, .gallery, .register {
+/* NOTE: .concept excluded — overflow:hidden breaks position:sticky on concept-section cards */
+.factsheet, .amenities, .units, .gallery, .register {
   overflow: hidden;
 }
+.concept { overflow: visible; }
 
 /* =============================================
    RESPONSIVE
