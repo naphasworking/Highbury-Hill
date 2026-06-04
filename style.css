@@ -561,7 +561,7 @@ button { cursor: pointer; background: none; border: none; font-family: inherit; 
    FACT SHEET
    ============================================= */
 .factsheet {
-  padding: 100px 0;
+  padding: 56px 0;
   background: #F5EDE0;  /* warm champagne — accent break between white sections */
   border-top: 1px solid rgba(139,94,60,0.12);
   border-bottom: 1px solid rgba(139,94,60,0.12);
@@ -570,22 +570,23 @@ button { cursor: pointer; background: none; border: none; font-family: inherit; 
 .facts-grid {
   display: grid;
   grid-template-columns: repeat(5, 1fr);
-  gap: 32px;
+  gap: 20px;
 }
 
 .fact-item {
-  padding: 16px 12px;
+  padding: 8px;
   text-align: center;
 }
 
 .fact-number {
   font-family: var(--font-serif);   /* CI brand display serif */
-  font-size: clamp(2.2rem, 3.2vw, 3.2rem);
+  font-size: clamp(1.9rem, 2.6vw, 2.6rem);
   font-weight: 600;
   color: var(--gold);
   line-height: 1.05;
-  margin-bottom: 14px;
+  margin-bottom: 8px;
   letter-spacing: 0.01em;
+  white-space: nowrap;              /* keep 285–484 on one line */
   /* force lining + tabular figures so 1/133/10.9M read clearly in the serif */
   font-feature-settings: "lnum" 1, "tnum" 1;
   font-variant-numeric: lining-nums tabular-nums;
@@ -603,29 +604,29 @@ button { cursor: pointer; background: none; border: none; font-family: inherit; 
    AMENITIES
    ============================================= */
 .amenities {
-  padding: var(--section-pad);
+  padding: 72px 0;
   background: var(--cream);  /* warm cream from greige family */
 }
 
-.amenities .section-title { margin-bottom: 56px; }
+.amenities .section-title { margin-bottom: 40px; }
 
 .amenities-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 56px 48px;
+  gap: 36px 40px;
 }
 
 .amenity-item {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 16px;
+  gap: 12px;
   text-align: center;
 }
 
 .amenity-icon {
-  width: 56px;
-  height: 56px;
+  width: 48px;
+  height: 48px;
   color: var(--navy);
 }
 .amenity-icon svg { width: 100%; height: 100%; }
