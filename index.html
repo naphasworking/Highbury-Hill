@@ -165,8 +165,11 @@
   <main id="main-content">
   <section class="hero" id="hero" aria-label="Hero">
     <div class="hero-bg">
-      <!-- Still hero image with dark filter -->
-      <img class="hero-still" src="Asset/hero-still.webp" alt="Highbury Hill Pool Villas Pattaya" fetchpriority="high" decoding="async" />
+      <!-- Still hero image with dark filter — portrait crop on mobile, landscape on desktop -->
+      <picture>
+        <source media="(max-width: 768px)" srcset="Asset/hero-still-mobile.webp" />
+        <img class="hero-still" src="Asset/hero-still.webp" alt="Highbury Hill Pool Villas Pattaya" fetchpriority="high" decoding="async" />
+      </picture>
       <!-- Cinematic dark filter overlay -->
       <div class="hero-overlay"></div>
     </div>
