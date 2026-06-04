@@ -1105,7 +1105,10 @@ button { cursor: pointer; background: none; border: none; font-family: inherit; 
    ============================================= */
 .register {
   padding: var(--section-pad);
-  background: #1A120B;
+  /* CI corporate-identity backdrop: warm cocoa with a soft radial vignette,
+     matching the official brand announcement (deep brown + metallic gold) */
+  background:
+    radial-gradient(ellipse 90% 80% at 50% 35%, #2A1A0F 0%, #1A120B 45%, #0D0704 100%);
 }
 
 /* Text overrides for dark register section */
