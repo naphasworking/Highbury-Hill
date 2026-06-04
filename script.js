@@ -25,8 +25,8 @@
     var tl = gsap.timeline({ onComplete: finish });
 
     tl
-      /* 1 — logo rises + scales in */
-      .fromTo('.intro-logo',
+      /* 1 — logo (with halo) rises + scales in */
+      .fromTo('.intro-logo-wrap',
         { y: 50, scale: 0.9, opacity: 0 },
         { y: 0, scale: 1, opacity: 1, duration: 1.3, ease: 'power3.out' })
       /* 2 — all lifestyle tiles cascade in from depth, staggered */
@@ -39,7 +39,7 @@
       /* 4 — decorative tiles + logo fade away... */
       .to('.intro-img:not(.intro-hero-tile)',
         { opacity: 0, scale: 0.92, duration: 0.7, stagger: 0.03, ease: 'power2.in' })
-      .to('.intro-logo',
+      .to('.intro-logo-wrap',
         { opacity: 0, y: -28, duration: 0.6, ease: 'power2.in' }, '<')
       /* 5 — ...while the hero tile expands to fill the whole screen */
       .to('.intro-hero-tile',
