@@ -119,15 +119,21 @@ button { cursor: pointer; background: none; border: none; font-family: inherit; 
 .i-item-8 { bottom: 4%; left: 41%; }
 
 @media (max-width: 768px) {
-  .intro-img { width: 142px; height: 98px; }
-  .intro-logo { width: 240px; }
-  .i-item-1 { top: 7%;  left: 3%; }
-  .i-item-2 { top: 10%; right: 3%; }
-  .i-item-3 { bottom: 9%; left: 4%; }
-  .i-item-4 { bottom: 8%; right: 3%; }
-  .i-item-5 { top: 2%; left: 32%; }
-  .i-item-6 { bottom: 3%; left: 34%; }
-  .i-item-7, .i-item-8 { display: none; }   /* keep it clean on small screens */
+  /* vw sizing scales with the screen so tiles never collide */
+  .intro-img { width: 40vw; height: 27vw; }
+  .intro-logo { width: 60vw; max-width: 280px; }
+  /* Four clean corners only — guaranteed no overlap, logo stays clear */
+  .i-item-1 { top: 8%;    left: 4%;  right: auto; bottom: auto; }
+  .i-item-2 { top: 8%;    right: 4%; left: auto;  bottom: auto; }
+  .i-item-3 { bottom: 8%; left: 4%;  right: auto; top: auto; }
+  .i-item-4 { bottom: 8%; right: 4%; left: auto;  top: auto; }
+  .i-item-5, .i-item-6, .i-item-7, .i-item-8 { display: none; }
+}
+
+/* Tablets: drop the two centre tiles so nothing collides (6 images) */
+@media (min-width: 769px) and (max-width: 1024px) {
+  .intro-img { width: 22vw; height: 15vw; }
+  .i-item-7, .i-item-8 { display: none; }
 }
 
 @media (prefers-reduced-motion: reduce) {
