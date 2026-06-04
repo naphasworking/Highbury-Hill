@@ -444,7 +444,8 @@ button { cursor: pointer; background: none; border: none; font-family: inherit; 
    CONCEPT
    ============================================= */
 .concept {
-  padding: var(--section-pad);
+  padding-top: var(--section-pad);
+  padding-bottom: 0;
   background: var(--off-white);
 }
 
@@ -480,50 +481,71 @@ button { cursor: pointer; background: none; border: none; font-family: inherit; 
   height: 100%;
   object-fit: cover;
   display: block;
-  transition: transform 0.9s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 
-/* Three compact concept cards — each with image + text */
-.concept-pillars {
+/* ---- Three big alternating concept sections ---- */
+.concept-section {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 36px;
+  grid-template-columns: 55fr 45fr;
+  min-height: 580px;
+  align-items: stretch;
+  border-top: 1px solid var(--border);
 }
 
-.concept-pillar { display: flex; flex-direction: column; gap: 0; }
+/* Reverse: text left (45%), image right (55%) */
+.concept-section--reverse {
+  grid-template-columns: 45fr 55fr;
+}
+.concept-section--reverse .concept-section-img { order: 1; }
+.concept-section--reverse .concept-section-text { order: 0; }
 
-/* Card image — 4:3 ratio, subtle zoom on hover */
-.pillar-img {
-  aspect-ratio: 4 / 3;
+.concept-section-img {
   overflow: hidden;
   background: var(--greige);
-  margin-bottom: 24px;
+  position: relative;
 }
-.pillar-img img {
+.concept-section-img img {
   width: 100%;
   height: 100%;
   object-fit: cover;
   object-position: center center;
   display: block;
-  transition: transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  transition: transform 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
-.concept-pillar:hover .pillar-img img { transform: scale(1.04); }
+.concept-section:hover .concept-section-img img { transform: scale(1.03); }
 
-.pillar-body { padding-top: 4px; }
+.concept-section-text {
+  padding: 80px 72px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 22px;
+  background: var(--cream);
+}
 
-.pillar-title {
+.concept-section-num {
+  font-size: 10px;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--gold);
+  font-weight: 500;
+  font-family: var(--font-sans);
+}
+
+.concept-section-title {
   font-family: var(--font-serif);
-  font-size: clamp(1.3rem, 1.8vw, 1.65rem);
+  font-size: clamp(1.9rem, 3vw, 2.8rem);
   font-weight: 300;
   color: var(--charcoal);
-  margin-bottom: 12px;
+  line-height: 1.12;
   letter-spacing: 0.01em;
 }
 
-.pillar-desc {
-  font-size: 13.5px;
+.concept-section-desc {
+  font-size: 14.5px;
   color: var(--text-muted);
   line-height: 1.9;
+  max-width: 400px;
 }
 
 /* =============================================
@@ -1511,7 +1533,14 @@ button { cursor: pointer; background: none; border: none; font-family: inherit; 
   .fact-item:nth-child(4),
   .fact-item:nth-child(5) { border-top: 1px solid rgba(139,94,60,0.15); }
 
-  .concept-grid,
+  .concept-section,
+  .concept-section--reverse { grid-template-columns: 1fr; min-height: auto; }
+  .concept-section-img { aspect-ratio: 4 / 3; }
+  .concept-section--reverse .concept-section-img { order: 0; }
+  .concept-section--reverse .concept-section-text { order: 1; }
+  .concept-section-text { padding: 40px 0; gap: 16px; }
+  .concept-section-desc { max-width: 100%; }
+
   .unit-lower,
   .location-grid,
   .register-grid { grid-template-columns: 1fr; gap: 40px; }

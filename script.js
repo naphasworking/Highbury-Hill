@@ -176,9 +176,9 @@ mapToggles.forEach(btn => {
     if (title) addReveal(title, 110);
   });
 
-  /* Concept — philosophy quote + three pillars with stagger */
+  /* Concept — philosophy quote + each section text block */
   document.querySelectorAll('.concept-philosophy').forEach(el => addReveal(el, 100));
-  document.querySelectorAll('.concept-pillar').forEach((el, i) => addReveal(el, 80 + i * 100));
+  document.querySelectorAll('.concept-section-text').forEach(el => addReveal(el, 80));
 
   /* Staggered grids */
   [
