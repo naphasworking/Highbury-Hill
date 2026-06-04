@@ -68,7 +68,7 @@ button { cursor: pointer; background: none; border: none; font-family: inherit; 
   position: fixed;
   inset: 0;
   z-index: 9999;
-  background: #1A120B;   /* CI cocoa */
+  background: #FAF7F2;   /* CI warm off-white */
   overflow: hidden;
 }
 
@@ -78,7 +78,7 @@ button { cursor: pointer; background: none; border: none; font-family: inherit; 
   height: 100%;
 }
 
-/* Centre logo (white on cocoa) */
+/* Centre logo (dark on warm off-white) */
 .intro-logo {
   position: absolute;
   top: 50%;
@@ -89,8 +89,7 @@ button { cursor: pointer; background: none; border: none; font-family: inherit; 
   max-width: 56vw;
   height: auto;
   opacity: 0;                                /* GSAP fades in */
-  filter: brightness(0) invert(1)
-          drop-shadow(0 0 30px rgba(212,175,55,0.25));
+  filter: brightness(0);                     /* dark logo on light bg */
   will-change: transform, opacity;
 }
 
@@ -136,12 +135,21 @@ button { cursor: pointer; background: none; border: none; font-family: inherit; 
   .i-item-3, .i-item-4, .i-item-9, .i-item-10 { display: none; } /* thin the collage */
 }
 
-/* Mobile — fewer tiles, hero tile larger */
+/* Mobile — balanced: 4 corner tiles around a large central hero tile */
 @media (max-width: 768px) {
-  .intro-img { width: 36vw; height: 16vh; }
-  .intro-logo { width: 58vw; max-width: 260px; }
-  .intro-hero-tile { width: 76vw; height: 34vh; left: 12vw; top: 22vh; }
-  .i-item-3, .i-item-4, .i-item-9, .i-item-10, .i-item-11, .i-item-12, .i-item-2 { display: none; }
+  .intro-img { width: 38vw; height: 13vh; }
+  .intro-logo { width: 62vw; max-width: 260px; }
+
+  /* show only 4 corners + hero tile */
+  .i-item-3, .i-item-4, .i-item-6, .i-item-7,
+  .i-item-9, .i-item-10, .i-item-12, .i-item-2 { display: none; }
+
+  .i-item-1  { top: 5vh;    left: 4vw;  right: auto; bottom: auto; }
+  .i-item-5  { top: 7vh;    right: 4vw; left: auto;  bottom: auto; }
+  .i-item-8  { bottom: 6vh; left: 4vw;  top: auto;   right: auto; }
+  .i-item-11 { bottom: 8vh; right: 4vw; top: auto;   left: auto; }
+
+  .intro-hero-tile { top: 30vh; left: 8vw; width: 84vw; height: 32vh; }
 }
 
 @media (prefers-reduced-motion: reduce) {
