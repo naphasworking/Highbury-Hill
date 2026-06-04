@@ -11,6 +11,8 @@
   function finish() {
     if (overlay && overlay.parentNode) overlay.parentNode.removeChild(overlay);
     document.body.style.overflow = '';
+    /* make sure the hero tagline + button are visible no matter what */
+    if (typeof gsap !== 'undefined') gsap.set(['.hero-title', '.hero-cta'], { clearProps: 'all' });
   }
 
   var prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -35,43 +37,22 @@
       /* 3 — brief settle on the logo */
       .to('.intro-logo',
         { y: -14, duration: 0.7, ease: 'power2.inOut' }, '-=0.5')
-      /* 4 — curtain lifts to reveal the hero */
+      /* 4 — curtain lifts to reveal the still hero */
       .to('.intro-overlay',
-        { yPercent: -100, duration: 1.15, ease: 'power4.inOut' }, '+=0.45');
+        { yPercent: -100, duration: 1.15, ease: 'power4.inOut' }, '+=0.45')
+      /* 5 — tagline rises up on the dark-filtered image */
+      .from('.hero-title',
+        { y: 50, opacity: 0, duration: 1.3, ease: 'power3.out' }, '-=0.55')
+      /* 6 — offer button fades up */
+      .from('.hero-cta',
+        { y: 28, opacity: 0, duration: 0.9, ease: 'power2.out' }, '-=0.8');
   });
 
   /* Safety net — never leave the user trapped behind the overlay */
   setTimeout(finish, 12000);
 })();
 
-/* --- YouTube hero video — injected on load, muted autoplay loop --- */
-window.addEventListener('load', function () {
-  var wrap   = document.getElementById('heroVideoWrap');
-  var poster = document.getElementById('heroVideoPoster');
-  if (!wrap) return;
-
-  var iframe = document.createElement('iframe');
-  iframe.src = 'https://www.youtube.com/embed/SEbjs0Vo6uQ'
-             + '?autoplay=1&mute=1&loop=1&playlist=SEbjs0Vo6uQ'
-             + '&controls=0&showinfo=0&rel=0&modestbranding=1'
-             + '&iv_load_policy=3&disablekb=1&playsinline=1';
-  iframe.setAttribute('allow', 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share');
-  iframe.setAttribute('allowfullscreen', '');
-  iframe.setAttribute('referrerpolicy', 'strict-origin-when-cross-origin');
-  iframe.setAttribute('aria-hidden', 'true');
-  iframe.setAttribute('tabindex', '-1');
-  iframe.style.border = '0';
-  wrap.appendChild(iframe);
-
-  setTimeout(function () {
-    if (poster) {
-      poster.style.opacity = '0';
-      setTimeout(function () {
-        if (poster.parentNode) poster.parentNode.removeChild(poster);
-      }, 1200);
-    }
-  }, 3500);
-});
+/* Hero is now a still image (see .hero-still) — no video injection needed */
 
 /* --- Google Maps: lazy-load API only when location section is near viewport --- */
 (function () {
