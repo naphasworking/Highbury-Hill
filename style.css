@@ -69,41 +69,24 @@ button { cursor: pointer; background: none; border: none; font-family: inherit; 
   inset: 0;
   z-index: 9999;
   background: #1A120B;   /* CI cocoa */
-  display: flex;
-  align-items: center;
-  justify-content: center;
   overflow: hidden;
-  perspective: 1300px;   /* enables the 3D depth of incoming images */
 }
 
-/* Stage: top row, centre logo, bottom row — spaced apart, never overlapping */
 .intro-stage {
   position: relative;
   width: 100%;
   height: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: space-between;
-  gap: 3vh;
-  padding: 6vh 3vw;
-}
-
-/* A row of evenly-spaced tiles (flex = guaranteed no overlap) */
-.intro-row {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 1.6vw;
-  width: 100%;
-  flex: 0 0 auto;
 }
 
 /* Centre logo (white on cocoa) */
 .intro-logo {
-  flex: 0 0 auto;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 50;
   width: 340px;
-  max-width: 50vw;
+  max-width: 56vw;
   height: auto;
   opacity: 0;                                /* GSAP fades in */
   filter: brightness(0) invert(1)
@@ -111,32 +94,54 @@ button { cursor: pointer; background: none; border: none; font-family: inherit; 
   will-change: transform, opacity;
 }
 
-/* Uniform lifestyle tiles */
+/* Scattered lifestyle tiles (Rekha-style collage) */
 .intro-img {
-  flex: 0 0 auto;
-  width: 20vw;
-  max-width: 280px;
-  height: 13.5vw;
-  max-height: 190px;
+  position: absolute;
+  width: 16vw;
+  height: 21vh;
   object-fit: cover;
   opacity: 0;                                /* GSAP fades in */
-  box-shadow: 0 24px 60px rgba(0,0,0,0.5);
+  box-shadow: 0 24px 60px rgba(0,0,0,0.45);
   will-change: transform, opacity;
 }
 
-/* Tablet: 3 per row (hide 4th in each row) */
-@media (min-width: 769px) and (max-width: 1024px) {
-  .intro-img { width: 26vw; height: 17vw; }
-  .intro-row .intro-img:nth-child(4) { display: none; }
+/* 12 collage positions */
+.i-item-1  { top: 6vh;   left: 4vw;   z-index: 5; }
+.i-item-3  { top: 9vh;   left: 21vw;  z-index: 4; }
+.i-item-4  { top: 5vh;   right: 22vw; z-index: 4; }
+.i-item-5  { top: 7vh;   right: 4vw;  z-index: 5; }
+.i-item-6  { top: 33vh;  left: 1vw;   z-index: 6; }
+.i-item-7  { top: 30vh;  right: 1vw;  z-index: 6; }
+.i-item-8  { bottom: 7vh; left: 5vw;  z-index: 5; }
+.i-item-9  { bottom: 10vh; left: 23vw; z-index: 4; }
+.i-item-10 { bottom: 6vh; right: 23vw; z-index: 4; }
+.i-item-11 { bottom: 8vh; right: 5vw;  z-index: 5; }
+.i-item-12 { bottom: 34vh; left: 2vw;  z-index: 3; }
+.i-item-2  { top: 35vh;  right: 2vw;  z-index: 3; } /* (re-using class names, decorative) */
+
+/* The hero tile — sits prominent, then expands to fullscreen in the finale */
+.intro-hero-tile {
+  top: 18vh;
+  left: 30vw;
+  width: 40vw;
+  height: 46vh;
+  z-index: 30;
+  box-shadow: 0 30px 80px rgba(0,0,0,0.6);
 }
 
-/* Mobile: 2 per row (hide 3rd & 4th in each row) — clean, no overlap */
+/* Tablet */
+@media (min-width: 769px) and (max-width: 1024px) {
+  .intro-img { width: 22vw; height: 18vh; }
+  .intro-hero-tile { width: 50vw; height: 40vh; left: 25vw; }
+  .i-item-3, .i-item-4, .i-item-9, .i-item-10 { display: none; } /* thin the collage */
+}
+
+/* Mobile — fewer tiles, hero tile larger */
 @media (max-width: 768px) {
-  .intro-img { width: 40vw; height: 27vw; }
-  .intro-logo { width: 60vw; max-width: 260px; }
-  .intro-row { gap: 4vw; }
-  .intro-row .intro-img:nth-child(3),
-  .intro-row .intro-img:nth-child(4) { display: none; }
+  .intro-img { width: 36vw; height: 16vh; }
+  .intro-logo { width: 58vw; max-width: 260px; }
+  .intro-hero-tile { width: 76vw; height: 34vh; left: 12vw; top: 22vh; }
+  .i-item-3, .i-item-4, .i-item-9, .i-item-10, .i-item-11, .i-item-12, .i-item-2 { display: none; }
 }
 
 @media (prefers-reduced-motion: reduce) {

@@ -28,22 +28,29 @@
       /* 1 — logo rises + scales in */
       .fromTo('.intro-logo',
         { y: 50, scale: 0.9, opacity: 0 },
-        { y: 0, scale: 1, opacity: 1, duration: 1.4, ease: 'power3.out' })
-      /* 2 — lifestyle tiles cascade in, staggered */
+        { y: 0, scale: 1, opacity: 1, duration: 1.3, ease: 'power3.out' })
+      /* 2 — all lifestyle tiles cascade in from depth, staggered */
       .fromTo('.intro-img',
-        { y: 50, scale: 0.85, opacity: 0 },
-        { y: 0, scale: 1, opacity: 1, duration: 1.5, stagger: 0.12, ease: 'power3.out' },
-        '-=0.9')
-      /* 3 — brief settle on the logo */
+        { y: 55, scale: 0.82, opacity: 0 },
+        { y: 0, scale: 1, opacity: 1, duration: 1.3, stagger: 0.1, ease: 'power3.out' },
+        '-=0.8')
+      /* 3 — hold the full collage a beat */
+      .to({}, { duration: 0.5 })
+      /* 4 — decorative tiles + logo fade away... */
+      .to('.intro-img:not(.intro-hero-tile)',
+        { opacity: 0, scale: 0.92, duration: 0.7, stagger: 0.03, ease: 'power2.in' })
       .to('.intro-logo',
-        { y: -14, duration: 0.7, ease: 'power2.inOut' }, '-=0.5')
-      /* 4 — curtain lifts to reveal the still hero */
+        { opacity: 0, y: -28, duration: 0.6, ease: 'power2.in' }, '<')
+      /* 5 — ...while the hero tile expands to fill the whole screen */
+      .to('.intro-hero-tile',
+        { top: 0, left: 0, width: '100%', height: '100%', duration: 1.3, ease: 'power3.inOut' }, '<0.05')
+      /* 6 — cross-fade the overlay out onto the matching real hero */
       .to('.intro-overlay',
-        { yPercent: -100, duration: 1.15, ease: 'power4.inOut' }, '+=0.45')
-      /* 5 — tagline rises up on the dark-filtered image */
+        { autoAlpha: 0, duration: 0.7, ease: 'power2.inOut' }, '+=0.15')
+      /* 7 — tagline rises up on the dark-filtered hero */
       .from('.hero-title',
-        { y: 50, opacity: 0, duration: 1.3, ease: 'power3.out' }, '-=0.55')
-      /* 6 — offer button fades up */
+        { y: 50, opacity: 0, duration: 1.3, ease: 'power3.out' }, '-=0.35')
+      /* 8 — offer button fades up */
       .from('.hero-cta',
         { y: 28, opacity: 0, duration: 0.9, ease: 'power2.out' }, '-=0.8');
   });
