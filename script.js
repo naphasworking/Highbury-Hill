@@ -323,9 +323,23 @@ function openLightbox(i) {
   lbImg.src = lbImages[i].src;
   lbImg.alt = lbImages[i].alt;
   lbCounter.textContent = (i + 1) + ' / ' + lbImages.length;
+  /* hide nav + counter when there's only one image (e.g. a floor plan) */
+  var single = lbImages.length <= 1;
+  lbPrev.style.display    = single ? 'none' : '';
+  lbNext.style.display    = single ? 'none' : '';
+  lbCounter.style.display = single ? 'none' : '';
   lightbox.classList.add('open');
   document.body.style.overflow = 'hidden';
 }
+
+/* --- Floor plan: click to open full-size in the lightbox --- */
+document.querySelectorAll('.floorplan-img').forEach(function (img) {
+  img.style.cursor = 'zoom-in';
+  img.addEventListener('click', function () {
+    lbImages = [{ src: img.src, alt: img.alt || 'Floor Plan' }];
+    openLightbox(0);
+  });
+});
 
 function closeLightbox() {
   lightbox.classList.remove('open');
