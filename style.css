@@ -597,32 +597,33 @@ button { cursor: pointer; background: none; border: none; font-family: inherit; 
 /* --- Side-by-side: image left, info+floorplan right --- */
 .unit-split {
   display: grid;
-  grid-template-columns: 1.25fr 0.75fr;
-  min-height: 720px;
+  grid-template-columns: 1.45fr 0.55fr;
+  min-height: 780px;
   align-items: stretch;
 }
 
 .unit-main-photo {
   overflow: hidden;
   background: var(--greige);
+  position: relative;
 }
 .unit-main-photo img {
+  position: absolute;
+  inset: 0;
   width: 100%;
-  height: 100%;
+  height: 140%;           /* taller than container so we can shift up */
   object-fit: cover;
-  /* Push crop window to show the house exterior, skip the baked-in
-     factsheet header (top ~25%) and footer (bottom ~8%) of the image */
-  object-position: center 62%;
-  display: block;
+  object-position: center bottom;
+  top: -40%;              /* shift up to skip baked-in title + stats bands */
 }
 
 /* Right panel — info stacked above floor plan */
 .unit-detail {
-  padding: 64px 56px;
+  padding: 56px 44px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  gap: 48px;
+  gap: 40px;
   background: var(--off-white);
   border-left: 1px solid var(--border);
 }
