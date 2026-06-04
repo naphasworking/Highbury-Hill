@@ -323,15 +323,36 @@ button { cursor: pointer; background: none; border: none; font-family: inherit; 
   background: var(--dark); /* fallback while video loads */
 }
 
-/* ---- Self-hosted hero video — covers full viewport, cropped to center ---- */
-.hero-video {
+/* ---- YouTube hero video — iframe scaled to fill viewport ---- */
+.hero-video-wrap {
   position: absolute;
   inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+.hero-video-wrap iframe {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 177.78vh;
+  height: 56.25vw;
+  min-width: 100%;
+  min-height: 100%;
+  transform: translate(-50%, -50%) scale(1.15);
+  border: 0;
+  pointer-events: none;
+}
+.hero-video-poster {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  transition: opacity 1.2s ease;
+}
+.hero-video-poster img {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  object-position: center center;
-  pointer-events: none;
+  display: block;
 }
 
 /* Cinematic vignette — lighter overlay for "airy" feel, text still legible */
