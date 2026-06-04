@@ -150,17 +150,12 @@
   <main id="main-content">
   <section class="hero" id="hero" aria-label="Hero">
     <div class="hero-bg">
-      <!-- Self-hosted hero video — no YouTube dependencies or account restrictions -->
-      <video
-        class="hero-video"
-        autoplay muted loop playsinline
-        poster="Asset/Video/hero-poster.webp"
-        aria-hidden="true"
-        preload="auto"
-      >
-        <source src="Asset/Video/hero.mp4" type="video/mp4" />
-        <source src="Asset/Video/hero.webm" type="video/webm" />
-      </video>
+      <!-- YouTube hero video — injected after load for performance -->
+      <div class="hero-video-wrap" id="heroVideoWrap" aria-hidden="true">
+        <div class="hero-video-poster" id="heroVideoPoster">
+          <img src="https://img.youtube.com/vi/SEbjs0Vo6uQ/maxresdefault.jpg" alt="" fetchpriority="high" decoding="async" width="1280" height="720" />
+        </div>
+      </div>
       <!-- Cinematic vignette overlay -->
       <div class="hero-overlay"></div>
     </div>
@@ -253,32 +248,40 @@
   <!-- ======= CONCEPT ======= -->
   <section class="concept" id="concept" aria-label="Our Concept">
     <div class="container">
-      <div class="concept-grid">
-        <div class="concept-text">
-          <p class="section-label">Our Concept</p>
-          <h2 class="section-title">A Private World<br /><em>Above the Ordinary</em></h2>
-          <p class="concept-desc">
-            Nestled within Pattaya's rolling hills, HIGHBURY HILL is a sanctuary where lush
-            landscapes and mountain silhouettes define the horizon. Here, the boundary between
-            home and nature dissolves — and every moment becomes an invitation to rest, to
-            breathe, to truly live.
-          </p>
-          <p class="concept-desc">
-            Two distinct pool villa typologies. Each a harmonious balance of refined aesthetics
-            and considered living — designed so that every detail reflects a life chosen
-            deliberately, not simply lived.
-          </p>
-          <a href="#units" class="btn btn-outline">Discover the Villas</a>
+
+      <!-- Centered headline -->
+      <div class="concept-header">
+        <p class="section-label center">Our Concept</p>
+        <h2 class="section-title center">A Private World<br /><em>Above the Ordinary</em></h2>
+      </div>
+
+      <!-- Impactful philosophy statement -->
+      <p class="concept-philosophy">
+        Where the boundary between home and nature dissolves —<br />
+        and every moment becomes an invitation to live deliberately.
+      </p>
+
+      <!-- Full-width anchor image -->
+      <div class="concept-img-wrap concept-img-full">
+        <img src="Asset/Perspectives/Concept/Gemini_Generated_Image_c20j8uc20j8uc20j.webp" alt="Highbury Hill — Private Pool Villa with Mountain View" loading="lazy" decoding="async" />
+      </div>
+
+      <!-- Three concept pillars -->
+      <div class="concept-pillars">
+        <div class="concept-pillar">
+          <h3 class="pillar-title">Nature's Sanctuary</h3>
+          <p class="pillar-desc">Nestled within Pattaya's rolling hills, where lush landscapes and mountain silhouettes define the horizon.</p>
         </div>
-        <div class="concept-image" data-parallax="0.10">
-          <div class="concept-img-wrap concept-img-1">
-            <img src="Asset/Perspectives/Concept/Gemini_Generated_Image_c20j8uc20j8uc20j.webp" alt="Highbury Hill — Private Pool Villa with Mountain View" loading="lazy" decoding="async" width="1200" height="800" />
-          </div>
-          <div class="concept-img-wrap concept-img-2">
-            <img src="Asset/Perspectives/Concept/Gemini_Generated_Image_2lrbcq2lrbcq2lrb%20(1).webp" alt="Highbury Hill — Tropical Pool Garden" loading="lazy" decoding="async" width="1200" height="800" />
-          </div>
+        <div class="concept-pillar">
+          <h3 class="pillar-title">Refined Craft</h3>
+          <p class="pillar-desc">Every detail considered, every material chosen with purpose — a home that reflects who you are.</p>
+        </div>
+        <div class="concept-pillar">
+          <h3 class="pillar-title">Deliberate Living</h3>
+          <p class="pillar-desc">Two distinct pool villa typologies. One extraordinary way of life — chosen, not simply lived.</p>
         </div>
       </div>
+
     </div>
   </section>
 

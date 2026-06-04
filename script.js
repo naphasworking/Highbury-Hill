@@ -2,7 +2,34 @@
    HIGHBURY HILL — Interactions + Google Maps
    ============================================= */
 
-/* Hero video — self-hosted MP4, no YouTube dependencies */
+/* --- YouTube hero video — injected on load, muted autoplay loop --- */
+window.addEventListener('load', function () {
+  var wrap   = document.getElementById('heroVideoWrap');
+  var poster = document.getElementById('heroVideoPoster');
+  if (!wrap) return;
+
+  var iframe = document.createElement('iframe');
+  iframe.src = 'https://www.youtube.com/embed/SEbjs0Vo6uQ'
+             + '?autoplay=1&mute=1&loop=1&playlist=SEbjs0Vo6uQ'
+             + '&controls=0&showinfo=0&rel=0&modestbranding=1'
+             + '&iv_load_policy=3&disablekb=1&playsinline=1';
+  iframe.setAttribute('allow', 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share');
+  iframe.setAttribute('allowfullscreen', '');
+  iframe.setAttribute('referrerpolicy', 'strict-origin-when-cross-origin');
+  iframe.setAttribute('aria-hidden', 'true');
+  iframe.setAttribute('tabindex', '-1');
+  iframe.style.border = '0';
+  wrap.appendChild(iframe);
+
+  setTimeout(function () {
+    if (poster) {
+      poster.style.opacity = '0';
+      setTimeout(function () {
+        if (poster.parentNode) poster.parentNode.removeChild(poster);
+      }, 1200);
+    }
+  }, 3500);
+});
 
 /* --- Google Maps: lazy-load API only when location section is near viewport --- */
 (function () {
@@ -149,9 +176,9 @@ mapToggles.forEach(btn => {
     if (title) addReveal(title, 110);
   });
 
-  /* Concept text */
-  document.querySelectorAll('.concept-desc').forEach((el, i) => addReveal(el, 120 + i * 90));
-  document.querySelectorAll('.concept-text .btn').forEach(el => addReveal(el, 310));
+  /* Concept — philosophy quote + three pillars with stagger */
+  document.querySelectorAll('.concept-philosophy').forEach(el => addReveal(el, 100));
+  document.querySelectorAll('.concept-pillar').forEach((el, i) => addReveal(el, 80 + i * 100));
 
   /* Staggered grids */
   [
