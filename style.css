@@ -444,8 +444,7 @@ button { cursor: pointer; background: none; border: none; font-family: inherit; 
    CONCEPT
    ============================================= */
 .concept {
-  padding-top: var(--section-pad);
-  padding-bottom: 0;
+  padding: 110px 0 0;
   background: var(--off-white);
 }
 
