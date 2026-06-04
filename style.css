@@ -618,8 +618,8 @@ button { cursor: pointer; background: none; border: none; font-family: inherit; 
 /* --- Side-by-side: image left, info+floorplan right --- */
 .unit-split {
   display: grid;
-  grid-template-columns: 1.05fr 0.95fr;
-  min-height: 680px;
+  grid-template-columns: 1.25fr 0.75fr;
+  min-height: 720px;
   align-items: stretch;
 }
 
@@ -631,7 +631,9 @@ button { cursor: pointer; background: none; border: none; font-family: inherit; 
   width: 100%;
   height: 100%;
   object-fit: cover;
-  object-position: center 55%;
+  /* Push crop window to show the house exterior, skip the baked-in
+     factsheet header (top ~25%) and footer (bottom ~8%) of the image */
+  object-position: center 62%;
   display: block;
 }
 
