@@ -545,43 +545,39 @@
       <p class="section-label center">Gallery</p>
       <h2 class="section-title center">A Glimpse of <em>Your Future Home</em></h2>
     </div>
-    <!-- Swiper slideshow — single image, horizontal slide, loop, arrows -->
-    <div class="gallery-swiper swiper" id="gallerySwiper">
-      <div class="swiper-wrapper">
-        <div class="swiper-slide gallery-item">
-          <img src="Asset/Perspectives/649724862_122095815458981875_1198341658871514138_n.webp" alt="Infinity Pool Pavilion" />
-          <span class="gallery-label">Infinity Pool</span>
-        </div>
-        <div class="swiper-slide gallery-item">
-          <img src="Asset/Perspectives/651194889_122095814990981875_1476640163081865012_n.webp" alt="Residence View" />
-        </div>
-        <div class="swiper-slide gallery-item">
-          <img src="Asset/Perspectives/651216146_122095815494981875_1668103954893824275_n.webp" alt="Outdoor Living" />
-        </div>
-        <div class="swiper-slide gallery-item">
-          <img src="Asset/Perspectives/651229413_122095814954981875_1844944932397895768_n.webp" alt="Garden Landscape" />
-        </div>
-        <div class="swiper-slide gallery-item">
-          <img src="Asset/Perspectives/651786206_122095815332981875_3143422091300379329_n.webp" alt="Fitness Club" />
-          <span class="gallery-label">Fitness Club</span>
-        </div>
-        <div class="swiper-slide gallery-item">
-          <img src="Asset/Perspectives/652529496_122095815158981875_5978225575130406269_n.webp" alt="Pool Villa" />
-        </div>
-        <div class="swiper-slide gallery-item">
-          <img src="Asset/Perspectives/652553192_122095815284981875_8550794738937442576_n.webp" alt="Community Amenity" />
-        </div>
-        <div class="swiper-slide gallery-item">
-          <img src="Asset/Perspectives/652896761_122095815326981875_6512771362683088472_n.webp" alt="Landscape" />
-        </div>
-        <div class="swiper-slide gallery-item">
-          <img src="Asset/Perspectives/653706252_122095815026981875_3275715715743186195_n.webp" alt="Clubhouse Entrance" />
-          <span class="gallery-label">Clubhouse</span>
+    <!-- Two marquee rows auto-scrolling in opposite directions -->
+    <div class="gallery-marquee">
+
+      <!-- Top row → scrolls left -->
+      <div class="gallery-row swiper" id="galleryRowTop">
+        <div class="swiper-wrapper">
+          <div class="swiper-slide gallery-item"><img src="Asset/Perspectives/649724862_122095815458981875_1198341658871514138_n.webp" alt="Infinity Pool Pavilion" /></div>
+          <div class="swiper-slide gallery-item"><img src="Asset/Perspectives/651194889_122095814990981875_1476640163081865012_n.webp" alt="Residence View" /></div>
+          <div class="swiper-slide gallery-item"><img src="Asset/Perspectives/651216146_122095815494981875_1668103954893824275_n.webp" alt="Outdoor Living" /></div>
+          <div class="swiper-slide gallery-item"><img src="Asset/Perspectives/651229413_122095814954981875_1844944932397895768_n.webp" alt="Garden Landscape" /></div>
+          <div class="swiper-slide gallery-item"><img src="Asset/Perspectives/651786206_122095815332981875_3143422091300379329_n.webp" alt="Fitness Club" /></div>
+          <div class="swiper-slide gallery-item"><img src="Asset/Perspectives/652529496_122095815158981875_5978225575130406269_n.webp" alt="Pool Villa" /></div>
+          <div class="swiper-slide gallery-item"><img src="Asset/Perspectives/652553192_122095815284981875_8550794738937442576_n.webp" alt="Community Amenity" /></div>
+          <div class="swiper-slide gallery-item"><img src="Asset/Perspectives/652896761_122095815326981875_6512771362683088472_n.webp" alt="Landscape" /></div>
+          <div class="swiper-slide gallery-item"><img src="Asset/Perspectives/653706252_122095815026981875_3275715715743186195_n.webp" alt="Clubhouse Entrance" /></div>
         </div>
       </div>
-      <div class="swiper-button-prev gallery-nav"></div>
-      <div class="swiper-button-next gallery-nav"></div>
-      <div class="swiper-pagination gallery-pagination"></div>
+
+      <!-- Bottom row → scrolls right (reversed order) -->
+      <div class="gallery-row swiper" id="galleryRowBottom">
+        <div class="swiper-wrapper">
+          <div class="swiper-slide gallery-item"><img src="Asset/Perspectives/653706252_122095815026981875_3275715715743186195_n.webp" alt="Clubhouse Entrance" /></div>
+          <div class="swiper-slide gallery-item"><img src="Asset/Perspectives/652896761_122095815326981875_6512771362683088472_n.webp" alt="Landscape" /></div>
+          <div class="swiper-slide gallery-item"><img src="Asset/Perspectives/652553192_122095815284981875_8550794738937442576_n.webp" alt="Community Amenity" /></div>
+          <div class="swiper-slide gallery-item"><img src="Asset/Perspectives/652529496_122095815158981875_5978225575130406269_n.webp" alt="Pool Villa" /></div>
+          <div class="swiper-slide gallery-item"><img src="Asset/Perspectives/651786206_122095815332981875_3143422091300379329_n.webp" alt="Fitness Club" /></div>
+          <div class="swiper-slide gallery-item"><img src="Asset/Perspectives/651229413_122095814954981875_1844944932397895768_n.webp" alt="Garden Landscape" /></div>
+          <div class="swiper-slide gallery-item"><img src="Asset/Perspectives/651216146_122095815494981875_1668103954893824275_n.webp" alt="Outdoor Living" /></div>
+          <div class="swiper-slide gallery-item"><img src="Asset/Perspectives/651194889_122095814990981875_1476640163081865012_n.webp" alt="Residence View" /></div>
+          <div class="swiper-slide gallery-item"><img src="Asset/Perspectives/649724862_122095815458981875_1198341658871514138_n.webp" alt="Infinity Pool Pavilion" /></div>
+        </div>
+      </div>
+
     </div>
   </section>
 

@@ -950,78 +950,49 @@ button { cursor: pointer; background: none; border: none; font-family: inherit; 
 
 .gallery .section-title { margin-bottom: 48px; }
 
-/* ---- Swiper slideshow (Rekha-style: 2 rows, auto-slide, arrows) ---- */
-.gallery-swiper {
-  width: 100%;
-  max-width: 1240px;
-  margin: 0 auto;
-  padding: 0 40px 56px;
+/* ---- Two opposing marquee rows (Rekha-style) ---- */
+.gallery-marquee {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
   overflow: hidden;
-  position: relative;
 }
 
-/* Grid mode (rows: 2) — each slide is one cell; two stack per column */
-.gallery-swiper .swiper-slide {
+.gallery-row { width: 100%; overflow: hidden; }
+
+/* Continuous linear scroll — override Swiper's eased timing */
+.gallery-row .swiper-wrapper {
+  transition-timing-function: linear !important;
+}
+
+/* Uniform image tiles — all the same size */
+.gallery-row .swiper-slide {
+  width: 460px;
   height: 300px;
   overflow: hidden;
   position: relative;
   cursor: pointer;
   background: var(--greige);
 }
-
-.gallery-swiper .swiper-slide img {
+.gallery-row .swiper-slide img {
   width: 100%;
   height: 100%;
   object-fit: cover;
   display: block;
+  transition: transform 0.7s cubic-bezier(0.25,0.46,0.45,0.94), filter 0.4s;
 }
+.gallery-row .swiper-slide:hover img { transform: scale(1.05); filter: brightness(1.05); }
 
-/* Caption label */
+/* Caption label (kept for compatibility, unused in marquee) */
 .gallery-label {
   position: absolute;
-  bottom: 24px;
-  left: 28px;
+  bottom: 18px;
+  left: 22px;
   font-size: 10px;
   letter-spacing: 0.22em;
   text-transform: uppercase;
   color: rgba(255,255,255,0.9);
   z-index: 3;
-  background: rgba(13,9,5,0.35);
-  padding: 8px 16px;
-  backdrop-filter: blur(4px);
-}
-
-/* Navigation arrows */
-.gallery-swiper .gallery-nav {
-  color: var(--white);
-  width: 52px;
-  height: 52px;
-  background: rgba(13,9,5,0.4);
-  border-radius: 50%;
-  transition: background 0.3s ease;
-  backdrop-filter: blur(4px);
-}
-.gallery-swiper .gallery-nav:hover { background: rgba(212,175,55,0.85); }
-.gallery-swiper .gallery-nav::after { font-size: 18px; font-weight: 600; }
-.gallery-swiper .swiper-button-prev { left: 56px; }
-.gallery-swiper .swiper-button-next { right: 56px; }
-
-/* Pagination dots */
-.gallery-swiper .gallery-pagination {
-  bottom: 16px;
-}
-.gallery-swiper .swiper-pagination-bullet {
-  background: var(--text-faint);
-  opacity: 0.5;
-  width: 8px;
-  height: 8px;
-  transition: opacity 0.3s, background 0.3s;
-}
-.gallery-swiper .swiper-pagination-bullet-active {
-  background: var(--gold);
-  opacity: 1;
-  width: 22px;
-  border-radius: 4px;
 }
 
 /* =============================================
@@ -1580,13 +1551,9 @@ button { cursor: pointer; background: none; border: none; font-family: inherit; 
   .unit-specs { font-size: 12px; }
   .unit-actions .btn { width: 100%; text-align: center; }
 
-  /* Gallery swiper mobile */
-  .gallery-swiper { padding: 0 0 48px; }
-  .gallery-swiper .swiper-slide { height: 200px; }
-  .gallery-swiper .swiper-button-prev { left: 12px; }
-  .gallery-swiper .swiper-button-next { right: 12px; }
-  .gallery-swiper .gallery-nav { width: 42px; height: 42px; }
-  .gallery-swiper .gallery-nav::after { font-size: 15px; }
+  /* Gallery marquee mobile — smaller tiles */
+  .gallery-row .swiper-slide { width: 280px; height: 190px; }
+  .gallery-marquee { gap: 10px; }
 
   /* Mobile lightbox touch targets */
   .lb-close { top: 14px; right: 14px; font-size: 40px; padding: 8px; }
@@ -1605,7 +1572,7 @@ button { cursor: pointer; background: none; border: none; font-family: inherit; 
   .hero-actions { flex-direction: column; align-items: center; }
   .unit-actions { flex-direction: column; gap: 12px; }
   .amenities-grid { grid-template-columns: repeat(2, 1fr); gap: 24px; }
-  .gallery-swiper .swiper-slide { height: 180px; }
+  .gallery-row .swiper-slide { width: 240px; height: 160px; }
   .footer-links { flex-direction: column; gap: 32px; }
 }
 

@@ -264,26 +264,29 @@ const lbPrev     = document.getElementById('lbPrev');
 const lbNext     = document.getElementById('lbNext');
 const lbCounter  = document.getElementById('lbCounter');
 
-/* Build lightbox image list from the original (non-cloned) slides */
-const gallerySwiperEl = document.getElementById('gallerySwiper');
+/* Build unique lightbox image list from both marquee rows (dedupe by src) */
 let lbImages = [];
 let lbIdx = 0;
 
-if (gallerySwiperEl) {
-  const origSlides = Array.from(gallerySwiperEl.querySelectorAll('.swiper-slide'));
-  lbImages = origSlides.map(s => {
-    const img = s.querySelector('img');
-    return { src: img.src, alt: img.alt };
+(function () {
+  const rows = document.querySelectorAll('.gallery-row');
+  if (!rows.length) return;
+
+  const seen = new Set();
+  document.querySelectorAll('.gallery-row .swiper-slide img').forEach(img => {
+    if (!seen.has(img.src)) { seen.add(img.src); lbImages.push({ src: img.src, alt: img.alt }); }
   });
 
-  /* Click a slide → open lightbox at its DOM index (ignore drag-clicks) */
-  gallerySwiperEl.addEventListener('click', e => {
-    const slide = e.target.closest('.swiper-slide');
-    if (!slide || gallerySwiperEl.classList.contains('swiper-was-dragging')) return;
-    const idx = origSlides.indexOf(slide);
-    if (idx >= 0) openLightbox(idx);
+  /* Click a tile → open lightbox at the matching image (ignore drag-clicks) */
+  rows.forEach(row => {
+    row.addEventListener('click', e => {
+      const img = e.target.closest('.swiper-slide')?.querySelector('img');
+      if (!img || row.classList.contains('swiper-was-dragging')) return;
+      const idx = lbImages.findIndex(x => x.src === img.src);
+      if (idx >= 0) openLightbox(idx);
+    });
   });
-}
+})();
 
 function openLightbox(i) {
   lbIdx = i;
@@ -334,44 +337,36 @@ if (locationShowMoreBtn) {
   });
 }
 
-/* --- Gallery Swiper (Rekha-style: 1 slide, horizontal, loop, 300ms) --- */
+/* --- Gallery: two opposing marquee rows (Rekha-style continuous scroll) --- */
 window.addEventListener('load', function () {
-  if (typeof Swiper === 'undefined' || !document.getElementById('gallerySwiper')) return;
+  if (typeof Swiper === 'undefined') return;
 
-  const gallerySwiper = new Swiper('#gallerySwiper', {
-    /* 2 rows that auto-slide horizontally (grid mode can't loop, so use rewind) */
-    slidesPerView: 2,
-    grid: { rows: 2, fill: 'row' },
-    spaceBetween: 12,
-    speed: 600,
-    rewind: true,
-    grabCursor: true,
-    keyboard: { enabled: true },
-    autoplay: {
-      delay: 3000,
-      disableOnInteraction: false,
-      pauseOnMouseEnter: true,
-    },
-    navigation: {
-      nextEl: '#gallerySwiper .swiper-button-next',
-      prevEl: '#gallerySwiper .swiper-button-prev',
-    },
-    pagination: {
-      el: '#gallerySwiper .swiper-pagination',
-      clickable: true,
-    },
-    breakpoints: {
-      768:  { slidesPerView: 2, spaceBetween: 12 },
-      1024: { slidesPerView: 3, spaceBetween: 14 },
-    },
-  });
+  function makeMarquee(selector, reverse) {
+    const el = document.querySelector(selector);
+    if (!el) return;
 
-  /* Flag drag so a drag-release doesn't trigger the lightbox click */
-  const galEl = document.getElementById('gallerySwiper');
-  gallerySwiper.on('sliderFirstMove', () => galEl.classList.add('swiper-was-dragging'));
-  gallerySwiper.on('touchEnd', () => {
-    setTimeout(() => galEl.classList.remove('swiper-was-dragging'), 50);
-  });
+    const sw = new Swiper(selector, {
+      slidesPerView: 'auto',
+      spaceBetween: 14,
+      loop: true,
+      speed: 6000,                 /* slow, continuous glide */
+      allowTouchMove: true,
+      grabCursor: true,
+      autoplay: {
+        delay: 0,                  /* 0 = never stop → continuous marquee */
+        disableOnInteraction: false,
+        reverseDirection: reverse, /* bottom row scrolls the opposite way */
+        pauseOnMouseEnter: true,
+      },
+    });
+
+    /* Drag guard so a swipe-release doesn't trigger the lightbox */
+    sw.on('sliderFirstMove', () => el.classList.add('swiper-was-dragging'));
+    sw.on('touchEnd', () => setTimeout(() => el.classList.remove('swiper-was-dragging'), 50));
+  }
+
+  makeMarquee('#galleryRowTop', false);    /* scrolls left  */
+  makeMarquee('#galleryRowBottom', true);  /* scrolls right */
 });
 
 /* --- Smooth scroll --- */
