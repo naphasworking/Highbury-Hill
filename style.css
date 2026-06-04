@@ -954,7 +954,7 @@ button { cursor: pointer; background: none; border: none; font-family: inherit; 
 .gallery-marquee {
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 30px;
   overflow: hidden;
 }
 
@@ -1553,7 +1553,7 @@ button { cursor: pointer; background: none; border: none; font-family: inherit; 
 
   /* Gallery marquee mobile — smaller tiles */
   .gallery-row .swiper-slide { width: 364px; height: 247px; }
-  .gallery-marquee { gap: 14px; }
+  .gallery-marquee { gap: 21px; }
 
   /* Mobile lightbox touch targets */
   .lb-close { top: 14px; right: 14px; font-size: 40px; padding: 8px; }

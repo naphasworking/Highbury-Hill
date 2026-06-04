@@ -349,7 +349,7 @@ window.addEventListener('load', function () {
       slidesPerView: 'auto',
       spaceBetween: 20,
       loop: true,
-      speed: 6000,                 /* slow, continuous glide */
+      speed: 9000,                 /* slow, continuous glide (higher = slower) */
       allowTouchMove: true,
       grabCursor: true,
       autoplay: {
