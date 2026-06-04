@@ -82,26 +82,7 @@ unitTabs.forEach(tab => {
   });
 });
 
-/* --- Lifestyle photo thumbnail switcher --- */
-document.querySelectorAll('.unit-thumb').forEach(thumb => {
-  thumb.addEventListener('click', () => {
-    const mainId = thumb.dataset.main;
-    const mainImg = document.getElementById(mainId);
-    if (!mainImg) return;
-
-    // Update active thumb within same group
-    const siblings = document.querySelectorAll(`[data-main="${mainId}"]`);
-    siblings.forEach(t => t.classList.remove('active'));
-    thumb.classList.add('active');
-
-    // Swap main image with fade
-    mainImg.style.opacity = '0';
-    setTimeout(() => {
-      mainImg.src = thumb.src;
-      mainImg.style.opacity = '1';
-    }, 200);
-  });
-});
+/* Thumbnail switcher removed — single main photo per unit type */
 
 /* --- Floor plan toggle --- */
 document.querySelectorAll('.fp-btn').forEach(btn => {
