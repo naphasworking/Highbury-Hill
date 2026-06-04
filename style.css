@@ -171,7 +171,7 @@ button { cursor: pointer; background: none; border: none; font-family: inherit; 
   max-width: var(--max-w);
   margin: 0 auto;
   padding: 0 64px;
-  height: 100px;
+  height: 134px;
   display: flex;
   align-items: center;
   gap: 40px;
@@ -186,7 +186,7 @@ button { cursor: pointer; background: none; border: none; font-family: inherit; 
 /* Nav logo — transparent header (over dark hero video):
    PNG has white bg → brightness(0) invert(1) = pure white logo on dark  */
 .nav-logo {
-  height: 80px;
+  height: 112px;
   width: auto;
   display: block;
   filter: brightness(0) invert(1);
@@ -492,7 +492,7 @@ button { cursor: pointer; background: none; border: none; font-family: inherit; 
 
   /* Sticky stack: each section pins to top and the next one slides over it */
   position: sticky;
-  top: 100px;   /* = header height */
+  top: 134px;   /* = header height */
   box-shadow: 0 -8px 40px rgba(0,0,0,0.07);
 }
 
@@ -1495,7 +1495,7 @@ button { cursor: pointer; background: none; border: none; font-family: inherit; 
   .facts-grid { grid-template-columns: repeat(3, 1fr); gap: 36px 24px; }
 
   .concept-section,
-  .concept-section--reverse { grid-template-columns: 1fr; min-height: auto; }
+  .concept-section--reverse { grid-template-columns: 1fr; min-height: auto; top: 100px; }
   .concept-section-img { aspect-ratio: 4 / 3; }
   .concept-section--reverse .concept-section-img { order: 0; }
   .concept-section--reverse .concept-section-text { order: 1; }
@@ -1528,8 +1528,8 @@ button { cursor: pointer; background: none; border: none; font-family: inherit; 
   .lang-toggle { display: none; }
   .mobile-menu-btn { display: flex; }
 
-  .header-inner { height: 72px; }
-  .nav-logo { height: 56px; }
+  .header-inner { height: 100px; }
+  .nav-logo { height: 78px; }
 
   .hero-title { font-size: clamp(3rem, 14vw, 5rem); }
 
