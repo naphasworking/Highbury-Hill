@@ -1499,8 +1499,12 @@ button { cursor: pointer; background: none; border: none; font-family: inherit; 
   .concept-section-img { aspect-ratio: 4 / 3; }
   .concept-section--reverse .concept-section-img { order: 0; }
   .concept-section--reverse .concept-section-text { order: 1; }
-  .concept-section-text { padding: 40px 0; gap: 16px; }
+  .concept-section-text { padding: 36px 28px; gap: 14px; }
   .concept-section-desc { max-width: 100%; }
+  .concept-section-title { font-size: clamp(1.6rem, 6vw, 2rem); }
+  /* Philosophy: drop forced line breaks so it wraps within the screen */
+  .concept-philosophy { font-size: 1.15rem; margin-bottom: 48px; }
+  .concept-philosophy br { display: none; }
 
   .unit-lower,
   .location-grid,
@@ -1515,6 +1519,10 @@ button { cursor: pointer; background: none; border: none; font-family: inherit; 
   :root { --section-pad: 70px 0; }
 
   .container { padding: 0 28px; }
+
+  /* Smaller titles so they never run off narrow screens */
+  .section-title { font-size: clamp(1.9rem, 7vw, 2.6rem); }
+  .concept-header { max-width: 100%; }
 
   .main-nav { display: none; }
   .lang-toggle { display: none; }
