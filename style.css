@@ -1640,8 +1640,25 @@ button { cursor: pointer; background: none; border: none; font-family: inherit; 
   .concept-header { max-width: 100%; }
 
   .main-nav { display: none; }
-  .lang-toggle { display: none; }
+  .lang-toggle { display: none; }            /* hide the header one */
   .mobile-menu-btn { display: flex; }
+
+  /* Language toggle inside the mobile menu (cream bg → dark text) */
+  .mobile-nav .lang-toggle.mobile-lang {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    margin-top: 8px;
+    padding-top: 16px;
+    border-top: 1px solid var(--border);
+  }
+  .mobile-nav .lang-btn {
+    color: var(--text-muted);
+    font-size: 13px;
+    letter-spacing: 0.1em;
+  }
+  .mobile-nav .lang-btn.active { color: var(--gold); font-weight: 600; }
+  .mobile-nav .lang-toggle span { color: var(--text-faint); }
 
   .header-inner { height: 100px; }
   .nav-logo { height: 78px; }
