@@ -1698,7 +1698,12 @@ button { cursor: pointer; background: none; border: none; font-family: inherit; 
   .header-inner { height: 100px; }
   .nav-logo { height: 78px; }
 
-  .hero-title { font-size: clamp(3.64rem, 15.5vw, 5.46rem); margin-bottom: 24px; }
+  .hero-title {
+    font-size: clamp(3rem, 12.5vw, 5rem);
+    margin-bottom: 24px;
+    white-space: nowrap;        /* keep "Where Luxury" on one line */
+    letter-spacing: 0.01em;
+  }
   .hero-divider { height: 66px; margin: 14px auto 38px; }
 
   .facts-grid { grid-template-columns: repeat(2, 1fr); gap: 32px 20px; }
