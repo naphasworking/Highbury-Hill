@@ -908,6 +908,8 @@ button { cursor: pointer; background: none; border: none; font-family: inherit; 
   margin-bottom: -4%;
   transition: opacity 0.35s ease;
 }
+/* Amaryllis plans are already cleanly framed (no baked-in title band) */
+.floorplan-img--nocrop { margin-top: 0; margin-bottom: 0; }
 
 /* =============================================
    LOCATION

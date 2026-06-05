@@ -40,7 +40,7 @@
   <!-- === Stylesheet (render-blocking — critical, keep first) === -->
   <!-- Swiper (gallery slideshow) -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
-  <link rel="stylesheet" href="style.css?v=20260605a" />
+  <link rel="stylesheet" href="style.css?v=20260605b" />
 
   <!-- === Fonts (non-render-blocking via preload swap trick) === -->
   <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@300;400;500&family=Trirong:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Noto+Sans+Thai:wght@300;400;500&display=swap" onload="this.onload=null;this.rel='stylesheet'" />
@@ -506,6 +506,15 @@
               <p class="unit-specs">590 Sq.M &nbsp;·&nbsp; 5 Bedrooms &nbsp;·&nbsp; 6 Bathrooms &nbsp;·&nbsp; 1 Maid Room &nbsp;·&nbsp; 4 Car Parking &nbsp;·&nbsp; 1 Private Pool</p>
               <a href="#register" class="btn btn-primary">Register Interest</a>
             </div>
+            <div class="unit-floorplan">
+              <div class="floorplan-toggle">
+                <button class="fp-btn active" data-fp="amaryllis-fp" data-src="Asset/Home%20Type/amaryllis-floorplan1.webp">1st Floor</button>
+                <button class="fp-btn" data-fp="amaryllis-fp" data-src="Asset/Home%20Type/amaryllis-floorplan2.webp">2nd Floor</button>
+              </div>
+              <div class="floorplan-img-wrap">
+                <img src="Asset/Home%20Type/amaryllis-floorplan1.webp" alt="Amaryllis Floor Plan" id="amaryllis-fp" class="floorplan-img floorplan-img--nocrop" />
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -678,6 +687,6 @@
 
   <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js" defer></script>
   <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js" defer></script>
-  <script src="script.js?v=20260605a" defer></script>
+  <script src="script.js?v=20260605b" defer></script>
 </body>
 </html>

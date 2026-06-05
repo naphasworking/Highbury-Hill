@@ -487,8 +487,8 @@ if (locationShowMoreBtn) {
       ] },
     { sel: '.unit-detail .btn', all: true, en: 'Register Interest', th: 'ลงทะเบียนสนใจ' },
     { sel: '.fp-btn', all: true,
-      en: ['1st Floor','2nd Floor','1st Floor','2nd Floor','1st Floor','2nd Floor'],
-      th: ['ชั้น 1','ชั้น 2','ชั้น 1','ชั้น 2','ชั้น 1','ชั้น 2'] },
+      en: ['1st Floor','2nd Floor','1st Floor','2nd Floor','1st Floor','2nd Floor','1st Floor','2nd Floor'],
+      th: ['ชั้น 1','ชั้น 2','ชั้น 1','ชั้น 2','ชั้น 1','ชั้น 2','ชั้น 1','ชั้น 2'] },
 
     /* Amenities */
     { sel: '.amenities .section-label', en: 'Amenities', th: 'สิ่งอำนวยความสะดวก' },
