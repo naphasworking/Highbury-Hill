@@ -470,18 +470,20 @@ if (locationShowMoreBtn) {
     { sel: '.units .section-title', html: true,
       en: 'Find Your <em>Perfect Home</em>', th: 'ค้นหา<em>บ้านที่ใช่</em>ของคุณ' },
     { sel: '.unit-subtitle', all: true,
-      en: ['Private Pool Villa','Private Pool Villa','Grand Pool Villa'],
-      th: ['พูลวิลล่าส่วนตัว','พูลวิลล่าส่วนตัว','แกรนด์พูลวิลล่า'] },
+      en: ['Private Pool Villa','Private Pool Villa','Grand Pool Villa','Signature Pool Villa'],
+      th: ['พูลวิลล่าส่วนตัว','พูลวิลล่าส่วนตัว','แกรนด์พูลวิลล่า','พูลวิลล่าซิกเนเจอร์'] },
     { sel: '.unit-specs', all: true, html: true,
       en: [
         '285 Sq.M &nbsp;·&nbsp; 4 Bedrooms &nbsp;·&nbsp; 5 Bathrooms &nbsp;·&nbsp; 2 Car Parking &nbsp;·&nbsp; 1 Private Pool',
         '375 Sq.M &nbsp;·&nbsp; 4 Bedrooms &nbsp;·&nbsp; 5 Bathrooms &nbsp;·&nbsp; 3 Car Parking &nbsp;·&nbsp; 1 Private Pool',
-        '484 Sq.M &nbsp;·&nbsp; 4 Bedrooms &nbsp;·&nbsp; 5 Bathrooms &nbsp;·&nbsp; 4 Car Parking &nbsp;·&nbsp; 1 Private Pool'
+        '484 Sq.M &nbsp;·&nbsp; 4 Bedrooms &nbsp;·&nbsp; 5 Bathrooms &nbsp;·&nbsp; 4 Car Parking &nbsp;·&nbsp; 1 Private Pool',
+        '590 Sq.M &nbsp;·&nbsp; 5 Bedrooms &nbsp;·&nbsp; 6 Bathrooms &nbsp;·&nbsp; 1 Maid Room &nbsp;·&nbsp; 4 Car Parking &nbsp;·&nbsp; 1 Private Pool'
       ],
       th: [
         '285 ตร.ม. &nbsp;·&nbsp; 4 ห้องนอน &nbsp;·&nbsp; 5 ห้องน้ำ &nbsp;·&nbsp; จอดรถ 2 คัน &nbsp;·&nbsp; สระส่วนตัว 1 สระ',
         '375 ตร.ม. &nbsp;·&nbsp; 4 ห้องนอน &nbsp;·&nbsp; 5 ห้องน้ำ &nbsp;·&nbsp; จอดรถ 3 คัน &nbsp;·&nbsp; สระส่วนตัว 1 สระ',
-        '484 ตร.ม. &nbsp;·&nbsp; 4 ห้องนอน &nbsp;·&nbsp; 5 ห้องน้ำ &nbsp;·&nbsp; จอดรถ 4 คัน &nbsp;·&nbsp; สระส่วนตัว 1 สระ'
+        '484 ตร.ม. &nbsp;·&nbsp; 4 ห้องนอน &nbsp;·&nbsp; 5 ห้องน้ำ &nbsp;·&nbsp; จอดรถ 4 คัน &nbsp;·&nbsp; สระส่วนตัว 1 สระ',
+        '590 ตร.ม. &nbsp;·&nbsp; 5 ห้องนอน &nbsp;·&nbsp; 6 ห้องน้ำ &nbsp;·&nbsp; ห้องแม่บ้าน 1 ห้อง &nbsp;·&nbsp; จอดรถ 4 คัน &nbsp;·&nbsp; สระส่วนตัว 1 สระ'
       ] },
     { sel: '.unit-detail .btn', all: true, en: 'Register Interest', th: 'ลงทะเบียนสนใจ' },
     { sel: '.fp-btn', all: true,

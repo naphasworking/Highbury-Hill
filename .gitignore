@@ -3,3 +3,6 @@ package.json
 package-lock.json
 convert-webp.js
 update-paths.js
+*.pdf
+read-pdf.js
+conv-house.js
