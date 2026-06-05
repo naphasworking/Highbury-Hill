@@ -561,10 +561,8 @@ if (locationShowMoreBtn) {
     btn.addEventListener('click', function () { applyLang(btn.dataset.lang); });
   });
 
-  /* Initial language: saved choice, else English */
-  let initial = 'en';
-  try { initial = localStorage.getItem('hh_lang') || 'en'; } catch (e) {}
-  applyLang(initial);
+  /* Always start in English on every page load (toggle still works in-session) */
+  applyLang('en');
 })();
 
 /* --- Gallery: two opposing marquee rows (Rekha-style continuous scroll) --- */
