@@ -1668,7 +1668,7 @@ button { cursor: pointer; background: none; border: none; font-family: inherit; 
   .header-inner { height: 100px; }
   .nav-logo { height: 78px; }
 
-  .hero-title { font-size: clamp(2rem, 8.5vw, 3rem); margin-bottom: 28px; }
+  .hero-title { font-size: clamp(2.8rem, 11.9vw, 4.2rem); margin-bottom: 28px; }
 
   .facts-grid { grid-template-columns: repeat(2, 1fr); gap: 32px 20px; }
 
