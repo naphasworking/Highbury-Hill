@@ -509,6 +509,35 @@ button { cursor: pointer; background: none; border: none; font-family: inherit; 
   box-shadow: 0 8px 30px rgba(0,0,0,0.35);
 }
 
+/* --- Artistic gold divider between tagline and CTA (slow luxury glow) --- */
+.hero-divider {
+  width: 120px;
+  height: 1px;
+  margin: 4px auto 32px;
+  position: relative;
+  background: linear-gradient(90deg, transparent, rgba(212,175,55,0.9), transparent);
+  animation: heroLineGlow 3.6s ease-in-out infinite;
+}
+.hero-divider::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 6px;
+  height: 6px;
+  transform: translate(-50%, -50%) rotate(45deg);
+  background: var(--gold);
+  animation: heroDiamond 3.6s ease-in-out infinite;
+}
+@keyframes heroLineGlow {
+  0%, 100% { opacity: 0.4; }
+  50%      { opacity: 1; }
+}
+@keyframes heroDiamond {
+  0%, 100% { opacity: 0.5; box-shadow: 0 0 5px rgba(212,175,55,0.35); }
+  50%      { opacity: 1;   box-shadow: 0 0 18px rgba(212,175,55,0.95); }
+}
+
 .hero-tagline {
   font-size: 14px;
   font-weight: 300;
@@ -1580,6 +1609,7 @@ button { cursor: pointer; background: none; border: none; font-family: inherit; 
     opacity: 1 !important; animation: none !important;
   }
   .hero-still { animation: none !important; transform: none !important; }
+  .hero-divider, .hero-divider::before { animation: none !important; opacity: 1 !important; }
   .reveal, .reveal-left { opacity: 1 !important; }
   .reveal.in-view, .reveal-left.in-view { animation: none !important; }
   .img-clip-reveal img { transform: none !important; opacity: 1 !important; transition: none !important; }
