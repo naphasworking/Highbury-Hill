@@ -279,7 +279,7 @@ mapToggles.forEach(btn => {
 
 /* --- Registration form → Google Sheet (Apps Script Web App) --- */
 /* Paste your deployed Apps Script Web App URL between the quotes below. */
-const LEAD_ENDPOINT = 'https://script.google.com/macros/s/PASTE_YOUR_DEPLOYMENT_ID/exec';
+const LEAD_ENDPOINT = 'https://script.google.com/macros/s/AKfycbwzegRPKkEB_JmvladtrDGaYCHI2bI0IDQUvL1hTfU_SE2cFnjDM9NxkAzBt9QYvhPq/exec';
 
 const form = document.getElementById('registerForm');
 const formSuccess = document.getElementById('formSuccess');
