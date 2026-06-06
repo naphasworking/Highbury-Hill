@@ -40,7 +40,7 @@
   <!-- === Stylesheet (render-blocking — critical, keep first) === -->
   <!-- Swiper (gallery slideshow) -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
-  <link rel="stylesheet" href="style.css?v=20260605g" />
+  <link rel="stylesheet" href="style.css?v=20260606c" />
 
   <!-- === Fonts (non-render-blocking via preload swap trick) === -->
   <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@300;400;500&family=Trirong:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Noto+Sans+Thai:wght@300;400;500&display=swap" onload="this.onload=null;this.rel='stylesheet'" />
@@ -230,8 +230,8 @@
                 <input type="text" id="firstName" name="firstName" placeholder="Your first name" required />
               </div>
               <div class="form-group">
-                <label for="lastName">Last Name <span>*</span></label>
-                <input type="text" id="lastName" name="lastName" placeholder="Your last name" required />
+                <label for="lastName">Last Name</label>
+                <input type="text" id="lastName" name="lastName" placeholder="Your last name" />
               </div>
             </div>
             <div class="form-group">
@@ -239,8 +239,8 @@
               <input type="tel" id="mobile" name="mobile" placeholder="0XX XXX XXXX" required />
             </div>
             <div class="form-group">
-              <label for="email">Email Address <span>*</span></label>
-              <input type="email" id="email" name="email" placeholder="your@email.com" required />
+              <label for="email">Email Address</label>
+              <input type="email" id="email" name="email" placeholder="your@email.com" />
             </div>
             <div class="form-group">
               <label for="unitType">Interested Unit Type</label>
@@ -262,7 +262,7 @@
               </select>
             </div>
             <div class="form-checkbox">
-              <input type="checkbox" id="consent" name="consent" required />
+              <input type="checkbox" id="consent" name="consent" />
               <label for="consent">
                 I consent to HIGHBURY HILL contacting me with project information and agree to the
                 <a href="#">Privacy Policy</a>.
@@ -270,10 +270,13 @@
             </div>
             <button type="submit" class="btn btn-primary full-width">Register Now</button>
           </form>
-          <div class="form-success" id="formSuccess">
-            <div class="success-icon">✓</div>
-            <h3>Thank You!</h3>
-            <p>We've received your registration. Our team will contact you shortly.</p>
+          <div class="form-success" id="formSuccess" role="dialog" aria-modal="true">
+            <div class="success-inner">
+              <button class="success-close" id="successClose" aria-label="Close">&times;</button>
+              <div class="success-icon">✓</div>
+              <h3>Thank You!</h3>
+              <p>We've received your registration. Our team will contact you shortly.</p>
+            </div>
           </div>
         </div>
       </div>
@@ -688,6 +691,6 @@
 
   <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js" defer></script>
   <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js" defer></script>
-  <script src="script.js?v=20260606b" defer></script>
+  <script src="script.js?v=20260606c" defer></script>
 </body>
 </html>

@@ -302,8 +302,18 @@ form.addEventListener('submit', e => {
     fetch(LEAD_ENDPOINT, { method: 'POST', mode: 'no-cors', body: data }).catch(() => {});
   }
 
-  form.style.display = 'none';
+  /* Pop up the thank-you modal, reset the form for next time */
   formSuccess.classList.add('show');
+  form.reset();
+});
+
+/* Close the thank-you popup */
+function closeFormSuccess() { formSuccess.classList.remove('show'); }
+const successCloseBtn = document.getElementById('successClose');
+if (successCloseBtn) successCloseBtn.addEventListener('click', closeFormSuccess);
+formSuccess.addEventListener('click', e => { if (e.target === formSuccess) closeFormSuccess(); });
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape' && formSuccess.classList.contains('show')) closeFormSuccess();
 });
 
 /* --- Gallery Lightbox --- */
@@ -430,9 +440,9 @@ if (locationShowMoreBtn) {
       en: 'Take the first step towards your dream home. Register your interest and our team will be in touch to guide you through the process.',
       th: 'ก้าวแรกสู่บ้านในฝันของคุณ ลงทะเบียนความสนใจ แล้วทีมงานของเราจะติดต่อกลับเพื่อดูแลคุณในทุกขั้นตอน' },
     { sel: 'label[for="firstName"]', html: true, en: 'First Name <span>*</span>', th: 'ชื่อ <span>*</span>' },
-    { sel: 'label[for="lastName"]',  html: true, en: 'Last Name <span>*</span>',  th: 'นามสกุล <span>*</span>' },
+    { sel: 'label[for="lastName"]',  en: 'Last Name',  th: 'นามสกุล' },
     { sel: 'label[for="mobile"]',    html: true, en: 'Mobile Number <span>*</span>', th: 'เบอร์โทรศัพท์ <span>*</span>' },
-    { sel: 'label[for="email"]',     html: true, en: 'Email Address <span>*</span>', th: 'อีเมล <span>*</span>' },
+    { sel: 'label[for="email"]',     en: 'Email Address', th: 'อีเมล' },
     { sel: 'label[for="unitType"]',  en: 'Interested Unit Type', th: 'แบบบ้านที่สนใจ' },
     { sel: 'label[for="budget"]',    en: 'Budget Range', th: 'งบประมาณ' },
     { sel: 'label[for="consent"]',   html: true,

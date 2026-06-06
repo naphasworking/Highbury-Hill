@@ -1321,12 +1321,43 @@ button { cursor: pointer; background: none; border: none; font-family: inherit; 
   text-decoration: underline;
 }
 
+/* Thank-you popup modal */
 .form-success {
   display: none;
-  text-align: center;
-  padding: 60px 20px;
+  position: fixed;
+  inset: 0;
+  z-index: 2000;
+  background: rgba(13, 9, 5, 0.6);
+  backdrop-filter: blur(3px);
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
 }
-.form-success.show { display: block; }
+.form-success.show { display: flex; }
+.success-inner {
+  position: relative;
+  background: var(--off-white);
+  text-align: center;
+  padding: 56px 44px;
+  max-width: 420px;
+  width: 100%;
+  box-shadow: 0 30px 90px rgba(0,0,0,0.45);
+  border-top: 3px solid var(--gold);
+  animation: lbZoomIn 0.4s cubic-bezier(0.22,1,0.36,1) both;
+}
+.success-close {
+  position: absolute;
+  top: 14px;
+  right: 18px;
+  font-size: 26px;
+  line-height: 1;
+  color: var(--text-faint);
+  background: none;
+  border: none;
+  cursor: pointer;
+  transition: color 0.2s;
+}
+.success-close:hover { color: var(--charcoal); }
 .success-icon {
   width: 64px;
   height: 64px;
