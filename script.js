@@ -277,11 +277,31 @@ mapToggles.forEach(btn => {
   }, 2500);
 })();
 
-/* --- Registration form --- */
+/* --- Registration form → Google Sheet (Apps Script Web App) --- */
+/* Paste your deployed Apps Script Web App URL between the quotes below. */
+const LEAD_ENDPOINT = 'https://script.google.com/macros/s/PASTE_YOUR_DEPLOYMENT_ID/exec';
+
 const form = document.getElementById('registerForm');
 const formSuccess = document.getElementById('formSuccess');
 form.addEventListener('submit', e => {
   e.preventDefault();
+
+  /* Collect the lead */
+  const data = new URLSearchParams();
+  data.append('firstName', (form.firstName && form.firstName.value) || '');
+  data.append('lastName',  (form.lastName && form.lastName.value) || '');
+  data.append('mobile',    (form.mobile && form.mobile.value) || '');
+  data.append('email',     (form.email && form.email.value) || '');
+  data.append('unitType',  (form.unitType && form.unitType.value) || '');
+  data.append('budget',    (form.budget && form.budget.value) || '');
+  data.append('lang',      window.HH_LANG || 'en');
+  data.append('page',      location.href);
+
+  /* Send to the sheet (fire-and-forget; no-cors avoids CORS issues) */
+  if (LEAD_ENDPOINT.indexOf('http') === 0 && LEAD_ENDPOINT.indexOf('PASTE_YOUR_DEPLOYMENT_ID') === -1) {
+    fetch(LEAD_ENDPOINT, { method: 'POST', mode: 'no-cors', body: data }).catch(() => {});
+  }
+
   form.style.display = 'none';
   formSuccess.classList.add('show');
 });
