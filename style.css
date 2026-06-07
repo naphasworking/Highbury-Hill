@@ -1250,12 +1250,12 @@ button { cursor: pointer; background: none; border: none; font-family: inherit; 
 
 /* LINE QR — white card so it scans cleanly on the dark register background */
 .line-qr {
-  display: inline-flex;
+  display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 10px;
-  margin-top: 28px;
-  padding: 14px;
+  gap: 7px;
+  margin-top: 24px;
+  padding: 11px;
   background: #fff;
   border-radius: 8px;
   width: max-content;
@@ -1264,12 +1264,12 @@ button { cursor: pointer; background: none; border: none; font-family: inherit; 
 }
 .line-qr:hover { transform: translateY(-3px); box-shadow: 0 12px 36px rgba(0,0,0,0.35); }
 .line-qr img {
-  width: 150px;
-  height: 150px;
+  width: 110px;
+  height: 110px;
   display: block;
 }
 .line-qr-caption {
-  font-size: 11px;
+  font-size: 9.5px;
   letter-spacing: 0.08em;
   text-transform: uppercase;
   color: #6B5B45;
@@ -1711,6 +1711,7 @@ button { cursor: pointer; background: none; border: none; font-family: inherit; 
   .unit-lower,
   .location-grid,
   .register-grid { grid-template-columns: 1fr; gap: 40px; }
+  .line-qr { margin-left: auto; margin-right: auto; }   /* centre QR on mobile */
 
   .concept-image { order: -1; }
 
