@@ -436,6 +436,7 @@ if (locationShowMoreBtn) {
     { sel: '.register-text .section-label', en: 'Register', th: 'ลงทะเบียน' },
     { sel: '.register-text .section-title', html: true,
       en: 'Begin Your<br><em>Journey</em>', th: 'เริ่มต้น<br><em>การเดินทางของคุณ</em>' },
+    { sel: '.line-qr-caption', en: 'Scan to add us on LINE', th: 'สแกนเพื่อเพิ่มเพื่อนทาง LINE' },
     { sel: '.register-desc',
       en: 'Take the first step towards your dream home. Register your interest and our team will be in touch to guide you through the process.',
       th: 'ก้าวแรกสู่บ้านในฝันของคุณ ลงทะเบียนความสนใจ แล้วทีมงานของเราจะติดต่อกลับเพื่อดูแลคุณในทุกขั้นตอน' },
