@@ -509,6 +509,43 @@ button { cursor: pointer; background: none; border: none; font-family: inherit; 
   box-shadow: 0 8px 30px rgba(0,0,0,0.35);
 }
 
+/* --- Starting price line (sits above the CTA) --- */
+.hero-price {
+  font-family: var(--font-serif);
+  font-size: clamp(2.1rem, 4.7vw, 3.4rem);
+  font-weight: 400;
+  letter-spacing: 0.04em;
+  color: var(--white);
+  margin: 0 0 30px;
+  text-shadow: 0 2px 24px rgba(0,0,0,0.5);
+}
+.hero-price .hero-price-amount { color: var(--gold); }
+/* Number ~40% larger than the surrounding letters, to catch the eye */
+.hero-price-num {
+  font-size: 1.4em;
+  font-weight: 500;
+  line-height: 1;
+}
+.hero-price-star {
+  color: var(--gold);
+  font-size: 0.55em;
+  vertical-align: super;
+  margin-left: 1px;
+}
+
+/* --- Small corner notice, bottom-right of the hero --- */
+.hero-disclaimer {
+  position: absolute;
+  bottom: 16px;
+  right: 22px;
+  z-index: 10;
+  margin: 0;
+  font-size: 10px;
+  letter-spacing: 0.08em;
+  color: rgba(255,255,255,0.55);
+  text-shadow: 0 1px 8px rgba(0,0,0,0.5);
+}
+
 /* --- Artistic vertical gold divider between tagline and CTA (slow luxury glow) --- */
 .hero-divider {
   width: 1px;
