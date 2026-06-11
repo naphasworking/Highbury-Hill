@@ -1805,10 +1805,11 @@ button { cursor: pointer; background: none; border: none; font-family: inherit; 
   }
   .hero-divider { height: 66px; margin: 14px auto 38px; }
 
-  /* Keep "Starts 10.9 MB*" on a single line on phones */
+  /* Keep "Starts 10.9 MB*" on a single line on phones,
+     sized as large as the screen width allows */
   .hero-price {
     white-space: nowrap;
-    font-size: clamp(1.5rem, 5.8vw, 2.4rem);
+    font-size: clamp(1.7rem, calc(11vw - 8px), 3rem);
   }
 
   .facts-grid { grid-template-columns: repeat(2, 1fr); gap: 32px 20px; }
