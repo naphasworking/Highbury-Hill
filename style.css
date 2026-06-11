@@ -511,10 +511,10 @@ button { cursor: pointer; background: none; border: none; font-family: inherit; 
 
 /* --- Starting price line (sits above the CTA) --- */
 .hero-price {
-  font-family: var(--font-serif);
-  font-size: clamp(2.1rem, 4.7vw, 3.4rem);
-  font-weight: 400;
-  letter-spacing: 0.04em;
+  font-family: var(--font-serif);   /* CI brand font (Cormorant Garamond) */
+  font-size: clamp(2.7rem, 6.1vw, 4.4rem);
+  font-weight: 400;                 /* loaded CI serif weight (crisp) */
+  letter-spacing: 0.03em;
   color: var(--white);
   margin: 0 0 30px;
   text-shadow: 0 2px 24px rgba(0,0,0,0.5);
@@ -522,9 +522,11 @@ button { cursor: pointer; background: none; border: none; font-family: inherit; 
 .hero-price .hero-price-amount { color: var(--gold); }
 /* Number ~40% larger than the surrounding letters, to catch the eye */
 .hero-price-num {
+  font-family: var(--font-sans);    /* clear, legible figures for the number only */
   font-size: 1.4em;
-  font-weight: 500;
+  font-weight: 600;
   line-height: 1;
+  font-feature-settings: 'tnum' 1;  /* even, tabular figures */
 }
 .hero-price-star {
   color: var(--gold);
