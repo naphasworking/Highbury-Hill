@@ -1501,6 +1501,18 @@ button { cursor: pointer; background: none; border: none; font-family: inherit; 
   transition: var(--transition);
 }
 .footer-col a:hover { color: var(--white); }
+/* Contact links with a leading icon (phone / email / LINE) */
+.footer-contact {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+.footer-contact svg {
+  width: 15px;
+  height: 15px;
+  flex-shrink: 0;
+  color: var(--gold);
+}
 
 .footer-bottom {
   display: flex;
