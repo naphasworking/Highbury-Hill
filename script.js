@@ -538,7 +538,7 @@ if (locationShowMoreBtn) {
       th: 'ถนนทุ่งกลม-ตาลหมัน ห้วยใหญ่<br>บางละมุง พัทยา' },
     { sel: '.distance-item span:first-child', all: true,
       en: ['Tara Pattana International School','Sukhumvit Road','Siam Country Club','Highgate International School','Jomtien Beach','Ocean Marina Yacht Club','Jomtien Hospital',"Columbia Pictures' Aquaverse",'Rugby International School','Nongnooch Pattaya Garden','U-Tapao International Airport'],
-      th: ['โรงเรียนนานาชาติธารปัญญา','ถนนสุขุมวิท','สยามคันทรีคลับ','โรงเรียนนานาชาติไฮเกท','หาดจอมเทียน','โอเชียน มารีน่า ยอชต์คลับ','โรงพยาบาลจอมเทียน','โคลัมเบีย พิคเจอร์ส อควาเวิร์ส','โรงเรียนนานาชาติรักบี้','สวนนงนุชพัทยา','สนามบินนานาชาติอู่ตะเภา'] },
+      th: ['โรงเรียนนานาชาติธาราพัฒนา','ถนนสุขุมวิท','สยามคันทรีคลับ','โรงเรียนนานาชาติไฮเกท','หาดจอมเทียน','โอเชียน มารีน่า ยอชต์คลับ','โรงพยาบาลจอมเทียน','โคลัมเบีย พิคเจอร์ส อควาเวิร์ส','โรงเรียนนานาชาติรักบี้','สวนนงนุชพัทยา','สนามบินนานาชาติอู่ตะเภา'] },
     { sel: '.distance-item span:last-child', all: true,
       en: ['6.9 km','7.1 km','8.1 km','8.6 km','9.3 km','11.2 km','11 km','15 km','14.7 km','17 km','30 km'],
       th: ['6.9 กม.','7.1 กม.','8.1 กม.','8.6 กม.','9.3 กม.','11.2 กม.','11 กม.','15 กม.','14.7 กม.','17 กม.','30 กม.'] },
