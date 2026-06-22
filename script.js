@@ -534,8 +534,8 @@ if (locationShowMoreBtn) {
     { sel: '.location-text .section-title', html: true,
       en: 'Perfectly<br><em>Connected</em>', th: 'เชื่อมต่อ<br><em>ทุกการเดินทาง</em>' },
     { sel: '.location-address', html: true,
-      en: 'Huai Yai, Pattaya<br>Chonburi 20150',
-      th: 'ห้วยใหญ่ พัทยา<br>ชลบุรี 20150' },
+      en: 'Thung Klom-Tanman Road, Huai Yai<br>Banglamung Pattaya',
+      th: 'ถนนทุ่งกลม-ตาลหมัน ห้วยใหญ่<br>บางละมุง พัทยา' },
     { sel: '.distance-item span:first-child', all: true,
       en: ['Tara Pattana International School','Sukhumvit Road','Siam Country Club','Highgate International School','Jomtien Beach','Ocean Marina Yacht Club','Jomtien Hospital',"Columbia Pictures' Aquaverse",'Rugby International School','Nongnooch Pattaya Garden','U-Tapao International Airport'],
       th: ['โรงเรียนนานาชาติธารปัญญา','ถนนสุขุมวิท','สยามคันทรีคลับ','โรงเรียนนานาชาติไฮเกท','หาดจอมเทียน','โอเชียน มารีน่า ยอชต์คลับ','โรงพยาบาลจอมเทียน','โคลัมเบีย พิคเจอร์ส อควาเวิร์ส','โรงเรียนนานาชาติรักบี้','สวนนงนุชพัทยา','สนามบินนานาชาติอู่ตะเภา'] },
@@ -697,7 +697,7 @@ const COLOR_NEARBY  = '#4a6880';  // Navy blue — surrounding landmarks
 const VENUE = {
   coords: { lat: 12.8672, lng: 100.9438 },
   name: 'HIGHBURY HILL Pool Villas Pattaya',
-  address: 'Huai Yai, Pattaya, Chonburi 20150',
+  address: 'Thung Klom-Tanman Road, Huai Yai, Banglamung Pattaya',
   link: 'https://maps.app.goo.gl/Sk322MG9xAeyQH8P6'
 };
 
