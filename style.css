@@ -522,11 +522,15 @@ button { cursor: pointer; background: none; border: none; font-family: inherit; 
 .hero-price .hero-price-amount { color: var(--gold); }
 /* Number ~40% larger than the surrounding letters, to catch the eye */
 .hero-price-num {
-  font-family: var(--font-sans);    /* clear, legible figures for the number only */
+  font-family: var(--font-serif);   /* thin serif, matching the hero title above */
   font-size: 1.4em;
-  font-weight: 600;
+  font-weight: 300;                 /* light/thin like "Where Luxury Meets Life" */
   line-height: 1;
-  font-feature-settings: 'tnum' 1;  /* even, tabular figures */
+  /* lining + tabular figures: digits sit evenly on one baseline (no old-style descenders) */
+  font-feature-settings: 'lnum' 1, 'tnum' 1;
+  font-variant-numeric: lining-nums tabular-nums;
+  /* dark halo so the thin gold strokes stay legible over a bright photo */
+  text-shadow: 0 1px 3px rgba(0,0,0,0.85), 0 0 18px rgba(0,0,0,0.7);
 }
 .hero-price-star {
   color: var(--gold);
